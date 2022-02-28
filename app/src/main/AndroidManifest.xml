@@ -10,6 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
+            android:name=".SummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseTimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CourtTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookCourtActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CourtOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
