@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2985" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/ic_person_username.xml" value="0.1935" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_edittext.xml" value="0.1935" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_transparent_button.xml" value="0.1935" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_account.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_book_court.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_choose_time.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_overview.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_type.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_home_page.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_new_account.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_summary.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/toolbar.xml" value="0.33" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2985" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2985" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

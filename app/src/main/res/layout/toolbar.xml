@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_color_dark">
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="45dp"
+        android:src="@drawable/mytennis_logo"></ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/general_mytennis_text"
+        android:textColor="@color/white"
+        android:fontFamily="@font/title_font"
+        android:textSize="23dp"
+        android:layout_gravity="center"></TextView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/toolbaraccountbutton"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        app:icon="@drawable/ic_person_white"
+        app:iconSize="37dp"
+        app:iconGravity="textStart"></com.google.android.material.button.MaterialButton>
+
+
+
+</androidx.appcompat.widget.Toolbar>

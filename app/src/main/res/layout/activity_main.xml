@@ -1,18 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_color_orange"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/myTennis_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/general_mytennis_text"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/title_font"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myTennis_title"
+        android:id="@+id/login_title"
+        android:gravity="center"
+        android:text="@string/main_page_login_text"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/title_font"></TextView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/mytennislogo"
+        android:layout_height="100dp"
+        android:layout_below="@id/login_title"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/mytennis_logo"></ImageView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:layout_below="@id/mytennislogo"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/main_page_username_text"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_margin="30dp"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_person_username"
+        android:drawablePadding="20dp"></EditText>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableLeft="@drawable/ic_key_password"
+        android:drawablePadding="20dp"
+        android:hint="@string/main_page_password_text"
+        android:padding="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:inputType="textPassword"></EditText>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createnewaccountbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/password"
+        android:layout_alignLeft="@id/password"
+        android:padding="10dp"
+        android:drawablePadding="20dp"
+        android:text="@string/main_page_create_new_account_text"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:background="@drawable/rounded_transparent_button"></com.google.android.material.button.MaterialButton>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imagetennisball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createnewaccountbutton"
+        android:layout_alignRight="@id/gobutton"
+        android:layout_alignBottom="@+id/gobutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:layout_marginRight="-15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:src="@drawable/mytennis_tennisball"></ImageView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gobutton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createnewaccountbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="10dp"
+        android:text="G    "
+        android:textColor="@color/black"
+        android:textSize="50dp"></com.google.android.material.button.MaterialButton>
+
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color_orange"
+    tools:context=".CourtTypeActivity">
+
+    <include layout="@layout/toolbar"></include>
+
+    <TextView
+        android:id="@+id/courttypetitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Court Type"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"></TextView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gototimebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/courttypetitle"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_transparent_button"
+        android:drawablePadding="20dp"
+        android:padding="10dp"
+        android:text="Inside / Outside"
+        android:textColor="@color/black"
+        android:textStyle="bold"></com.google.android.material.button.MaterialButton>
+
+</RelativeLayout>
