@@ -11,4 +11,5 @@
     <color name="main_color_yellow">#FFFF00</color>
     <color name="main_color_dark">#3E3633</color>
     <color name="main_color_orange">#F4B183</color>
+    <color name="grey_disabled_color">#605F5F</color>
 </resources>

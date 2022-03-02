@@ -28,6 +28,4 @@
         app:iconSize="37dp"
         app:iconGravity="textStart"></com.google.android.material.button.MaterialButton>
 
-
-
 </androidx.appcompat.widget.Toolbar>

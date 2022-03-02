@@ -10,17 +10,29 @@ import com.google.android.material.button.MaterialButton;
 
 public class CourtTypeActivity extends AppCompatActivity {
 
+    private boolean isIndoor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_type);
 
-        MaterialButton insideButton = (MaterialButton) findViewById(R.id.gototimebutton);
+        MaterialButton Indoor = (MaterialButton) findViewById(R.id.indoorbutton);
+        MaterialButton Outdoor = (MaterialButton) findViewById(R.id.outdoorbutton);
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
 
-        insideButton.setOnClickListener(new View.OnClickListener() {
+        Indoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isIndoor = true;
+                openChooseTimeActivity();
+            }
+        });
+
+        Outdoor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isIndoor = false;
                 openChooseTimeActivity();
             }
         });
