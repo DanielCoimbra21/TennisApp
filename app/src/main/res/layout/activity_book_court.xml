@@ -10,26 +10,39 @@
     <include layout="@layout/toolbar"></include>
 
     <TextView
-        android:id="@+id/bookcourttitle"
+        android:id="@+id/selectdatetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Book a court"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"></TextView>
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="12dp"
+        android:text="@string/select_a_date_text"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/nextbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bookcourttitle"
+        android:layout_below="@id/calendar"
+        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_transparent_button"
+        app:backgroundTint="@null"
+        android:background="@drawable/rounded_edittext"
         android:drawablePadding="20dp"
-        android:padding="10dp"
-        android:text="next"
+        android:padding="15dp"
+        android:text="Validate"
+        android:textSize="19dp"
         android:textColor="@color/black"
         android:textStyle="bold"></com.google.android.material.button.MaterialButton>
+
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_calendar"
+        android:theme="@style/CalendarViewCustom"></CalendarView>
 </RelativeLayout>

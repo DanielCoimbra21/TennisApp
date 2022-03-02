@@ -16,13 +16,29 @@
     // court overview + indoor and outdoor selection
     <string name="court_indoor_text">Indoor</string>
     <string name="court_Outdoor_text">Outdoor</string>
-    <string name="place_selection_selection_demand_text">Please select one of the following:</string>
+    <string name="place_selection_selection_demand_text">Please select one \n of the following:</string>
 
     // book a court
-    <string name="book_a_court_select_a_date_text">Select a date:</string>
+    <string name="select_a_date_text">Select a date:</string>
 
     // time selection
     <string name="select_a_time_text">Select a time:</string>
+    <string name="button7_text">07:00</string>
+    <string name="button8_text">08:00</string>
+    <string name="button9_text">09:00</string>
+    <string name="button10_text">10:00</string>
+    <string name="button11_text">11:00</string>
+    <string name="button12_text">12:00</string>
+    <string name="button13_text">13:00</string>
+    <string name="button14_text">14:00</string>
+    <string name="button15_text">15:00</string>
+    <string name="button16_text">16:00</string>
+    <string name="button17_text">17:00</string>
+    <string name="button18_text">18:00</string>
+    <string name="button19_text">19:00</string>
+    <string name="button20_text">20:00</string>
+    <string name="button21_text">21:00</string>
+    <string name="button22_text">22:00</string>
 
     // court selection
     <string name="select_a_court">Select a court:</string>
