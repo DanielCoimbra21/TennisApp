@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".SummaryActivity"
             android:exported="false" />
         <activity
