@@ -9,6 +9,7 @@
 
     <include layout="@layout/toolbar"></include>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,5 +19,20 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:textColor="@color/black"></TextView>
+
+    <Button
+        android:id="@+id/menubutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rounded_transparent_button"
+        android:drawablePadding="20dp"
+        android:padding="10dp"
+        android:text="Menu"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
 </RelativeLayout>
