@@ -7,6 +7,9 @@
     android:background="@color/main_color_orange"
     tools:context=".CourtSelectionActivity">
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"></TextView>
 
 </RelativeLayout>
