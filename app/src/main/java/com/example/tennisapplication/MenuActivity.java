@@ -28,6 +28,8 @@ public class MenuActivity extends AppCompatActivity {
         list.add("Theo I LUV U");
 
 
+
+
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
 
