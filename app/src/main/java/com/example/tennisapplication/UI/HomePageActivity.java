@@ -1,4 +1,4 @@
-package com.example.tennisapplication;
+package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.tennisapplication.R;
+import com.example.tennisapplication.UI.AccountActivity;
+import com.example.tennisapplication.UI.BookCourtActivity;
+import com.example.tennisapplication.UI.CourtOverviewActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class HomePageActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.tennisapplication;
+package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.tennisapplication.R;
+import com.example.tennisapplication.UI.AccountActivity;
+import com.example.tennisapplication.UI.MenuActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class SummaryActivity extends AppCompatActivity {
