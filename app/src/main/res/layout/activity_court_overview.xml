@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_orange"
+    android:background="@color/blue_to_dark_color"
     tools:context=".CourtOverviewActivity">
 
     <include layout="@layout/toolbar"></include>

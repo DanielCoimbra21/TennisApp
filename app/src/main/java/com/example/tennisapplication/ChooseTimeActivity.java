@@ -21,11 +21,10 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_choose_time);
 
         // set le tableau qui va check si la réservation est pleine ou non
-        buttonReservedTab = new boolean[22];
+        buttonReservedTab = new boolean[23];
         for(int i = 0 ; i < buttonReservedTab.length ; i++){
             buttonReservedTab[i] = false;
         }
-
 
         // appel et set des différents boutons
         Button toolbarButton = (Button) findViewById(R.id.toolbaraccountbutton);
@@ -82,8 +81,8 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
 
     private void disableIfFull(Button buttonToCheck){
         int i = Integer.valueOf((String) buttonToCheck.getTag());
-        System.out.println(i);
 
+        // remplacer 1==0 par du code logique en relation avec la base de donnée
         if(1==0){
             //buttonToCheck.setTextColor(500000);
             buttonReservedTab[i] = true;
@@ -91,8 +90,8 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void openSummaryActivity(){
-        Intent intent = new Intent(this, SummaryActivity.class);
+    private void openCourtSelectionActivity(){
+        Intent intent = new Intent(this, CourtSelectionActivity.class);
         startActivity(intent);
     }
 
@@ -112,7 +111,7 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
             int i = Integer.parseInt((String) test.getTag());
             if(buttonReservedTab[i] != true){
                 selectedTime = i;
-                openSummaryActivity();
+                openCourtSelectionActivity();
             }
             else{
                 Toast.makeText(this, "sorry c'est complet", Toast.LENGTH_SHORT).show();

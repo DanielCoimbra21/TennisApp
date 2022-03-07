@@ -4,12 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_orange"
+    android:background="@color/blue_to_dark_color"
     tools:context=".CourtSelectionActivity">
 
+    <include layout="@layout/toolbar"></include>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/choosecourttitle"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="test"></TextView>
+        android:layout_marginTop="75dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="10dp"
+        android:text="@string/select_a_court"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="26dp"
+        android:textStyle="bold"></TextView>
+
+    <ImageView
+        android:id="@+id/planimage"
+        android:layout_width="380dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/plan"></ImageView>
+
+    <ImageView
+        android:id="@+id/t1"
+        android:tag="1"
+        android:layout_width="146dp"
+        android:layout_height="69dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="27dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t1"></ImageView>
+
+    <ImageView
+        android:id="@+id/t2"
+        android:tag="2"
+        android:layout_width="146dp"
+        android:layout_height="69dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="103dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t2"></ImageView>
+
+    <ImageView
+        android:id="@+id/t3"
+        android:tag="3"
+        android:layout_width="146dp"
+        android:layout_height="69dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="196dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t3"></ImageView>
+
+    <ImageView
+        android:id="@+id/t4"
+        android:tag="4"
+        android:layout_width="146dp"
+        android:layout_height="69dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="273dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t4"></ImageView>
+
+    <ImageView
+        android:id="@+id/t5"
+        android:tag="5"
+        android:layout_width="116dp"
+        android:layout_height="69dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="203dp"
+        android:layout_marginTop="273dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t5"></ImageView>
+
+    <ImageView
+        android:id="@+id/t6"
+        android:tag="6"
+        android:layout_width="146dp"
+        android:layout_height="71dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="198dp"
+        android:layout_marginTop="100dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t6"></ImageView>
+
+    <ImageView
+        android:id="@+id/t7"
+        android:tag="7"
+        android:layout_width="146dp"
+        android:layout_height="74dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_alignTop="@+id/planimage"
+        android:layout_marginStart="198dp"
+        android:layout_marginTop="27dp"
+        android:clickable="true"
+        android:src="@drawable/tennis_court_t7"></ImageView>
+
 
 </RelativeLayout>

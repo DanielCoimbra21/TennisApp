@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_orange"
+    android:background="@color/blue_to_dark_color"
     tools:context=".NewAccountActivity">
 
     <TextView
@@ -15,6 +15,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="@color/black"></TextView>
+        android:textColor="@color/black_to_white_color"></TextView>
 
 </RelativeLayout>

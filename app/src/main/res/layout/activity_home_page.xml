@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_orange"
+    android:background="@color/blue_to_dark_color"
     tools:context=".HomePageActivity">
 
     <include layout="@layout/toolbar"></include>
@@ -19,7 +19,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="@string/general_mytennis_text"
-        android:textColor="@color/black"
+        android:textColor="@color/black_to_white_color"
         android:textSize="35dp"
         android:textStyle="bold"
         android:fontFamily="@font/title_font"></TextView>
@@ -31,7 +31,7 @@
         android:layout_below="@id/homepagefirsttitle"
         android:gravity="center"
         android:text="@string/main_page_login_text"
-        android:textColor="@color/black"
+        android:textColor="@color/black_to_white_color"
         android:textSize="35dp"
         android:textStyle="bold"
         android:fontFamily="@font/title_font"></TextView>
@@ -55,7 +55,7 @@
         android:drawablePadding="20dp"
         android:padding="15dp"
         android:text="@string/home_page_book_a_court_text"
-        android:textColor="@color/black"
+        android:textColor="@color/black_to_white_color"
         android:textSize="19dp"
         android:textStyle="bold"
         app:backgroundTint="@null"></com.google.android.material.button.MaterialButton>
@@ -72,7 +72,7 @@
         android:padding="15dp"
         android:text="@string/home_page_court_overview_text"
         android:textSize="19dp"
-        android:textColor="@color/black"
+        android:textColor="@color/black_to_white_color"
         android:textStyle="bold"
         app:backgroundTint="@null"></com.google.android.material.button.MaterialButton>
 

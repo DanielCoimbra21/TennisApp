@@ -11,11 +11,12 @@
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_disabled_button.xml" value="0.2535" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_edittext.xml" value="0.1935" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_transparent_button.xml" value="0.1935" />
-        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_account.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/drawable/rounded_white_button.xml" value="0.1935" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_account.xml" value="0.33" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_book_court.xml" value="0.33" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_choose_time.xml" value="0.33" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_overview.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_selection.xml" value="0.17135416666666667" />
+        <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_selection.xml" value="0.33" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_court_type.xml" value="0.25" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_home_page.xml" value="0.33" />
         <entry key="..\:/Users/choff/AndroidStudioProjects/TennisApp/app/src/main/res/layout/activity_main.xml" value="0.25" />

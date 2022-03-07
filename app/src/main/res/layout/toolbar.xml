@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/main_color_dark">
+    android:background="@color/dark_to_yellow_color">
 
     <ImageView
         android:layout_width="55dp"
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="@string/general_mytennis_text"
-        android:textColor="@color/white"
+        android:textColor="@color/white_to_black_color"
         android:fontFamily="@font/title_font"
         android:textSize="23dp"
         android:layout_gravity="center"></TextView>
