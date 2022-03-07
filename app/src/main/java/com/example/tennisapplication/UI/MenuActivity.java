@@ -1,4 +1,4 @@
-package com.example.tennisapplication;
+package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.tennisapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
                 if(position==0){
                     //clicked Account
 
-                    startActivity(new Intent(MenuActivity.this,AccountActivity.class));
+                    startActivity(new Intent(MenuActivity.this, AccountActivity.class));
 
                 }else if(position==1){
                     //clicked SignOut

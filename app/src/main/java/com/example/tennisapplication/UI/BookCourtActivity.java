@@ -1,4 +1,4 @@
-package com.example.tennisapplication;
+package com.example.tennisapplication.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import com.example.tennisapplication.R;
 import com.google.android.material.button.MaterialButton;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookCourtActivity extends AppCompatActivity {

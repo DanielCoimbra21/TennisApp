@@ -1,4 +1,4 @@
-package com.example.tennisapplication;
+package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
+import com.example.tennisapplication.R;
 
 public class ChooseTimeActivity extends AppCompatActivity implements View.OnClickListener{
 
