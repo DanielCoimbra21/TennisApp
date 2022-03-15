@@ -16,6 +16,9 @@ public class PlayerEntity implements Comparable{
     @ColumnInfo(name = "email")
     private String email;
 
+    @ColumnInfo(name = "password")
+    private String password;
+
     @ColumnInfo(name = "firstName")
     private String firstName;
 
@@ -34,20 +37,25 @@ public class PlayerEntity implements Comparable{
     @ColumnInfo(name = "nbReservations")
     private int nbReservations;
 
+    @ColumnInfo(name = "image")
+    private int image;
+
     @Ignore
     public PlayerEntity() {
 
     }
 
-    public PlayerEntity(@NonNull String email, String firstName, String lastName, int age, int phoneNumber, String status, int nbReservations)
+    public PlayerEntity(@NonNull String email, String password, String firstName, String lastName, int age, int phoneNumber, String status, int nbReservations, int image)
     {
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.status = status;
         this.nbReservations = nbReservations;
+        this.image = image;
     }
 
     public int getIdPlayer() {
@@ -61,6 +69,14 @@ public class PlayerEntity implements Comparable{
     @NonNull
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getImage() {
+        return image;
     }
 
     public void setEmail(@NonNull String email) {
