@@ -3,6 +3,7 @@
     package="com.example.tennisapplication">
 
     <application
+        android:name=".BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,37 +11,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
-            android:name=".MenuActivity"
+            android:name=".UI.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".CourtSelectionActivity"
+            android:name=".UI.CourtSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".SummaryActivity"
+            android:name=".UI.SummaryActivity"
             android:exported="false" />
         <activity
-            android:name=".ChooseTimeActivity"
+            android:name=".UI.ChooseTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".CourtTypeActivity"
+            android:name=".UI.CourtTypeActivity"
             android:exported="false" />
         <activity
-            android:name=".BookCourtActivity"
+            android:name=".UI.BookCourtActivity"
             android:exported="false" />
         <activity
-            android:name=".CourtOverviewActivity"
+            android:name=".UI.CourtOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".AccountActivity"
+            android:name=".UI.AccountActivity"
             android:exported="false" />
         <activity
-            android:name=".HomePageActivity"
+            android:name=".UI.HomePageActivity"
             android:exported="false" />
         <activity
-            android:name=".NewAccountActivity"
+            android:name=".UI.NewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
