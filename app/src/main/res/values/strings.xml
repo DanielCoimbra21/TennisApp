@@ -53,4 +53,21 @@
     <string name="summary_modify_text">Modify</string>
     <string name="summary_confirm_text">Confirm</string>
 
+    <string name="playerName"></string>
+
+    //register
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="email">Email</string>
+    <string name="age">Age</string>
+    <string name="phone">phone</string>
+    <string name="password">Password</string>
+    <string name="passwordRep">confirm password</string>
+    <string name="button_newAccount">Register</string>
+    <string name="error_invalid_password">This password is incorrect</string>
+    <string name="error_invalid_email">This email is incorrect</string>
+
+
+
+
 </resources>

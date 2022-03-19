@@ -42,27 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 String passwordV = password.getText().toString();
                 attemptLogin(email, passwordV);
 
-                /*if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-                    // login correct
-
-                    private void reinitializeDatabase() {
-        DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
-    }
-
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    openHomePageActivity();
-                }
-                else{
-                    // login incorrect
-                    Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }*/
             }
-
         });
-
-
-
-
 
 
         // Create New Account Button
@@ -72,24 +53,23 @@ public class MainActivity extends AppCompatActivity {
                 // passe à la vue de création d'un account
                 openAccountActivity();
             }
-
-
-
         });
-
-
     }
 
     private void attemptLogin(String email, String passwordV) {
 
-
         repository.getPlayer(email,getApplication()).observe(MainActivity.this, playerEntity -> {
             if (playerEntity != null) {
                 if (playerEntity.getPassword().equals(passwordV)) {
+
+                    //Session
+                    SharedPreferences.Editor editor = getSharedPreferences(BaseApp.PREFS_NAME, 0).edit();
+                    editor.putString(BaseApp.PREFS_NAME, playerEntity.getEmail());
+                    editor.apply();
+
                     // login correct
                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     openHomePageActivity();
-
                 }
                 else {
                     // login incorrect
