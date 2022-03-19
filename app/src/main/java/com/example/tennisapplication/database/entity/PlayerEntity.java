@@ -26,10 +26,10 @@ public class PlayerEntity implements Comparable{
     private String lastName;
 
     @ColumnInfo(name = "age")
-    private int age;
+    private String age;
 
     @ColumnInfo(name = "phoneNumber")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @ColumnInfo(name = "status")
     private String status;
@@ -45,7 +45,7 @@ public class PlayerEntity implements Comparable{
 
     }
 
-    public PlayerEntity(@NonNull String email, String password, String firstName, String lastName, int age, int phoneNumber, String status, int nbReservations, int image)
+    public PlayerEntity(@NonNull String email, String password, String firstName, String lastName, String age, String phoneNumber, String status, int nbReservations, int image)
     {
         this.email = email;
         this.password = password;
@@ -99,19 +99,19 @@ public class PlayerEntity implements Comparable{
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public String  getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public int getPhoneNumber() {
+    public String  getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

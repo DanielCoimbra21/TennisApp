@@ -18,7 +18,7 @@ public class DatabaseInitializer {
     }
 
     private static void addPlayer(final AppDatabase db, final String email, final String password, final String firstName,
-                                  final String lastName, final int age, final int phoneNumber, final String status, final int nbReservation, final int image) {
+                                  final String lastName, final String  age, final String phoneNumber, final String status, final int nbReservation, final int image) {
         PlayerEntity player = new PlayerEntity(email, password,firstName, lastName, age, phoneNumber, status, nbReservation, image);
         db.playerDao().insert(player);
     }
@@ -26,7 +26,8 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         db.playerDao().deleteAll();
 
-        addPlayer(db, "michel.platini@fifa.com", "123","Michel", "Platini", 35, 91000000, "player", 0,0);
+        addPlayer(db, "michel.platini@fifa.com", "123","Michel", "Platini", "35", "91000000", "player", 0,0);
+        addPlayer(db, "admin@admin.com", "1234","Admin", "Admin", "35", "91000000", "player", 0,0);
 
     }
 

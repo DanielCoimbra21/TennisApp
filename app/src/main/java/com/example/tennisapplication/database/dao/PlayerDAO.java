@@ -24,6 +24,9 @@ public interface PlayerDAO {
     @Query("SELECT * FROM player")
     LiveData<List<PlayerEntity>> getAll();
 
+    @Query("SELECT * FROM player WHERE idPlayer = :id")
+    LiveData<PlayerEntity> getById(int id);
+
 
     @Insert
     void insert(PlayerEntity playerEntity) throws SQLiteConstraintException;
