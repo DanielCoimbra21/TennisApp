@@ -9,8 +9,7 @@ import com.example.tennisapplication.database.repository.ReservationRepository;
 
 public class BaseApp extends Application {
 
-    public static final String PREFS_NAME = "SharedPrefs";
-    public static final String PREFS_USER = "LoggedIn";
+
 
     @Override
     public void onCreate() {

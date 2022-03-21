@@ -1,32 +1,30 @@
-package com.example.tennisapplication.database.async.court;
+package com.example.tennisapplication.database.async.reservation;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.tennisapplication.BaseApp;
-import com.example.tennisapplication.database.entity.CourtEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 
-public class UpdateCourt extends AsyncTask<CourtEntity, Void, Void> {
-
-
+public class UpdateReservation extends AsyncTask<ReservationEntity, Void, Void> {
 
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public UpdateCourt(Application application, OnAsyncEventListener callback) {
+
+    public UpdateReservation(Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(CourtEntity... courtEntities) {
+    protected Void doInBackground(ReservationEntity... reservationEntities) {
         try {
-            for (CourtEntity courtEntity : courtEntities)
-
-                ((BaseApp) application).getDatabase().courtDao().update(courtEntity);
-        } catch (Exception e) {
+            for (ReservationEntity reservationEntity : reservationEntities)
+                ((BaseApp) application).getDatabase().reservationDao().update(reservationEntity);
+        }catch (Exception e) {
             exception = e;
         }
 
@@ -35,13 +33,13 @@ public class UpdateCourt extends AsyncTask<CourtEntity, Void, Void> {
 
     @Override
     protected void onPostExecute(Void unused) {
-        if (callback != null) {
+        if (callback != null){
             if (exception == null) {
                 callback.onSuccess();
-            } else {
+            }else {
                 callback.onFailure(exception);
             }
         }
     }
-}
 
+}

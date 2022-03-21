@@ -1,30 +1,30 @@
-package com.example.tennisapplication.database.async.court;
+package com.example.tennisapplication.database.async.reservation;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.tennisapplication.BaseApp;
-import com.example.tennisapplication.database.entity.CourtEntity;
+import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 
-public class CreateCourt extends AsyncTask<CourtEntity, Void, Void> {
+public class DeleteReservation extends AsyncTask<ReservationEntity, Void, Void> {
 
     private Application application;
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public CreateCourt(Application application, OnAsyncEventListener callback) {
+
+    public DeleteReservation(Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
     }
 
     @Override
-    protected Void doInBackground(CourtEntity... courtEntities) {
+    protected Void doInBackground(ReservationEntity... reservationEntities) {
         try {
-            for (CourtEntity courtEntity : courtEntities)
-
-               ((BaseApp) application).getDatabase().courtDao().insert(courtEntity);
+            for (ReservationEntity reservationEntity : reservationEntities)
+                ((BaseApp) application).getDatabase().reservationDao().delete(reservationEntity);
         }catch (Exception e) {
             exception = e;
         }

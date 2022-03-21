@@ -8,8 +8,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-/*@Entity(tableName = "reservation",
-        foreignKeys =
+@Entity(tableName = "courts")
+/*        ,foreignKeys =
         @ForeignKey(
                 entity = ReservationEntity.class,
                 parentColumns = "idReservation",
@@ -21,11 +21,16 @@ import androidx.room.PrimaryKey;
                 value = {"reservation"}
         )}
 )*/
-@Entity
-public class CourtEntity{
+public class CourtEntity implements Comparable{
 
     @PrimaryKey(autoGenerate = true)
     private Long idCourt;
+
+    public void setIdReservation(int idReservation) {
+        this.idReservation = idReservation;
+    }
+
+    private int idReservation;
 
     @ColumnInfo(name = "openAir")
     private boolean openAir;
@@ -36,9 +41,14 @@ public class CourtEntity{
 
     public CourtEntity(){}
 
-    public CourtEntity(boolean openAir, boolean reserved){
+    public CourtEntity(boolean openAir, boolean reserved, int idReservation){
         this.openAir = openAir;
         this.reserved = reserved;
+        this.idReservation = idReservation;
+    }
+
+    public int getIdReservation() {
+        return idReservation;
     }
 
     public Long getIdCourt() {
@@ -74,4 +84,8 @@ public class CourtEntity{
         return o.getIdCourt().equals(this.getIdCourt());
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return toString().compareTo(o.toString());
+    }
 }
