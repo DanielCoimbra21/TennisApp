@@ -13,16 +13,21 @@ import android.widget.Toast;
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.database.repository.PlayerRepository;
+import com.example.tennisapplication.sessions.SessionManager;
 import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private PlayerRepository repository;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //initilaize SessionManager
+        sessionManager = new SessionManager(getApplicationContext());
 
         repository = ((BaseApp) getApplication()).getPlayerRepository();
 
@@ -63,9 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 if (playerEntity.getPassword().equals(passwordV)) {
 
                     //Session
-                    SharedPreferences.Editor editor = getSharedPreferences(BaseApp.PREFS_NAME, 0).edit();
-                    editor.putString(BaseApp.PREFS_NAME, playerEntity.getEmail());
+                    SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+                    editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
                     editor.apply();
+
 
                     // login correct
                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();

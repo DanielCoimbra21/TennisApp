@@ -107,10 +107,10 @@ public class NewAccountActivity extends AppCompatActivity {
 
     private void setResponse(Boolean response) {
         if (response) {
-            final SharedPreferences.Editor editor = getSharedPreferences(BaseApp.PREFS_NAME, 0).edit();
-            editor.putString(BaseApp.PREFS_USER, etEmail.getText().toString());
+            final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+            editor.putString(BaseActivity.PREFS_USER, etEmail.getText().toString());
             editor.apply();
-            //toast.show();
+
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {

@@ -16,18 +16,19 @@ import com.example.tennisapplication.database.dao.PlayerDAO;
 import com.example.tennisapplication.database.dao.ReservationDAO;
 import com.example.tennisapplication.database.entity.CourtEntity;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
 
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {CourtEntity.class, PlayerEntity.class}, version = 1)
+@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "tennisDB";
+    private static final String DATABASE_NAME = "TennisDB1";
 
     public abstract CourtDAO courtDao();
 

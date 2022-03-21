@@ -11,10 +11,9 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="12dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/playerName"
-        android:text="@string/playerName"
+        android:id="@+id/tv_email"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"></TextView>

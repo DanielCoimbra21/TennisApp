@@ -9,8 +9,8 @@ import androidx.room.PrimaryKey;
 import java.sql.Time;
 import java.util.Date;
 
-/*@Entity(tableName = "reservation",
-        foreignKeys =
+@Entity(tableName = "reservation")
+/*        ,foreignKeys =
         @ForeignKey(
                 entity = PlayerEntity.class,
                 parentColumns = "idPlayer",
@@ -23,21 +23,20 @@ import java.util.Date;
         )
         }
 )*/
-@Entity
 public class ReservationEntity {
 
     @PrimaryKey(autoGenerate = true)
     private Long idReservation;
 
     @ColumnInfo(name = "schedule")
-    private Time schedule;
+    private String schedule;
 
     @ColumnInfo(name = "date")
-    private Date date;
+    private String date;
 
     public ReservationEntity() {}
 
-    public ReservationEntity(Time schedule, Date date) {
+    public ReservationEntity(String schedule, String date) {
         this.schedule = schedule;
         this.date = date;
     }
@@ -50,19 +49,19 @@ public class ReservationEntity {
         this.idReservation = idReservation;
     }
 
-    public Time getSchedule() {
+    public String getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Time schedule) {
+    public void setSchedule(String schedule) {
         this.schedule = schedule;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

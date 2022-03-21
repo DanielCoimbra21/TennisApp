@@ -1,5 +1,20 @@
 package com.example.tennisapplication.database.repository;
 
+import android.app.Application;
+
+import androidx.lifecycle.LiveData;
+
+import com.example.tennisapplication.BaseApp;
+import com.example.tennisapplication.database.async.player.CreatePlayer;
+import com.example.tennisapplication.database.async.player.DeletePlayer;
+import com.example.tennisapplication.database.async.player.UpdatePlayer;
+import com.example.tennisapplication.database.async.reservation.CreateReservation;
+import com.example.tennisapplication.database.async.reservation.DeleteReservation;
+import com.example.tennisapplication.database.async.reservation.UpdateReservation;
+import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
+import com.example.tennisapplication.util.OnAsyncEventListener;
+
 public class ReservationRepository {
 
     private static ReservationRepository instance;
@@ -15,6 +30,22 @@ public class ReservationRepository {
             }
         }
         return instance;
+    }
+
+    public LiveData<ReservationEntity> getReservation(final int reservationId, Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getByReservationId(reservationId);
+    }
+
+    public void insert(final ReservationEntity reservationEntity, OnAsyncEventListener callback, Application application){
+        new CreateReservation(application, callback).execute(reservationEntity);
+    }
+
+    public void update(final ReservationEntity reservationEntity, OnAsyncEventListener callback, Application application){
+        new UpdateReservation(application, callback).execute(reservationEntity);
+    }
+
+    public void delete(final ReservationEntity reservationEntity, OnAsyncEventListener callback, Application application){
+        new DeleteReservation(application, callback).execute(reservationEntity);
     }
 
 }
