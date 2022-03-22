@@ -68,6 +68,8 @@
     <string name="error_invalid_email">This email is incorrect</string>
 
 
-
+    //edit account
+    <string name="editButton_txt">Edit</string>
+    <string name="deleteButton_txt">Delete</string>
 
 </resources>
