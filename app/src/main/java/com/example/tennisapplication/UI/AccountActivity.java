@@ -4,17 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.sessions.SessionManager;
+import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 
 public class AccountActivity extends AppCompatActivity {
+
+    private static final String TAG = "AccountDetailActivity";
 
     SessionManager sessionManager;
 
@@ -29,20 +37,44 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        Button editButton = (Button) findViewById(R.id.editBtn);
+        Button deleteButton = (Button) findViewById(R.id.deleteBtn);
+
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
 
+
+        String email = getIntent().getStringExtra("email");
+
+
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
         viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-        viewModel.getPlayer().observe(this, reservaEntity -> {
-            if (reservaEntity != null) {
-                playerEntity = reservaEntity;
+        viewModel.getPlayer().observe(this, playerEntity -> {
+            if (playerEntity != null) {
+                this.playerEntity = playerEntity;
                 updateContent();
             }
         });
 
         tvEmail = findViewById(R.id.tv_email);
 
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openEditActivity();
+            }
+        });
+
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteAccount();
+                Toast.makeText(AccountActivity.this,"Account deleted", Toast.LENGTH_SHORT).show();
+                openMainActivity();
+            }
+        });
 
     }
 
@@ -52,5 +84,29 @@ public class AccountActivity extends AppCompatActivity {
             tvEmail.setText(playerEntity.getEmail());
             tvEmail.getText().toString();
         }
+    }
+
+    private void openEditActivity(){
+        Intent intent = new Intent(this, EditActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void deleteAccount(){
+        viewModel.deletePlayer(playerEntity, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "deleteAccount:success");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.d(TAG, "deleteAccount:failure");
+            }
+        });
     }
 }

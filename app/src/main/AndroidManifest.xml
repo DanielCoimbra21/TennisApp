@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
+            android:name=".UI.EditActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.MenuActivity"
             android:exported="false" />
         <activity
