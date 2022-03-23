@@ -15,11 +15,19 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
 
     private int courtSelected;
     private boolean[] courtReservedTab;
+    private boolean isIndoor;
+    private String curDate;
+    private int hour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_selection);
+
+        Intent intent = getIntent();
+        isIndoor = intent.getBooleanExtra("isIndoor", true);
+        curDate = intent.getStringExtra("curDate");
+        hour = intent.getIntExtra("Hour", -1);
 
         // set le tableau qui va check si la réservation est pleine ou non
         courtReservedTab = new boolean[23];
@@ -57,6 +65,10 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
 
     private void openSummaryActivity(){
         Intent intent = new Intent(this, SummaryActivity.class);
+        intent.putExtra("curDate", curDate);
+        intent.putExtra("isIndoor", isIndoor);
+        intent.putExtra("Hour", hour);
+        intent.putExtra("court", courtSelected);
         startActivity(intent);
     }
 
@@ -88,7 +100,7 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
                 openSummaryActivity();
             }
             else{
-                Toast.makeText(this, "sorry c'est complet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "court réservé / non disponible", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -14,11 +14,15 @@ import com.google.android.material.button.MaterialButton;
 public class CourtTypeActivity extends AppCompatActivity {
 
     private boolean isIndoor;
+    private String curDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_type);
+
+        Intent intent = getIntent();
+        curDate = intent.getStringExtra("curDate");
 
         MaterialButton Indoor = (MaterialButton) findViewById(R.id.indoorbutton);
         MaterialButton Outdoor = (MaterialButton) findViewById(R.id.outdoorbutton);
@@ -50,6 +54,8 @@ public class CourtTypeActivity extends AppCompatActivity {
 
     private void openChooseTimeActivity(){
         Intent intent = new Intent(this, ChooseTimeActivity.class);
+        intent.putExtra("isIndoor", isIndoor);
+        intent.putExtra("curDate", curDate);
         startActivity(intent);
     }
 

@@ -19,5 +19,6 @@
     <color name="white_to_dark_color">#FFFFFFFF</color>
     <color name="white_to_black_color">#FFFFFFFF</color>
     <color name="blue_to_dark_color">#00D9FF</color>
+    <color name="yellow_to_dark_color">#FFFF00</color>
 
 </resources>

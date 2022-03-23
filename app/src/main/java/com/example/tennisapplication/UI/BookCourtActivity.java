@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.tennisapplication.R;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BookCourtActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class BookCourtActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                curDate = String.valueOf(dayOfMonth);
+                curDate = String.valueOf(dayOfMonth) + "." + String.valueOf(month) + "." + String.valueOf(year);
             }
         });
 
@@ -40,9 +41,7 @@ public class BookCourtActivity extends AppCompatActivity {
                 // mettre la date d'aujourd'hui si rien n'est sélectionné
                 if(curDate == null){
                     Date date = new Date();
-                    int test = date.getDate();
-                    String tothestring = ""+test;
-                    curDate = tothestring;
+                    curDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
                 }
                 // afficher la date sélectionnée grâce à un toast et passer à la suite
                 Toast.makeText(BookCourtActivity.this, "sip: "+ curDate, Toast.LENGTH_SHORT).show();
@@ -58,12 +57,11 @@ public class BookCourtActivity extends AppCompatActivity {
         });
     }
 
-    public String getDate(){
-        return curDate;
-    }
 
     private void openCourtTypeActivity(){
         Intent intent = new Intent(this, CourtTypeActivity.class);
+        // envoyer la date
+        intent.putExtra("curDate", curDate);
         startActivity(intent);
     }
 

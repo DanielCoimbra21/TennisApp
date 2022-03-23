@@ -9,24 +9,173 @@
 
     <include layout="@layout/toolbar"></include>
 
+    <ImageView
+        android:id="@+id/menubutton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="76dp"
+        android:clickable="true"
+        android:src="@drawable/menu_button_image"></ImageView>
+
     <TextView
+        android:id="@+id/accounttitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="10dp"
+        android:text="@string/account_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountAgeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/tv_email"
-        android:textColor="@color/black"
-        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/accounttitle"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/account_age"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/accounttitle"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+
+
+    <TextView
+        android:id="@+id/accountMailAddressTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/accountAge"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/account_e_mail"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountMailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/accountAge"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/AccountPhoneNumberTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/accountMailAddress"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/account_phone_number"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accountMailAddress"
+        android:layout_marginLeft="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/AccountPhoneNumberTitle"
+        android:padding="10dp"
+        android:text="@string/summary_name_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/AccountPhoneNumberTitle"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/accountSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="-130dp"
+        android:layout_alignRight="@id/accountName"
+        android:layout_below="@id/AccountPhoneNumberTitle"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
         android:textStyle="bold"></TextView>
 
     <Button
         android:id="@+id/editBtn"
-        android:tag="7"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_email"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_white_button"
+        android:layout_below="@id/tennis_court_image"
+        android:layout_marginTop="30dp"
+        android:layout_alignRight="@id/reservationHistory"
+        android:background="@drawable/rounded_dark_label"
         android:drawablePadding="10dp"
         android:padding="7dp"
         android:text="@string/editButton_txt"
@@ -36,14 +185,39 @@
         app:backgroundTint="@null"></Button>
 
     <Button
-        android:id="@+id/deleteBtn"
-        android:tag="7"
-        android:layout_width="145dp"
+        android:id="@+id/reservationHistory"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editBtn"
+        android:layout_below="@id/accountSurname"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_white_button"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="20dp"
+        android:text="@string/account_list_of_reservations"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"></Button>
+
+    <ImageView
+        android:id="@+id/tennis_court_image"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/reservationHistory"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/account_tennis_court"></ImageView>
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/reservationHistory"
+        android:layout_below="@id/tennis_court_image"
+        android:background="@drawable/rounded_transparent_button"
         android:drawablePadding="10dp"
         android:padding="7dp"
         android:text="@string/deleteButton_txt"
