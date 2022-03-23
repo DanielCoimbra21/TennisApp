@@ -14,11 +14,17 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
 
     private int selectedTime;
     private boolean[] buttonReservedTab;
+    private boolean isIndoor;
+    private String curDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_time);
+
+        Intent intent = getIntent();
+        isIndoor = intent.getBooleanExtra("isIndoor", true);
+        curDate = intent.getStringExtra("curDate");
 
         // set le tableau qui va check si la réservation est pleine ou non
         buttonReservedTab = new boolean[23];
@@ -92,6 +98,9 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
 
     private void openCourtSelectionActivity(){
         Intent intent = new Intent(this, CourtSelectionActivity.class);
+        intent.putExtra("curDate", curDate);
+        intent.putExtra("isIndoor", isIndoor);
+        intent.putExtra("Hour", selectedTime);
         startActivity(intent);
     }
 
@@ -114,7 +123,7 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
                 openCourtSelectionActivity();
             }
             else{
-                Toast.makeText(this, "sorry c'est complet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "court réservé / non disponible", Toast.LENGTH_SHORT).show();
             }
         }
     }

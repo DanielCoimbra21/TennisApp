@@ -51,7 +51,7 @@
     <string name="summary_to_text">To:</string>
     <string name="summary_name_text">Name:</string>
     <string name="summary_modify_text">Modify</string>
-    <string name="summary_confirm_text">Confirm</string>
+    <string name="summary_book_text">Book</string>
 
     <string name="playerName"></string>
 
@@ -69,6 +69,12 @@
 
 
     //edit account
+    <string name="account_list_of_reservations">List of reservations</string>
+    <string name="account_phone_number">Phone:</string>
+    <string name="account_address">Address:</string>
+    <string name="account_e_mail">E-mail</string>
+    <string name="account_age">Age:</string>
+    <string name="account_title">Your Account:</string>
     <string name="editButton_txt">Edit</string>
     <string name="deleteButton_txt">Delete</string>
 

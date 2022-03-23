@@ -23,13 +23,9 @@ import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 public class AccountActivity extends AppCompatActivity {
 
     private static final String TAG = "AccountDetailActivity";
-
     SessionManager sessionManager;
-
     private PlayerRepository repository;
     private PlayerEntity playerEntity;
-    TextView tvEmail;
-
     private PlayerViewModel viewModel;
 
     @Override
@@ -40,23 +36,34 @@ public class AccountActivity extends AppCompatActivity {
         Button editButton = (Button) findViewById(R.id.editBtn);
         Button deleteButton = (Button) findViewById(R.id.deleteBtn);
 
+        // initialisation des différents champs
+        TextView firstName = (TextView) findViewById(R.id.accountSurname);
+        TextView lastName = (TextView) findViewById(R.id.accountName);
+        TextView age = (TextView) findViewById(R.id.accountAge);
+        TextView mail = (TextView) findViewById(R.id.accountMailAddress);
+        TextView phone = (TextView) findViewById(R.id.accountPhoneNumber);
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
-
-
-        String email = getIntent().getStringExtra("email");
-
-
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
         viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
         viewModel.getPlayer().observe(this, playerEntity -> {
             if (playerEntity != null) {
                 this.playerEntity = playerEntity;
-                updateContent();
+                if (playerEntity != null){
+                    //Set Username on TextView
+                    firstName.setText(playerEntity.getFirstName());
+                    firstName.getText().toString();
+                    lastName.setText(playerEntity.getLastName());
+                    lastName.getText().toString();
+                    age.setText(playerEntity.getAge());
+                    age.getText().toString();
+                    mail.setText(playerEntity.getEmail());
+                    mail.getText().toString();
+                    phone.setText(playerEntity.getPhoneNumber());
+                    phone.getText().toString();
+                }
             }
         });
-
-        tvEmail = findViewById(R.id.tv_email);
 
 
         editButton.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +83,6 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void updateContent(){
-        if (playerEntity != null){
-            //Set Username on TextView
-            tvEmail.setText(playerEntity.getEmail());
-            tvEmail.getText().toString();
-        }
     }
 
     private void openEditActivity(){

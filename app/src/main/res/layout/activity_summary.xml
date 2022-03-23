@@ -4,35 +4,285 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_color_orange"
+    android:background="@color/blue_to_dark_color"
     tools:context=".UI.SummaryActivity">
 
     <include layout="@layout/toolbar"></include>
 
 
     <TextView
+        android:id="@+id/summaryTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="10dp"
+        android:text="@string/summary_summary_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+
+    <ImageView
+        android:id="@+id/menubutton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="76dp"
+        android:clickable="true"
+        android:src="@drawable/menu_button_image"></ImageView>
+
+    <TextView
+        android:id="@+id/summaryDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Summary yay "
-        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/summaryTitle"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_date_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"></TextView>
+        android:layout_below="@id/summaryTitle"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/summaryCourt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/summaryDate"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_court_nb_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultCourt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/summaryDate"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/summaryFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/summaryCourt"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_from_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/summaryCourt"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/summaryTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/summaryFrom"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_to_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/summaryFrom"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/summaryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/summaryTo"
+        android:padding="10dp"
+        android:text="@string/summary_name_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/summaryTo"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/resultSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="-130dp"
+        android:layout_alignRight="@id/resultName"
+        android:layout_below="@id/summaryTo"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
 
     <Button
-        android:id="@+id/menubutton"
+        android:id="@+id/bookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/rounded_transparent_button"
-        android:drawablePadding="20dp"
-        android:padding="10dp"
-        android:text="Menu"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:layout_below="@id/resultSurname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_dark_label"
+        android:drawablePadding="10dp"
+        android:text="@string/summary_book_text"
+        android:textSize="25dp"
+        android:textColor="@color/black_to_white_color"
+        android:textStyle="bold"
+        app:backgroundTint="@null"></Button>
 
+    <ImageView
+        android:id="@+id/t1"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_1"
+        android:tag="1"></ImageView>
+
+    <ImageView
+        android:id="@+id/t2"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_2"
+        android:tag="2"></ImageView>
+
+    <ImageView
+        android:id="@+id/t3"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_3"
+        android:tag="3"></ImageView>
+
+    <ImageView
+        android:id="@+id/t4"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_4"
+        android:tag="4"></ImageView>
+
+    <ImageView
+        android:id="@+id/t5"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_5"
+        android:tag="5"></ImageView>
+
+    <ImageView
+        android:id="@+id/t6"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_6"
+        android:tag="6"></ImageView>
+
+    <ImageView
+        android:id="@+id/t7"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/bookButton"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/summary_court_7"
+        android:tag="7"></ImageView>
 </RelativeLayout>
