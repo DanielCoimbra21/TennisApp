@@ -9,7 +9,6 @@ import android.view.View;
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.UI.AccountActivity;
 import com.example.tennisapplication.UI.BookCourtActivity;
-import com.example.tennisapplication.UI.CourtOverviewActivity;
 import com.google.android.material.button.MaterialButton;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -21,14 +20,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         MaterialButton bookButton = (MaterialButton) findViewById(R.id.bookacourtbutton);
-        MaterialButton courseOverviewButton = (MaterialButton) findViewById(R.id.courseoverviewbutton);
 
-        courseOverviewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCourseOverviewActivity();
-            }
-        });
 
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,10 +42,6 @@ public class HomePageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openCourseOverviewActivity(){
-        Intent intent = new Intent(this, CourtOverviewActivity.class);
-        startActivity(intent);
-    }
 
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
