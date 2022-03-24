@@ -23,10 +23,12 @@ public interface ReservationDAO {
     @Query("SELECT * FROM reservation")
     LiveData<List<ReservationEntity>> getAllReservation();
 
+    @Query("SELECT * FROM reservation WHERE playerEmail = :playerEmail")
+    LiveData<List<ReservationEntity>> getByPlayerEmail(String playerEmail);
 
 
     @Insert
-    void insert(ReservationEntity reservationEntity) throws SQLiteConstraintException;
+    long insert(ReservationEntity reservationEntity) throws SQLiteConstraintException;
 
     @Update
     void update(ReservationEntity reservationEntity);

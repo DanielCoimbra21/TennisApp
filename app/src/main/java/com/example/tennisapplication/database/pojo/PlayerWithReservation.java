@@ -13,7 +13,7 @@ public class PlayerWithReservation {
     @Embedded
     public PlayerEntity player;
 
-    @Relation(parentColumn = "email", entityColumn = "player", entity = ReservationEntity.class)
+    @Relation(parentColumn = "email", entityColumn = "playerEmail", entity = ReservationEntity.class)
     public List<ReservationEntity> reservations;
 
 }

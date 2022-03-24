@@ -68,10 +68,10 @@
         android:textColor="@color/black_to_white_color"
         android:textSize="19dp"
         android:textStyle="bold"
-        app:backgroundTint="@null"></com.google.android.material.button.MaterialButton>
+        app:backgroundTint="@null" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/courseoverviewbutton"
+        android:id="@+id/myReservationsButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bookacourtbutton"
@@ -81,18 +81,18 @@
         android:drawablePadding="20dp"
         android:padding="15dp"
         android:text="@string/home_page_court_overview_text"
-        android:textSize="19dp"
         android:textColor="@color/black_to_white_color"
+        android:textSize="19dp"
         android:textStyle="bold"
-        app:backgroundTint="@null"></com.google.android.material.button.MaterialButton>
+        app:backgroundTint="@null" />
 
     <ImageView
         android:id="@+id/imagetenniscourt"
         android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:src="@drawable/tennis_court_image"
-        android:layout_below="@id/courseoverviewbutton"
-        android:layout_marginTop="30dp"></ImageView>
+        android:layout_below="@id/myReservationsButton"
+        android:layout_marginTop="30dp" />
 
 
 </RelativeLayout>

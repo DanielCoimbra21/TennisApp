@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
+            android:name=".UI.ReservationDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.EditActivity"
             android:exported="false" />
         <activity
@@ -32,7 +35,7 @@
             android:name=".UI.BookCourtActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.CourtOverviewActivity"
+            android:name=".UI.ReservationsActivity"
             android:exported="false" />
         <activity
             android:name=".UI.AccountActivity"

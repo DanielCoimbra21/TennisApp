@@ -9,7 +9,10 @@ import com.example.tennisapplication.database.async.player.CreatePlayer;
 import com.example.tennisapplication.database.async.player.DeletePlayer;
 import com.example.tennisapplication.database.async.player.UpdatePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.pojo.PlayerWithReservation;
 import com.example.tennisapplication.util.OnAsyncEventListener;
+
+import java.util.List;
 
 public class PlayerRepository {
 
@@ -30,6 +33,11 @@ public class PlayerRepository {
 
     public LiveData<PlayerEntity> getPlayer(final String email, Application application){
         return ((BaseApp)application).getDatabase().playerDao().getByEmail(email);
+    }
+
+    public LiveData<List<PlayerWithReservation>> getOtherPlayerWithReservations(final String email,
+                                                                             Application application) {
+        return ((BaseApp) application).getDatabase().playerDao().getOtherPlayersWithReservations(email);
     }
 
     public void insert(final PlayerEntity playerEntity, OnAsyncEventListener callback, Application application){

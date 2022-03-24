@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.tennisapplication.database.entity.CourtEntity;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -27,13 +28,14 @@ public class DatabaseInitializer {
         db.playerDao().insert(player);
     }
 
-    private static void addReservation(final AppDatabase db, final Time schedule, final Date date){
-
+    private static void addReservation(final AppDatabase db, final String schedule, final String date, final String playerId,final int courtNumber){
+        ReservationEntity reservation = new ReservationEntity(schedule, date, playerId, courtNumber);
+        db.reservationDao().insert(reservation);
 
     }
 
-    private static void addCourt(final AppDatabase db, final boolean openAir, final boolean reserved, final int idReservation){
-        CourtEntity court = new CourtEntity(openAir, reserved, idReservation);
+    private static void addCourt(final AppDatabase db, final int idCourt,final boolean openAir, final boolean reserved){
+        CourtEntity court = new CourtEntity(idCourt, openAir, reserved);
         db.courtDao().insert(court);
     }
 
@@ -49,8 +51,10 @@ public class DatabaseInitializer {
             e.printStackTrace();
         }
 
-        addCourt(db, true, true, 1);
-        addCourt(db, false, false, 2);
+
+        addCourt(db, 1,true, true);
+        addCourt(db, 2,false, false);
+
 
         try {
             Thread.sleep(1000);
@@ -59,6 +63,8 @@ public class DatabaseInitializer {
         }
 
 
+        addReservation(db, "10.00.00", "30.03.2022", "admin@admin.com", 1);
+        addReservation(db, "09.00.00", "31.03.2022", "admin@admin.com", 1);
 
 
     }
