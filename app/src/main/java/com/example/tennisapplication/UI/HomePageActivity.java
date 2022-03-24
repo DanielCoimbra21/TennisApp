@@ -21,6 +21,8 @@ public class HomePageActivity extends AppCompatActivity {
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         MaterialButton bookButton = (MaterialButton) findViewById(R.id.bookacourtbutton);
 
+        MaterialButton reservationsButton = findViewById(R.id.myReservationsButton);
+
 
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,13 @@ public class HomePageActivity extends AppCompatActivity {
                 openAccountActivity();
             }
         });
+
+        reservationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMyReservations();
+            }
+        });
     }
 
     private void openBookCourtActivity(){
@@ -45,6 +54,11 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMyReservations(){
+        Intent intent = new Intent(this, ReservationsActivity.class);
         startActivity(intent);
     }
 }

@@ -19,7 +19,7 @@ public interface CourtDAO {
     LiveData<CourtEntity> getCourtById(int id);
 
     @Insert
-    void insert(CourtEntity courtEntity) throws SQLiteConstraintException;
+    long insert(CourtEntity courtEntity) throws SQLiteConstraintException;
 
     @Update
     void update(CourtEntity courtEntity);

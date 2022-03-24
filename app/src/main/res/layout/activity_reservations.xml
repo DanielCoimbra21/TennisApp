@@ -5,19 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_to_dark_color"
-    tools:context=".UI.CourtOverviewActivity">
+    tools:context=".UI.ReservationsActivity">
 
     <include layout="@layout/toolbar"></include>
 
-    <TextView
-        android:id="@+id/courtoverviewtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Court Overview"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reservationsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="-6dp"
+        android:layout_marginRight="16dp"
+        android:scrollbars="vertical" />
+
 
 </RelativeLayout>

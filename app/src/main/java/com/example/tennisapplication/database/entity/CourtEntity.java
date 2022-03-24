@@ -9,28 +9,10 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courts")
-/*        ,foreignKeys =
-        @ForeignKey(
-                entity = ReservationEntity.class,
-                parentColumns = "idReservation",
-                childColumns = "idReservation",
-                onDelete = ForeignKey.CASCADE
-        ),
-        indices = {
-        @Index(
-                value = {"reservation"}
-        )}
-)*/
 public class CourtEntity implements Comparable{
 
-    @PrimaryKey(autoGenerate = true)
-    private Long idCourt;
-
-    public void setIdReservation(int idReservation) {
-        this.idReservation = idReservation;
-    }
-
-    private int idReservation;
+    @PrimaryKey
+    private int idCourt;
 
     @ColumnInfo(name = "openAir")
     private boolean openAir;
@@ -41,21 +23,18 @@ public class CourtEntity implements Comparable{
 
     public CourtEntity(){}
 
-    public CourtEntity(boolean openAir, boolean reserved, int idReservation){
+    public CourtEntity(int idCourt,boolean openAir, boolean reserved){
         this.openAir = openAir;
         this.reserved = reserved;
-        this.idReservation = idReservation;
+        this.idCourt = idCourt;
     }
 
-    public int getIdReservation() {
-        return idReservation;
-    }
 
-    public Long getIdCourt() {
+    public int getIdCourt() {
         return idCourt;
     }
 
-    public void setIdCourt(Long idCourt) {
+    public void setIdCourt(int idCourt) {
         this.idCourt = idCourt;
     }
 
@@ -81,7 +60,11 @@ public class CourtEntity implements Comparable{
         if (obj == this) return true;
         if (!(obj instanceof CourtEntity)) return false;
         CourtEntity o = (CourtEntity) obj;
-        return o.getIdCourt().equals(this.getIdCourt());
+        if(o.getIdCourt() == this.getIdCourt()){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

@@ -15,6 +15,8 @@ import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 
+import java.util.List;
+
 public class ReservationRepository {
 
     private static ReservationRepository instance;
@@ -34,6 +36,10 @@ public class ReservationRepository {
 
     public LiveData<ReservationEntity> getReservation(final int reservationId, Application application){
         return ((BaseApp)application).getDatabase().reservationDao().getByReservationId(reservationId);
+    }
+
+    public LiveData<List<ReservationEntity>> getByPlayerEmail(final String playerEmail, Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getByPlayerEmail(playerEmail);
     }
 
     public void insert(final ReservationEntity reservationEntity, OnAsyncEventListener callback, Application application){

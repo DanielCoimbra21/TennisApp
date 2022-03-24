@@ -21,14 +21,14 @@ import com.example.tennisapplication.database.entity.ReservationEntity;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 1)
+@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 7, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "TennisDB1";
+    private static final String DATABASE_NAME = "TennisDB3";
 
     public abstract CourtDAO courtDao();
 
@@ -57,7 +57,7 @@ public abstract class AppDatabase extends RoomDatabase {
      */
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
-        return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
+        return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME).fallbackToDestructiveMigration()
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {

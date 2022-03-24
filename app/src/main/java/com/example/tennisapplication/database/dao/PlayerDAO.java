@@ -12,6 +12,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.pojo.PlayerWithReservation;
 
 import java.util.List;
 
@@ -24,12 +25,15 @@ public interface PlayerDAO {
     @Query("SELECT * FROM player")
     LiveData<List<PlayerEntity>> getAll();
 
-    @Query("SELECT * FROM player WHERE idPlayer = :id")
-    LiveData<PlayerEntity> getById(int id);
+    @Query("SELECT * FROM player WHERE email != :id")
+    LiveData<List<PlayerWithReservation>> getOtherPlayersWithReservations(String id);
+
+
+
 
 
     @Insert
-    void insert(PlayerEntity playerEntity) throws SQLiteConstraintException;
+    long insert(PlayerEntity playerEntity) throws SQLiteConstraintException;
 
     @Update
     void update(PlayerEntity playerEntity);

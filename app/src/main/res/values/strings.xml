@@ -78,4 +78,12 @@
     <string name="editButton_txt">Edit</string>
     <string name="deleteButton_txt">Delete</string>
 
+
+    //Reinitialize Database
+    <string name="action_data">Reset Demo Data</string>
+    <string name="resetMessage">Do you want to reset the DB</string>
+    <string name="actionReseted">Reset</string>
+    <string name="dataInitiated">Demo data initiated</string>
+    <string name="actionCancel">Cancel</string>
+
 </resources>

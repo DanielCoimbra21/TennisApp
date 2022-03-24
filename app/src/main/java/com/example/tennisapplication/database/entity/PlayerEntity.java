@@ -9,11 +9,11 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "player")
 public class PlayerEntity implements Comparable{
 
-    @PrimaryKey(autoGenerate = true)
-    private int idPlayer;
+    /*@PrimaryKey(autoGenerate = true)
+    private int idPlayer;*/
 
+    @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "email")
     private String email;
 
     @ColumnInfo(name = "password")
@@ -58,13 +58,13 @@ public class PlayerEntity implements Comparable{
         this.image = image;
     }
 
-    public int getIdPlayer() {
+    /*public int getIdPlayer() {
         return idPlayer;
     }
 
     public void setIdPlayer(int idPlayer) {
         this.idPlayer = idPlayer;
-    }
+    }*/
 
     @NonNull
     public String getEmail() {
@@ -147,4 +147,5 @@ public class PlayerEntity implements Comparable{
     public int compareTo(@NonNull Object o) {
         return toString().compareTo(o.toString());
     }
+
 }

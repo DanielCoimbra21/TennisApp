@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.entity.CourtEntity;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.util.RecyclerViewItemClickListener;
 
 import java.util.List;
@@ -53,8 +53,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         T item = mData.get(position);
-        /*if (item.getClass().equals(CourtEntity.class))
-            holder.mTextView.setText(((CourtEntity) item).getIdCourt());*/
+        if (item.getClass().equals(ReservationEntity.class))
+            holder.mTextView.setText(((ReservationEntity) item).getIdReservation().toString()+" " + ((ReservationEntity) item).getSchedule());
         if (item.getClass().equals(PlayerEntity.class))
             holder.mTextView.setText(((PlayerEntity) item).getFirstName() + " " + ((PlayerEntity) item).getLastName());
     }
@@ -86,9 +86,9 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    /*if (mData instanceof AccountEntity) {
-                        return ((AccountEntity) mData.get(oldItemPosition)).getId().equals(((AccountEntity) data.get(newItemPosition)).getId());
-                    }*/
+                    if (mData instanceof ReservationEntity) {
+                        return ((ReservationEntity) mData.get(oldItemPosition)).getIdReservation().equals(((ReservationEntity) data.get(newItemPosition)).getIdReservation());
+                    }
                     if (mData instanceof PlayerEntity) {
                         return ((PlayerEntity) mData.get(oldItemPosition)).getEmail().equals(
                                 ((PlayerEntity) data.get(newItemPosition)).getEmail());
@@ -98,14 +98,15 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    /*if (mData instanceof AccountEntity) {
-                        AccountEntity newAccount = (AccountEntity) data.get(newItemPosition);
-                        AccountEntity oldAccount = (AccountEntity) mData.get(newItemPosition);
-                        return newAccount.getId().equals(oldAccount.getId())
-                                && Objects.equals(newAccount.getName(), oldAccount.getName())
-                                && Objects.equals(newAccount.getBalance(), oldAccount.getBalance())
-                                && newAccount.getOwner().equals(oldAccount.getOwner());
-                    }*/
+                    if (mData instanceof ReservationEntity) {
+                        ReservationEntity newReservation = (ReservationEntity) data.get(newItemPosition);
+                        ReservationEntity oldReservation = (ReservationEntity) mData.get(newItemPosition);
+                        return newReservation.getIdReservation().equals(oldReservation.getIdReservation())
+                                && Objects.equals(newReservation.getDate(), oldReservation.getDate())
+                                && Objects.equals(newReservation.getCourtNumber(), oldReservation.getCourtNumber())
+                                && Objects.equals(newReservation.getSchedule(), oldReservation.getSchedule())
+                                && Objects.equals(newReservation.getPlayerEmail(), oldReservation.getPlayerEmail());
+                    }
                     if (mData instanceof PlayerEntity) {
                         PlayerEntity newClient = (PlayerEntity) data.get(newItemPosition);
                         PlayerEntity oldClient = (PlayerEntity) mData.get(newItemPosition);

@@ -1,5 +1,8 @@
 package com.example.tennisapplication.UI;
 
+import static com.example.tennisapplication.database.AppDatabase.initializeDemoData;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
+import com.example.tennisapplication.database.AppDatabase;
 import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.sessions.SessionManager;
 import com.google.android.material.button.MaterialButton;
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.gobutton);
         MaterialButton newAccountbtn = (MaterialButton) findViewById(R.id.createnewaccountbutton);
+        MaterialButton resetData = (MaterialButton) findViewById(R.id.resetButton);
+
+        resetData.setOnClickListener(view -> reinitializeDatabase());
 
         // Login button
         // unique password et username actif : admin et admin (tkt c'est secure)
@@ -102,6 +109,19 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
+    }
+
+    private void reinitializeDatabase(){
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.action_data));
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage(getString(R.string.resetMessage));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.actionReseted), (dialog, which) ->{
+            initializeDemoData(AppDatabase.getInstance(this));
+            Toast.makeText(this, getString(R.string.dataInitiated), Toast.LENGTH_LONG).show();
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.actionCancel), (dialog, which) -> alertDialog.dismiss());
+        alertDialog.show();
     }
 
 }
