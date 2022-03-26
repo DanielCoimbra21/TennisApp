@@ -21,7 +21,7 @@ import com.example.tennisapplication.database.entity.ReservationEntity;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 7, exportSchema = false)
+@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 8, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
