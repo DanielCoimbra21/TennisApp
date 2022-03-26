@@ -204,8 +204,8 @@
         android:background="@drawable/rounded_dark_label"
         android:drawablePadding="10dp"
         android:text="@string/summary_book_text"
-        android:textSize="25dp"
         android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:backgroundTint="@null"></Button>
 

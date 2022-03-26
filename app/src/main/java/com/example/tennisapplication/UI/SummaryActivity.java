@@ -10,11 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.UI.AccountActivity;
 import com.example.tennisapplication.UI.MenuActivity;
+import com.example.tennisapplication.database.async.player.CreatePlayer;
+import com.example.tennisapplication.database.async.reservation.CreateReservation;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
+import com.example.tennisapplication.database.repository.ReservationRepository;
+import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 import com.google.android.material.button.MaterialButton;
 
@@ -25,12 +32,18 @@ public class SummaryActivity extends AppCompatActivity {
     private int hour;
     private int court;
     private PlayerEntity playerEntity;
+    private ReservationEntity reservationEntity;
+    private ReservationRepository reservationRepository;
     private PlayerViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
+
+        //Book button
+        Button bookButton = (Button) findViewById(R.id.bookButton);
+
 
         // get les informations précédemment entrées
         Intent intent = getIntent();
@@ -126,6 +139,16 @@ public class SummaryActivity extends AppCompatActivity {
                 openMenuActivity();
             }
         });
+
+        String h = String.valueOf(hour);
+
+
+        bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveChanges(h, curDate, playerEntity.getEmail(), court);
+            }
+        });
     }
 
     private void openMenuActivity(){
@@ -136,5 +159,78 @@ public class SummaryActivity extends AppCompatActivity {
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
+    }
+
+    private void bookReservation(){
+
+    }
+
+    private void saveChanges(String schedule, String date, String playerId, int courtNumber) {
+
+        reservationRepository = ((BaseApp) getApplication()).getReservationRepository();
+        reservationRepository.getByPlayerEmail(playerId,getApplication()).observe(SummaryActivity.this, reservationEntities -> {
+            if (reservationEntities != null) {
+                if (reservationEntity.getSchedule().equals(schedule))
+                {
+                    if (reservationEntity.getDate().equals(date))
+                    {
+                        if (reservationEntity.getCourtNumber() == courtNumber)
+                        {
+                            // reservation incorrect
+                            Toast.makeText(SummaryActivity.this, "Reservation Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                else {
+
+
+                //Session
+                SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+                editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
+                editor.apply();
+
+                    ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
+
+
+                    new CreateReservation(getApplication(), new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            setResponse(true);
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            setResponse(false);
+                        }
+                    }).execute(newReservation);
+
+                // Reservation correct
+                Toast.makeText(SummaryActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
+                //openAccountActivity();
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+    private void setResponse(Boolean response) {
+        if (response) {
+
+            final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+            editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
+            editor.apply();
+
+            Intent intent = new Intent(this, HomePageActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            //etEmail.setError(getString(R.string.error_used_email));
+            //getE.requestFocus();
+        }
     }
 }
