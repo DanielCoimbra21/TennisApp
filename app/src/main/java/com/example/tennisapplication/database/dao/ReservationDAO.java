@@ -23,9 +23,17 @@ public interface ReservationDAO {
     @Query("SELECT * FROM reservation")
     LiveData<List<ReservationEntity>> getAllReservation();
 
+    @Query("SELECT * FROM reservation WHERE schedule = :schedule AND date =:date")
+    LiveData<List<ReservationEntity>> getNotAvailableCourt(String schedule, String date);
+
     @Query("SELECT * FROM reservation WHERE playerEmail = :playerEmail")
     LiveData<List<ReservationEntity>> getByPlayerEmail(String playerEmail);
 
+    @Query("SELECT * FROM reservation WHERE schedule = :schedule AND date = :date")
+    boolean getUnavailableCourtTime(String schedule, String date);
+
+    @Query("SELECT * FROM reservation WHERE schedule = :schedule AND date = :date AND courtNumber = :courtNumber")
+    boolean getUnavailableCourts(String schedule, String date, int courtNumber);
 
     @Insert
     long insert(ReservationEntity reservationEntity) throws SQLiteConstraintException;

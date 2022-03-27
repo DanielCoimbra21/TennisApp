@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         resetData.setOnClickListener(view -> reinitializeDatabase());
 
         // Login button
-        // unique password et username actif : admin et admin (tkt c'est secure)
+        // unique password et username
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

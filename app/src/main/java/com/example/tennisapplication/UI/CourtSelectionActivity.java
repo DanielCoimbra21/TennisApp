@@ -8,8 +8,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
+import com.example.tennisapplication.database.entity.ReservationEntity;
+import com.example.tennisapplication.database.repository.ReservationRepository;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourtSelectionActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,11 +24,14 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
     private boolean isIndoor;
     private String curDate;
     private int hour;
+    private List<ReservationEntity> reservations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_selection);
+
+        reservations = new ArrayList<>();
 
         Intent intent = getIntent();
         isIndoor = intent.getBooleanExtra("isIndoor", true);
@@ -60,7 +69,6 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         disableIfFull(court7);
         court7.setOnClickListener(this);
 
-        court3.setVisibility(View.INVISIBLE);
     }
 
     private void openSummaryActivity(){
@@ -78,13 +86,27 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
     }
 
     private void disableIfFull(ImageView courtToCheck){
-        int i = Integer.valueOf((String) courtToCheck.getTag());
 
-        // remplacer 1==0 par une fonction qui retourne true si il n'y a plus de court disponible a la date/heure choisie
-        if(1==0){
-            courtReservedTab[i] = true;
-            courtToCheck.setVisibility(View.INVISIBLE);
-        }
+        int i = Integer.valueOf((String) courtToCheck.getTag());
+        ReservationRepository repository = ((BaseApp) getApplication()).getReservationRepository();
+
+        String h1 = String.valueOf(hour);
+
+        repository.getNotAvailableCourts(h1, curDate, getApplication()).observe(CourtSelectionActivity.this, reservationEntities -> {
+
+            if (reservationEntities != null)
+            {
+                reservations = reservationEntities;
+                for (ReservationEntity r: reservations) {
+                    if(i == r.getCourtNumber())
+                    {
+                        courtReservedTab[i] = true;
+                        courtToCheck.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        });
+
     }
 
     @Override

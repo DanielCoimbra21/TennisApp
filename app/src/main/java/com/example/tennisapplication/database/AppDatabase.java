@@ -21,14 +21,14 @@ import com.example.tennisapplication.database.entity.ReservationEntity;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 8, exportSchema = false)
+@Database(entities = {CourtEntity.class, PlayerEntity.class, ReservationEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "TennisDB3";
+    private static final String DATABASE_NAME = "TennisDB6";
 
     public abstract CourtDAO courtDao();
 

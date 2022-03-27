@@ -14,9 +14,6 @@ import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.UI.AccountActivity;
-import com.example.tennisapplication.UI.MenuActivity;
-import com.example.tennisapplication.database.async.player.CreatePlayer;
 import com.example.tennisapplication.database.async.reservation.CreateReservation;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.entity.ReservationEntity;
@@ -25,6 +22,8 @@ import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class SummaryActivity extends AppCompatActivity {
 
     private boolean isIndoor;
@@ -32,7 +31,6 @@ public class SummaryActivity extends AppCompatActivity {
     private int hour;
     private int court;
     private PlayerEntity playerEntity;
-    private ReservationEntity reservationEntity;
     private ReservationRepository reservationRepository;
     private PlayerViewModel viewModel;
 
@@ -44,6 +42,8 @@ public class SummaryActivity extends AppCompatActivity {
         //Book button
         Button bookButton = (Button) findViewById(R.id.bookButton);
 
+
+        reservationRepository = ((BaseApp) getApplication()).getReservationRepository();
 
         // get les informations précédemment entrées
         Intent intent = getIntent();
@@ -146,9 +146,12 @@ public class SummaryActivity extends AppCompatActivity {
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveChanges(h, curDate, playerEntity.getEmail(), court);
-            }
-        });
+                testReservation(h, curDate, playerEntity.getEmail(), court);
+
+
+                }
+
+            });
     }
 
     private void openMenuActivity(){
@@ -161,61 +164,30 @@ public class SummaryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void bookReservation(){
+
+    private void testReservation(String schedule, String date, String playerId, int courtNumber) {
+
+
+        addReservation(schedule, date, playerId, courtNumber);
+
 
     }
 
-    private void saveChanges(String schedule, String date, String playerId, int courtNumber) {
-
-        reservationRepository = ((BaseApp) getApplication()).getReservationRepository();
-        reservationRepository.getByPlayerEmail(playerId,getApplication()).observe(SummaryActivity.this, reservationEntities -> {
-            if (reservationEntities != null) {
-                if (reservationEntity.getSchedule().equals(schedule))
-                {
-                    if (reservationEntity.getDate().equals(date))
-                    {
-                        if (reservationEntity.getCourtNumber() == courtNumber)
-                        {
-                            // reservation incorrect
-                            Toast.makeText(SummaryActivity.this, "Reservation Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                else {
+    private void addReservation(String schedule, String date, String playerId, int courtNumber){
+        ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
 
 
-                //Session
-                SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-                editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
-                editor.apply();
-
-                    ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
-
-
-                    new CreateReservation(getApplication(), new OnAsyncEventListener() {
-                        @Override
-                        public void onSuccess() {
-                            setResponse(true);
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            setResponse(false);
-                        }
-                    }).execute(newReservation);
-
-                // Reservation correct
-                Toast.makeText(SummaryActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
-                //openAccountActivity();
-                }
+        new CreateReservation(getApplication(), new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                setResponse(true);
             }
-        });
 
-
-
-
-
+            @Override
+            public void onFailure(Exception e) {
+                setResponse(false);
+            }
+        }).execute(newReservation);
     }
 
     private void setResponse(Boolean response) {
@@ -227,6 +199,7 @@ public class SummaryActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, HomePageActivity.class);
             startActivity(intent);
+            Toast.makeText(SummaryActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             //etEmail.setError(getString(R.string.error_used_email));
