@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tennisapplication.R;
@@ -31,6 +32,7 @@ public class BookCourtActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                month++;
                 curDate = String.valueOf(dayOfMonth) + "." + String.valueOf(month) + "." + String.valueOf(year);
             }
         });
@@ -49,12 +51,26 @@ public class BookCourtActivity extends AppCompatActivity {
             }
         });
 
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
+
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccountActivity();
             }
         });
+    }
+
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
 

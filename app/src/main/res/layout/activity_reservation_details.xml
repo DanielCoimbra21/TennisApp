@@ -1,9 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/blue_to_dark_color"
     android:layout_height="match_parent"
     tools:context=".UI.ReservationDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/toolbar"></include>
+
+    <ImageView
+        android:id="@+id/menubutton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/planimage"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="76dp"
+        android:clickable="true"
+        android:src="@drawable/menu_button_image"></ImageView>
+
+    <TextView
+        android:id="@+id/reservationDetailsTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/rounded_transparent_button"
+        android:padding="10dp"
+        android:text="@string/reservation_details_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/reservationDetailsTitle"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_date_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reservationDetailsTitle"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationCourtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/reservationDate"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_court_nb_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationCourt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reservationDate"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationFromTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/reservationCourt"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_from_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reservationCourt"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationToTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/reservationFrom"
+        android:background="@drawable/rounded_white_button"
+        android:padding="10dp"
+        android:text="@string/summary_to_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reservationFrom"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_below="@id/reservationTo"
+        android:padding="10dp"
+        android:text="@string/summary_name_text"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/reservationTo"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/reservationSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="-130dp"
+        android:layout_alignRight="@id/reservationName"
+        android:layout_below="@id/reservationTo"
+        android:padding="10dp"
+        android:text="NotFound"
+        android:textAlignment="center"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"></TextView>
+
+
+</RelativeLayout>

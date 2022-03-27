@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.UI.AccountActivity;
@@ -44,6 +45,15 @@ public class CourtTypeActivity extends AppCompatActivity {
             }
         });
 
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
+
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +71,11 @@ public class CourtTypeActivity extends AppCompatActivity {
 
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 }
