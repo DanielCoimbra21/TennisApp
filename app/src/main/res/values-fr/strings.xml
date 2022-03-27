@@ -59,7 +59,7 @@
     <string name="lastname">Nom de famille</string>
     <string name="email">Email</string>
     <string name="age">Age</string>
-    <string name="phone">Téléphone</string>
+    <string name="phone">Natel</string>
     <string name="password">Mot de passe</string>
     <string name="passwordRep">Confirmer mot de passe</string>
     <string name="button_newAccount">Créer</string>
@@ -68,7 +68,7 @@
 
 
     //edit account
-    <string name="account_list_of_reservations">Liste des réservations</string>
+    <string name="account_list_of_reservations">Réservations</string>
     <string name="account_phone_number">Téléphone:</string>
     <string name="account_address">Addresse:</string>
     <string name="account_e_mail">E-mail</string>
@@ -108,4 +108,12 @@
     <string name="menu_list_menu">Menu</string>
     <string name="menu_list_settings">Paramètres</string>
     <string name="menu_list_account">Compte</string>
+
+
+    //deleteReservation
+    <string name="title_activity_delete_reservation" >Supprimer Reservation</string>
+    <string name="reservation_delete_msg" >Tu veux vraiment supprimer cette reservation %1$s?</string>
+    <string name="action_accept" >Supprimer</string>
+    <string name="reservation_deleted">Reservation Supprimé</string>
+    <string name="action_cancel" >Annuler</string>
 </resources>

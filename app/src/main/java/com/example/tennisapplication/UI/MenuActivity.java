@@ -62,7 +62,8 @@ public class MenuActivity extends AppCompatActivity {
                     sessionManager.setLogin(false);
                     //set username (mail) empty
                     sessionManager.setUsername("");
-                    startActivity(new Intent(MenuActivity.this, MainActivity.class));
+                    BaseActivity b = new BaseActivity();
+                    b.logout();
                 }
             }
         });

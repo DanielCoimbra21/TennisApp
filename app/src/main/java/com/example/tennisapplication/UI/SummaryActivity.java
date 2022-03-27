@@ -148,7 +148,6 @@ public class SummaryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 testReservation(h, curDate, playerEntity.getEmail(), court);
 
-
                 }
 
             });
@@ -166,11 +165,7 @@ public class SummaryActivity extends AppCompatActivity {
 
 
     private void testReservation(String schedule, String date, String playerId, int courtNumber) {
-
-
         addReservation(schedule, date, playerId, courtNumber);
-
-
     }
 
     private void addReservation(String schedule, String date, String playerId, int courtNumber){

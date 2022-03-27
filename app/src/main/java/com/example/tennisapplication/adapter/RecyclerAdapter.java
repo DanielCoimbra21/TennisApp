@@ -54,7 +54,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         T item = mData.get(position);
         if (item.getClass().equals(ReservationEntity.class))
-            holder.mTextView.setText(((ReservationEntity) item).getIdReservation().toString()+" " + ((ReservationEntity) item).getSchedule());
+            holder.mTextView.setText(((ReservationEntity) item).getSchedule() +"H " + ((ReservationEntity) item).getDate()+" court: " + ((ReservationEntity) item).getCourtNumber());
         if (item.getClass().equals(PlayerEntity.class))
             holder.mTextView.setText(((PlayerEntity) item).getFirstName() + " " + ((PlayerEntity) item).getLastName());
     }
