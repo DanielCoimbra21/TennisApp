@@ -52,8 +52,14 @@ public class DatabaseInitializer {
         }
 
 
-        addCourt(db, 1,true, true);
-        addCourt(db, 2,false, false);
+        addCourt(db, 1,true, false);
+        addCourt(db, 2,true, false);
+        addCourt(db, 3,true, false);
+        addCourt(db, 4,true, false);
+        addCourt(db, 5,true, false);
+        addCourt(db, 6,true, false);
+        addCourt(db, 7,false, false);
+        addCourt(db, 8,false, false);
 
 
         try {

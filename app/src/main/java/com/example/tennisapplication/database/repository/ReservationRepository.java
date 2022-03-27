@@ -42,6 +42,22 @@ public class ReservationRepository {
         return ((BaseApp)application).getDatabase().reservationDao().getByPlayerEmail(playerEmail);
     }
 
+    public LiveData<List<ReservationEntity>> getAllReservation(Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getAllReservation();
+    }
+
+    public LiveData<List<ReservationEntity>> getNotAvailableCourts(String schedule, String date,Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getNotAvailableCourt(schedule,date);
+    }
+
+    public boolean getUnavailableCourtTime(final String schedule, final String date, Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getUnavailableCourtTime(schedule, date);
+    }
+
+    public boolean getUnavailableCourts(final String schedule, final String date, final int courtNumber,Application application){
+        return ((BaseApp)application).getDatabase().reservationDao().getUnavailableCourts(schedule, date, courtNumber);
+    }
+
     public void insert(final ReservationEntity reservationEntity, OnAsyncEventListener callback, Application application){
         new CreateReservation(application, callback).execute(reservationEntity);
     }
