@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TennisApplication</string>
+    <string name="general_mytennis_text">MyTennis</string>
+
+    // main page
+    <string name="main_page_login_text">Login</string>
+    <string name="main_page_username_text">Identifiant</string>
+    <string name="main_page_password_text">Mot de passe</string>
+    <string name="main_page_create_new_account_text">Nouveau? Créer un nouveau compte</string>
+
+    // home page
+    <string name="home_page_book_a_court_text">Réserver un court</string>
+    <string name="home_page_court_overview_text">Réservations</string>
+
+    // court overview + indoor and outdoor selection
+    <string name="court_indoor_text">Intérieur</string>
+    <string name="court_Outdoor_text">Extérieur</string>
+    <string name="place_selection_selection_demand_text">Sélectionner une \n des propositions:</string>
+
+    // book a court
+    <string name="select_a_date_text">Choisir une date:</string>
+
+    // time selection
+    <string name="select_a_time_text">Choisir une heure:</string>
+    <string name="button7_text">07:00</string>
+    <string name="button8_text">08:00</string>
+    <string name="button9_text">09:00</string>
+    <string name="button10_text">10:00</string>
+    <string name="button11_text">11:00</string>
+    <string name="button12_text">12:00</string>
+    <string name="button13_text">13:00</string>
+    <string name="button14_text">14:00</string>
+    <string name="button15_text">15:00</string>
+    <string name="button16_text">16:00</string>
+    <string name="button17_text">17:00</string>
+    <string name="button18_text">18:00</string>
+    <string name="button19_text">19:00</string>
+    <string name="button20_text">20:00</string>
+    <string name="button21_text">21:00</string>
+    <string name="button22_text">22:00</string>
+
+    // court selection
+    <string name="select_a_court">Choisir un court:</string>
+
+    // summary
+    <string name="summary_summary_text">Résumé:</string>
+    <string name="summary_date_text">Date:</string>
+    <string name="summary_court_nb_text">Court nb:</string>
+    <string name="summary_from_text">De:</string>
+    <string name="summary_to_text">A:</string>
+    <string name="summary_name_text">Nom:</string>
+    <string name="summary_modify_text">Modifier</string>
+    <string name="summary_book_text">Réserver</string>
+    <string name="playerName"></string>
+
+    //register
+    <string name="firstname">Prénom</string>
+    <string name="lastname">Nom de famille</string>
+    <string name="email">Email</string>
+    <string name="age">Age</string>
+    <string name="phone">Téléphone</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordRep">Confirmer mot de passe</string>
+    <string name="button_newAccount">Créer</string>
+    <string name="error_invalid_password">Ce mot de passe est incorrect</string>
+    <string name="error_invalid_email">Cet e-mail est incorrect</string>
+
+
+    //edit account
+    <string name="account_list_of_reservations">Liste des réservations</string>
+    <string name="account_phone_number">Téléphone:</string>
+    <string name="account_address">Addresse:</string>
+    <string name="account_e_mail">E-mail</string>
+    <string name="account_age">Age:</string>
+    <string name="account_title">Votre compte:</string>
+    <string name="editButton_txt">Editer</string>
+    <string name="deleteButton_txt">Supprimer</string>
+    <string name="edit_page_title">Editer:</string>
+
+
+    //settings page
+    <string name="settings_page_title">Réglages:</string>
+    <string name="settings_page_subtitle">Langue:</string>
+    <string name="settings_page_french">Français</string>
+    <string name="settings_page_english">Anglais</string>
+    <string name="settings_page_button">Changer Paramètres</string>
+
+    //reservation details
+    <string name="reservation_details_title">Details de réservation:</string>
+
+
+    //about page
+    <string name="about_page_title">A propos:</string>
+    <string name="about_page_description">Cette application a été crée par Daniel Coimbra et Theo Choffat pour le module mobile developpement. Ce projet a été supervisé par notre professeur Dr.Michael Schumacher. Date de création: 29.03.2022</string>
+
+
+    //Reinitialize Database
+    <string name="action_data">Réinitialiser base de données</string>
+    <string name="resetMessage">Est ce que vous vouletz réinitialiser la base de donnée ?</string>
+    <string name="actionReseted">Réinitialiser</string>
+    <string name="dataInitiated">Base de donnée initialisée</string>
+    <string name="actionCancel">Arrêter</string>
+
+    //menu
+    <string name="menu_list_logout">Se Déconnecter</string>
+    <string name="menu_list_about">A propos</string>
+    <string name="menu_list_menu">Menu</string>
+    <string name="menu_list_settings">Paramètres</string>
+    <string name="menu_list_account">Compte</string>
+</resources>

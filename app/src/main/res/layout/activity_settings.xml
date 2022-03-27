@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_to_dark_color"
-    tools:context=".SettingsActivity">
+    tools:context=".UI.SettingsActivity">
 
     <include layout="@layout/toolbar"></include>
 
@@ -20,7 +20,7 @@
         android:src="@drawable/menu_button_image"></ImageView>
 
     <TextView
-        android:id="@+id/choosetimetitle"
+        android:id="@+id/settingstitle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -32,5 +32,55 @@
         android:textColor="@color/black"
         android:textSize="26dp"
         android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/settingsSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/menubutton"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/menubutton"
+        android:padding="10dp"
+        android:text="@string/settings_page_subtitle"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26dp"
+        android:textStyle="bold"></TextView>
+
+    <RadioButton
+        android:id="@+id/radiobuttonfrench"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settingsSubTitle"
+        android:layout_alignLeft="@id/menubutton"
+        android:text="@string/settings_page_french"
+        android:textSize="25dp"
+        android:buttonTint="@color/dark_to_yellow_color"></RadioButton>
+
+    <RadioButton
+        android:id="@+id/radiobuttonenglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radiobuttonfrench"
+        android:layout_alignLeft="@id/menubutton"
+        android:layout_marginTop="10dp"
+        android:text="@string/settings_page_english"
+        android:textSize="25dp"
+        android:buttonTint="@color/dark_to_yellow_color"></RadioButton>
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radiobuttonenglish"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_dark_label"
+        android:drawablePadding="10dp"
+        android:text="@string/settings_page_button"
+        android:textColor="@color/black_to_white_color"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"></Button>
 
 </RelativeLayout>

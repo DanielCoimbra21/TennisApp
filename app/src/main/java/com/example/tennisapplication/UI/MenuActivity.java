@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.SettingsActivity;
 import com.example.tennisapplication.sessions.SessionManager;
 
 import java.util.ArrayList;
@@ -31,10 +30,12 @@ public class MenuActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listview);
 
         List<String> list = new ArrayList<>();
-        list.add("Account");
-        list.add("Sign-Out");
-        list.add("Settings");
-        list.add("About");
+        list.add(getString(R.string.menu_list_account)); // p0
+        list.add(getString(R.string.menu_list_menu)); // p1
+        list.add(getString(R.string.menu_list_about)); // p2
+        list.add(getString(R.string.menu_list_settings)); // p3
+        list.add(getString(R.string.menu_list_logout)); // p4
+
 
 
 
@@ -46,9 +47,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0){
-                    //clicked Account
-                    startActivity(new Intent(MenuActivity.this, AccountActivity.class));
+                    openAccountActivity();
                 }else if(position==1){
+                    openMainMenuActivity();
+                }else if(position==2){
+                    openAboutActivity();
+                }else if(position==3){
+                    openSettingsActivity();
+                }else if(position==4){
                     //clicked SignOut
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     builder.setTitle("Log out");
@@ -57,17 +63,19 @@ public class MenuActivity extends AppCompatActivity {
                     //set username (mail) empty
                     sessionManager.setUsername("");
                     startActivity(new Intent(MenuActivity.this, MainActivity.class));
-                }else if(position==2){
-                    //open settings activity
-                    openSettingsActivity();
-                }else if(position==3){
-                    //open about activity
-                    openAboutActivity();
-                }else{
-
                 }
             }
         });
+    }
+
+    private void openAccountActivity(){
+        Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMainMenuActivity(){
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
     }
 
     private void openAboutActivity(){
