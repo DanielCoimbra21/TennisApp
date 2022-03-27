@@ -14,9 +14,6 @@
             android:name=".UI.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".UI.ReservationDetailsActivity"
             android:exported="false" />
         <activity
@@ -30,6 +27,9 @@
             android:exported="false" />
         <activity
             android:name=".UI.SummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".UI.ChooseTimeActivity"
