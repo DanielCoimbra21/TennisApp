@@ -112,4 +112,12 @@
     <string name="menu_list_settings">Settings</string>
     <string name="menu_list_account">Account</string>
 
+
+    //deleteReservation
+    <string name="title_activity_delete_reservation" >Delete Reservation</string>
+    <string name="reservation_delete_msg" >Do you want to delete the reservation %1$s?</string>
+    <string name="action_accept" >Delete</string>
+    <string name="reservation_deleted">Reservation Deleted</string>
+    <string name="action_cancel" >Cancel</string>
+
 </resources>
