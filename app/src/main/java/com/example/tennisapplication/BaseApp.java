@@ -9,7 +9,12 @@ import com.example.tennisapplication.database.repository.ReservationRepository;
 
 public class BaseApp extends Application {
 
-
+    /*********************************************************************************************
+     *                     Base App de notre application smartphone
+     *
+     *
+     *          Lien vers le GitHub : https://github.com/DanielCoimbra21/TennisApp
+     * ******************************************************************************************/
 
     @Override
     public void onCreate() {

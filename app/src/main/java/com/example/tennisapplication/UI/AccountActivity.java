@@ -95,21 +95,41 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Edit Activity.
+     *
+     * trigger : edit button.
+     */
     private void openEditActivity(){
         Intent intent = new Intent(this, EditActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Main Activity.
+     *
+     * trigger : action after clicking on the delete button.
+     */
     private void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that deletes the account of the player.
+     *
+     * trigger : delecte button.
+     */
     private void deleteAccount(){
         viewModel.deletePlayer(playerEntity, new OnAsyncEventListener() {
             @Override

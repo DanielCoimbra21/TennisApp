@@ -68,12 +68,21 @@ public class BookCourtActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
-
+    /**
+     * Method that redirect the user to the Court Type Activity.
+     *
+     * trigger : when user clicks on the next activity button.
+     */
     private void openCourtTypeActivity(){
         Intent intent = new Intent(this, CourtTypeActivity.class);
         // envoyer la date
@@ -81,6 +90,11 @@ public class BookCourtActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);

@@ -10,8 +10,15 @@ import android.widget.ImageView;
 import com.example.tennisapplication.R;
 import com.google.android.material.button.MaterialButton;
 
+
+
 public class AboutActivity extends AppCompatActivity {
 
+    /**
+     * Initialisation method of the About Activity
+
+     * @param Bundle with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +43,21 @@ public class AboutActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);

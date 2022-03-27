@@ -69,21 +69,41 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Home Page Activity.
+     *
+     * trigger : user clicks on the "Menu" button of the list.
+     */
     private void openMainMenuActivity(){
         Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the About Activity.
+     *
+     * trigger : user clicks on the "About" button of the list.
+     */
     private void openAboutActivity(){
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Settings Activity.
+     *
+     * trigger : user clicks on the "Settings" button of the list.
+     */
     private void openSettingsActivity(){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
