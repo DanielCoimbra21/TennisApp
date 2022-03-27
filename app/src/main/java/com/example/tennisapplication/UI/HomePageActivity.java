@@ -56,22 +56,41 @@ public class HomePageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that redirect the user to the Book Court Activity.
+     *
+     * trigger : when user clicks on the book.
+     */
     private void openBookCourtActivity(){
         Intent intent = new Intent(this, BookCourtActivity.class);
         startActivity(intent);
     }
 
-
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Reservation Activity.
+     *
+     * trigger : open reservations button.
+     */
     private void openMyReservations(){
         Intent intent = new Intent(this, ReservationsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);

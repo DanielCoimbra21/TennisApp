@@ -92,12 +92,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Method that redirect the user to the Home Page Activity.
+     *
+     * trigger : connection Button.
+     */
     private void openHomePageActivity(){
         Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account button situated on the top right of the toolbar.
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, NewAccountActivity.class);
         startActivity(intent);

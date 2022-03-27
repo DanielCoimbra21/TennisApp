@@ -62,6 +62,11 @@ public class CourtTypeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that redirect the user to the Choose Time Activity.
+     *
+     * trigger : when user clicks on a type button.
+     */
     private void openChooseTimeActivity(){
         Intent intent = new Intent(this, ChooseTimeActivity.class);
         intent.putExtra("isIndoor", isIndoor);
@@ -69,11 +74,21 @@ public class CourtTypeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);

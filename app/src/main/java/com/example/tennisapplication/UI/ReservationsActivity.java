@@ -57,9 +57,16 @@ public class ReservationsActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(SessionManager.PREFS_NAME, 0);
         String user = settings.getString(SessionManager.PREFS_USER, null);
 
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
+
         reservations = new ArrayList<>();
-
-
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -108,11 +115,21 @@ public class ReservationsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);

@@ -18,6 +18,7 @@ import com.example.tennisapplication.database.async.player.DeletePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
+import com.google.android.material.button.MaterialButton;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -38,8 +39,9 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        initializeForm();
 
+        // Call initialisation method that will initialize all the fields
+        initializeForm();
 
         // Create menu Button
         ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
@@ -50,6 +52,14 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        // Create account Button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
+        toolbarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAccountActivity();
+            }
+        });
     }
 
     private void initializeForm() {
@@ -136,8 +146,23 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method that redirect the user to the Menu Activity.
+     *
+     * trigger : menu button situated on the top left of the activity.
+     */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Method that redirect the user to the Account Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
+    private void openAccountActivity(){
+        Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
 }
