@@ -3,8 +3,10 @@ package com.example.tennisapplication.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,30 +47,44 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         }
 
         // initialiser tous les boutons de la page
+        ImageView menuButton = (ImageView) findViewById(R.id.menubutton);
+        menuButton.setOnClickListener(this);
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(this);
         ImageView court1 = (ImageView) findViewById(R.id.t1);
         disableIfFull(court1);
+        disableIfType(court1);
         court1.setOnClickListener(this);
         ImageView court2 = (ImageView) findViewById(R.id.t2);
         disableIfFull(court2);
+        disableIfType(court2);
         court2.setOnClickListener(this);
         ImageView court3 = (ImageView) findViewById(R.id.t3);
         disableIfFull(court3);
+        disableIfType(court3);
         court3.setOnClickListener(this);
         ImageView court4 = (ImageView) findViewById(R.id.t4);
         disableIfFull(court4);
+        disableIfType(court4);
         court4.setOnClickListener(this);
         ImageView court5 = (ImageView) findViewById(R.id.t5);
         disableIfFull(court5);
+        disableIfType(court5);
         court5.setOnClickListener(this);
         ImageView court6 = (ImageView) findViewById(R.id.t6);
         disableIfFull(court6);
+        disableIfType(court6);
         court6.setOnClickListener(this);
         ImageView court7 = (ImageView) findViewById(R.id.t7);
         disableIfFull(court7);
+        disableIfType(court7);
         court7.setOnClickListener(this);
 
+    }
+
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
     private void openSummaryActivity(){
@@ -83,6 +99,25 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
+    }
+
+    private void disableIfType(ImageView courtToCheck){
+        int i = Integer.valueOf((String) courtToCheck.getTag());
+        if (isIndoor){
+            if (i == 6 || i == 7){
+                courtToCheck.setVisibility(View.VISIBLE);
+            }else {
+                courtReservedTab[i] = true;
+                courtToCheck.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            if (i == 6 || i == 7){
+                courtReservedTab[i] = true;
+                courtToCheck.setVisibility(View.INVISIBLE);
+            }else {
+                courtToCheck.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void disableIfFull(ImageView courtToCheck){
@@ -114,6 +149,9 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         if (view.getId() == R.id.toolbaraccountbutton){
             openAccountActivity();
         }
+        else if(view.getId() == R.id.menubutton){
+            openMenuActivity();
+        }
         else {
             ImageView test = (ImageView) findViewById(view.getId());
             int i = Integer.parseInt((String) test.getTag());
@@ -125,9 +163,5 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
                 Toast.makeText(this, "court réservé / non disponible", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public int getSelectedCourt(){
-        return courtSelected;
     }
 }
