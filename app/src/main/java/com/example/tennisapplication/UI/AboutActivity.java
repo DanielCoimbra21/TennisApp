@@ -8,22 +8,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.UI.AccountActivity;
-import com.example.tennisapplication.UI.BookCourtActivity;
 import com.google.android.material.button.MaterialButton;
 
-public class HomePageActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-
-        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
-        MaterialButton bookButton = (MaterialButton) findViewById(R.id.bookacourtbutton);
-
-        MaterialButton reservationsButton = findViewById(R.id.myReservationsButton);
-
+        setContentView(R.layout.activity_about);
 
         // Create menu Button
         ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
@@ -34,41 +26,18 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        bookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBookCourtActivity();
-            }
-        });
-
+        // Create account Button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccountActivity();
             }
         });
-
-        reservationsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openMyReservations();
-            }
-        });
     }
-
-    private void openBookCourtActivity(){
-        Intent intent = new Intent(this, BookCourtActivity.class);
-        startActivity(intent);
-    }
-
 
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
-        startActivity(intent);
-    }
-
-    private void openMyReservations(){
-        Intent intent = new Intent(this, ReservationsActivity.class);
         startActivity(intent);
     }
 

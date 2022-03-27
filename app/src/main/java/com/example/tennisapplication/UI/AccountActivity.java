@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,15 @@ public class AccountActivity extends AppCompatActivity {
 
         Button editButton = (Button) findViewById(R.id.editBtn);
         Button deleteButton = (Button) findViewById(R.id.deleteBtn);
+
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
 
         // initialisation des différents champs
         TextView firstName = (TextView) findViewById(R.id.accountSurname);
@@ -83,6 +93,11 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 
     private void openEditActivity(){

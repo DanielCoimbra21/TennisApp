@@ -77,6 +77,20 @@
     <string name="account_title">Your Account:</string>
     <string name="editButton_txt">Edit</string>
     <string name="deleteButton_txt">Delete</string>
+    <string name="edit_page_title">Edit:</string>
+
+
+    //settings page
+    <string name="settings_page_title">Settings:</string>
+
+
+    //reservation details
+    <string name="reservation_details_title">Reservation Details:</string>
+
+
+    //about page
+    <string name="about_page_title">About:</string>
+    <string name="about_page_description">This application was made by Daniel Coimbra and Theo Choffat for the mobile developpement module. This project was supervised by our teacher Dr.Michael Schumacher. Date of creation: 29.03.2022</string>
 
 
     //Reinitialize Database

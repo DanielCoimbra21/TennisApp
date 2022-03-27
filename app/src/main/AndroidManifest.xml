@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
+            android:name=".UI.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.ReservationDetailsActivity"
             android:exported="false" />
         <activity

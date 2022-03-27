@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.database.async.player.CreatePlayer;
@@ -40,6 +41,14 @@ public class EditActivity extends AppCompatActivity {
         initializeForm();
 
 
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
 
     }
 
@@ -125,5 +134,10 @@ public class EditActivity extends AppCompatActivity {
             //etEmail.setError(getString(R.string.error_used_email));
             etEmail.requestFocus();
         }
+    }
+
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 }

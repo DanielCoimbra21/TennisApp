@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.adapter.RecyclerAdapter;
@@ -53,6 +54,15 @@ public class ReservationsActivity extends AppCompatActivity {
 
         reservations = new ArrayList<>();
 
+
+        // Create menu Button
+        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMenuActivity();
+            }
+        });
 
 
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
@@ -97,10 +107,17 @@ public class ReservationsActivity extends AppCompatActivity {
 
     }
 
+    private void openMenuActivity(){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+    }
+
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
+
+
 
 
 }
