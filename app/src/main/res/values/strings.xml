@@ -11,7 +11,7 @@
 
     // home page
     <string name="home_page_book_a_court_text">Book a court</string>
-    <string name="home_page_court_overview_text">Court overview</string>
+    <string name="home_page_court_overview_text">List of Reservations</string>
 
     // court overview + indoor and outdoor selection
     <string name="court_indoor_text">Indoor</string>

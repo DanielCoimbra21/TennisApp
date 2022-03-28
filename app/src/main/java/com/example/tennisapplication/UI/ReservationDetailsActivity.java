@@ -113,14 +113,6 @@ public class ReservationDetailsActivity extends BaseActivity {
             }
         });
 
-        //Edit Accout Button
-        Button editButton = (Button) findViewById(R.id.editReservationBtn);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openEditReservation();
-            }
-        });
     }
 
     /**
@@ -133,20 +125,6 @@ public class ReservationDetailsActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    /**
-     * Method that redirect the user to the Account Activity.
-     *
-     * trigger : account Button situated on the toolbar
-     */
-    private void openEditReservation(){
-        Intent intent = new Intent(this, EditReservationActivity.class);
-        intent.putExtra("reservationId", reservations.get(position).getIdReservation());
-        intent.putExtra("date", reservations.get(position).getDate());
-        intent.putExtra("schedule", reservations.get(position).getSchedule());
-        intent.putExtra("playerId", reservations.get(position).getPlayerEmail());
-        intent.putExtra("courtNumber", reservations.get(position).getCourtNumber());
-        startActivity(intent);
-    }
 
     /**
      *

@@ -69,7 +69,7 @@
 
     //edit account
     <string name="account_list_of_reservations">Réservations</string>
-    <string name="account_phone_number">Téléphone:</string>
+    <string name="account_phone_number">Natel:</string>
     <string name="account_address">Addresse:</string>
     <string name="account_e_mail">E-mail</string>
     <string name="account_age">Age:</string>

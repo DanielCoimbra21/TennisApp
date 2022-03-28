@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,15 +60,14 @@ public class MenuActivity extends AppCompatActivity {
                 }else if(position==3){
                     openSettingsActivity();
                 }else if(position==4){
-                    //clicked SignOut
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setTitle("Log out");
-                    //set Login false
-                    sessionManager.setLogin(false);
-                    //set username (mail) empty
-                    sessionManager.setUsername("");
-                    BaseActivity b = new BaseActivity();
-                    b.logout();
+                    SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+                    editor.remove(BaseActivity.PREFS_USER);
+                    editor.apply();
+
+                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
                 }
             }
         });

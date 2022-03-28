@@ -23,7 +23,7 @@ import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 
 public class AccountActivity extends AppCompatActivity {
 
-    private static final String TAG = "AccountDetailActivity";
+    private static final String TAG = "AccountActivity";
     SessionManager sessionManager;
     private PlayerRepository repository;
     private PlayerEntity playerEntity;
@@ -43,6 +43,15 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openMenuActivity();
+            }
+        });
+
+        // Create ListButton Button
+        Button listReservations = (Button) findViewById(R.id.reservationHistory);
+        listReservations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openReservationsActivity();
             }
         });
 
@@ -143,5 +152,14 @@ public class AccountActivity extends AppCompatActivity {
                 Log.d(TAG, "deleteAccount:failure");
             }
         });
+    }
+
+
+    /**
+     * open the activity with all the reservations for this user
+     */
+    private void openReservationsActivity(){
+        Intent intent = new Intent(this, ReservationsActivity.class);
+        startActivity(intent);
     }
 }
