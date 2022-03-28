@@ -32,6 +32,7 @@ import com.example.tennisapplication.viewModel.reservation.ReservationViewModel;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.NumberFormat;
+import java.util.List;
 
 public class ReservationDetailsActivity extends BaseActivity {
 
@@ -46,6 +47,7 @@ public class ReservationDetailsActivity extends BaseActivity {
     private int court;
     private PlayerEntity playerEntity;
     private PlayerViewModel viewModel;
+    private List<ReservationEntity> reservations;
 
 
 
@@ -93,7 +95,7 @@ public class ReservationDetailsActivity extends BaseActivity {
             }
         });
 
-        // Create Account Button
+        // toolbar Button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +110,15 @@ public class ReservationDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 openMenuActivity();
+            }
+        });
+
+        //Edit Accout Button
+        Button editButton = (Button) findViewById(R.id.editReservationBtn);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openEditReservation();
             }
         });
     }
@@ -126,6 +137,19 @@ public class ReservationDetailsActivity extends BaseActivity {
      * Method that redirect the user to the Account Activity.
      *
      * trigger : account Button situated on the toolbar
+     */
+    private void openEditReservation(){
+        Intent intent = new Intent(this, EditReservationActivity.class);
+        intent.putExtra("reservationId", reservations.get(position).getIdReservation());
+        intent.putExtra("date", reservations.get(position).getDate());
+        intent.putExtra("schedule", reservations.get(position).getSchedule());
+        intent.putExtra("playerId", reservations.get(position).getPlayerEmail());
+        intent.putExtra("courtNumber", reservations.get(position).getCourtNumber());
+        startActivity(intent);
+    }
+
+    /**
+     *
      */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
