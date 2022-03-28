@@ -28,58 +28,60 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
     private int hour;
     private List<ReservationEntity> reservations;
 
+    /**
+     * Initialisation method of the Court Selection Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_selection);
 
-        reservations = new ArrayList<>();
-
+        // Get the previous data
         Intent intent = getIntent();
         isIndoor = intent.getBooleanExtra("isIndoor", true);
         curDate = intent.getStringExtra("curDate");
         hour = intent.getIntExtra("Hour", -1);
 
         // set le tableau qui va check si la réservation est pleine ou non
+        reservations = new ArrayList<>();
         courtReservedTab = new boolean[23];
         for(int i = 0 ; i < courtReservedTab.length ; i++){
             courtReservedTab[i] = false;
         }
 
-        // initialiser tous les boutons de la page
+        // initialiser tous les boutons de la page et les ajouter à un tableau afin de plus facilement ajouter des méthodes par la suite
+        ImageView[] courts = new ImageView[7];
         ImageView menuButton = (ImageView) findViewById(R.id.menubutton);
-        menuButton.setOnClickListener(this);
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
-        toolbarButton.setOnClickListener(this);
         ImageView court1 = (ImageView) findViewById(R.id.t1);
-        disableIfFull(court1);
-        disableIfType(court1);
-        court1.setOnClickListener(this);
         ImageView court2 = (ImageView) findViewById(R.id.t2);
-        disableIfFull(court2);
-        disableIfType(court2);
-        court2.setOnClickListener(this);
         ImageView court3 = (ImageView) findViewById(R.id.t3);
-        disableIfFull(court3);
-        disableIfType(court3);
-        court3.setOnClickListener(this);
         ImageView court4 = (ImageView) findViewById(R.id.t4);
-        disableIfFull(court4);
-        disableIfType(court4);
-        court4.setOnClickListener(this);
         ImageView court5 = (ImageView) findViewById(R.id.t5);
-        disableIfFull(court5);
-        disableIfType(court5);
-        court5.setOnClickListener(this);
         ImageView court6 = (ImageView) findViewById(R.id.t6);
-        disableIfFull(court6);
-        disableIfType(court6);
-        court6.setOnClickListener(this);
         ImageView court7 = (ImageView) findViewById(R.id.t7);
-        disableIfFull(court7);
-        disableIfType(court7);
-        court7.setOnClickListener(this);
 
+        // ajouter les courts au tableau de courts
+        courts[0] = court1;
+        courts[1] = court2;
+        courts[2] = court3;
+        courts[3] = court4;
+        courts[4] = court5;
+        courts[5] = court6;
+        courts[6] = court7;
+
+        // Add the onclicklistener for every buttons
+        menuButton.setOnClickListener(this);
+        toolbarButton.setOnClickListener(this);
+
+        // ajouter les différents paramètres aux courts grâce au tableau
+        for (int i = 0 ; i < courts.length ; i++){
+            courts[i].setOnClickListener(this);
+            disableIfFull(courts[i]);
+            disableIfType(courts[i]);
+        }
     }
 
     /**
@@ -92,6 +94,11 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         startActivity(intent);
     }
 
+    /**
+     * Method that redirect the user to the Summary Activity.
+     *
+     * trigger : account Button situated on the toolbar
+     */
     private void openSummaryActivity(){
         Intent intent = new Intent(this, SummaryActivity.class);
         intent.putExtra("curDate", curDate);
@@ -111,6 +118,11 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         startActivity(intent);
     }
 
+    /**
+     * Method that will disable certain courts based on user type choice.
+     *
+     * @param courtToCheck the court to check. Every court will pass here at the start of the activity
+     */
     private void disableIfType(ImageView courtToCheck){
         int i = Integer.valueOf((String) courtToCheck.getTag());
         if (isIndoor){
@@ -130,15 +142,16 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         }
     }
 
+    /**
+     * Method that checks at the start of the application which court is reserved based on the previous choices of the user
+     *
+     * @param courtToCheck the court to check. Every court will pass here at the start of the activity
+     */
     private void disableIfFull(ImageView courtToCheck){
-
         int i = Integer.valueOf((String) courtToCheck.getTag());
         ReservationRepository repository = ((BaseApp) getApplication()).getReservationRepository();
-
         String h1 = String.valueOf(hour);
-
         repository.getNotAvailableCourts(h1, curDate, getApplication()).observe(CourtSelectionActivity.this, reservationEntities -> {
-
             if (reservationEntities != null)
             {
                 reservations = reservationEntities;
@@ -151,9 +164,13 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
                 }
             }
         });
-
     }
 
+    /**
+     * Method that react to the clicks of the user
+     *
+     * @param view the current view in order to detect the onClick elements
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbaraccountbutton){

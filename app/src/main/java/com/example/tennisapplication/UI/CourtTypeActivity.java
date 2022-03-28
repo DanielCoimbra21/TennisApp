@@ -17,18 +17,22 @@ public class CourtTypeActivity extends AppCompatActivity {
     private boolean isIndoor;
     private String curDate;
 
+    /**
+     * Initialisation method of the Court Type Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_court_type);
 
+        // get the previous information entered by the user
         Intent intent = getIntent();
         curDate = intent.getStringExtra("curDate");
 
+        // Create Indoor Button that set the isIndoor variable
         MaterialButton Indoor = (MaterialButton) findViewById(R.id.indoorbutton);
-        MaterialButton Outdoor = (MaterialButton) findViewById(R.id.outdoorbutton);
-        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
-
         Indoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +41,8 @@ public class CourtTypeActivity extends AppCompatActivity {
             }
         });
 
+        // Create Outdoor Button that set the isIndoor variable
+        MaterialButton Outdoor = (MaterialButton) findViewById(R.id.outdoorbutton);
         Outdoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +60,8 @@ public class CourtTypeActivity extends AppCompatActivity {
             }
         });
 
+        // Create Toolbar Burron
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -20,7 +20,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class NewAccountActivity extends AppCompatActivity {
 
-
     private EditText etFirstName;
     private EditText etLastName;
     private EditText etEmail;
@@ -29,15 +28,27 @@ public class NewAccountActivity extends AppCompatActivity {
     private EditText etPwd1;
     private EditText etPwd2;
 
+    /**
+     * Initialisation method of the New Account Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        initializeForm();
 
+        // Call the initialisation method of the activity
+        initializeForm();
     }
 
+    /**
+     * Initialisation method of the New Account Activity
+     *
+     * trigger: onCreate Method
+     */
     private void initializeForm() {
+        // initialize the edit texts
         etFirstName = findViewById(R.id.tv_firstname);
         etLastName = findViewById(R.id.tv_lastname);
         etEmail = findViewById(R.id.tv_email);
@@ -46,7 +57,7 @@ public class NewAccountActivity extends AppCompatActivity {
         etPwd1 = findViewById(R.id.tv_password1);
         etPwd2 = findViewById(R.id.tv_password2);
 
-
+        // Create the save button that will call the method saveChanges
         Button saveBtn = findViewById(R.id.button_register);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,19 +73,21 @@ public class NewAccountActivity extends AppCompatActivity {
                 );
             }
         });
-
-        /*saveBtn.setOnClickListener(view -> saveChanges(
-                etFirstName.getText().toString(),
-                etLastName.getText().toString(),
-                etEmail.getText().toString(),
-                etAge.getText().toString(),
-                etPhone.getText().toString(),
-                etPwd1.getText().toString(),
-                etPwd2.getText().toString()
-        ));*/
     }
 
+    /**
+     * Method that saves the new account to the database and verify that every field is correctly entered
+     *
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param email the email of the user
+     * @param age the age of the user
+     * @param phone the phone of the user
+     * @param pwd the password of the user
+     * @param pwd2 the password confirmation of the user
+     */
     private void saveChanges(String firstName, String lastName, String email, String age, String phone ,String pwd, String pwd2) {
+        // check that the pwd and the email address are incorrect
         if (!pwd.equals(pwd2)) {
             etPwd1.setError(getString(R.string.error_invalid_password));
             etPwd1.requestFocus();
@@ -88,8 +101,8 @@ public class NewAccountActivity extends AppCompatActivity {
             return;
         }
 
+        // if it is correct, then create a new client in the database
         PlayerEntity newClient = new PlayerEntity(email,pwd,firstName,lastName,age,phone,"player",0,0);
-
         new CreatePlayer(getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
@@ -105,6 +118,11 @@ public class NewAccountActivity extends AppCompatActivity {
         }).execute(newClient);
     }
 
+    /**
+     * Method that set a response to the user in order to inform the failure/success of the database update
+     *
+     * @param response Boolean of the success/failure of the implementation
+     */
     private void setResponse(Boolean response) {
         if (response) {
             final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
@@ -114,9 +132,7 @@ public class NewAccountActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
-            //etEmail.setError(getString(R.string.error_used_email));
             etEmail.requestFocus();
         }
     }
-
 }

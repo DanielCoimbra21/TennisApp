@@ -23,21 +23,9 @@ public class BaseActivity extends AppCompatActivity{
     public static final String PREFS_USER = "LoggedIn";
 
     /**
-     *  Frame layout: Which is going to be used as parent layout for child activity layout.
-     *  This layout is protected so that child activity can access this
-     */
-    protected FrameLayout frameLayout;
-
-    protected DrawerLayout drawerLayout;
-
-    protected NavigationView navigationView;
-
-    /**
      * Static variable for selected item position. Which can be used in child activity to know which item is selected from the list.
      */
     protected static int position;
-
-
 
     /**
      * Method that redirect the user to the Main Activity.
@@ -48,7 +36,6 @@ public class BaseActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
         editor.remove(BaseActivity.PREFS_USER);
         editor.apply();
-
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

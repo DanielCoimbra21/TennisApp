@@ -33,27 +33,27 @@ import java.util.List;
 public class ReservationsActivity extends AppCompatActivity {
 
     private static final String TAG = "ReservationsActivity";
-
     private List<ReservationEntity> reservations;
     private RecyclerAdapter<ReservationEntity> adapter;
     private ReservationListViewModel viewModel;
 
+    /**
+     * Initialisation method of the Reservation Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
-        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
-
+        // Class initialisation
         RecyclerView recyclerView = findViewById(R.id.reservationsRecyclerView);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-
         SharedPreferences settings = getSharedPreferences(SessionManager.PREFS_NAME, 0);
         String user = settings.getString(SessionManager.PREFS_USER, null);
 
@@ -66,6 +66,8 @@ public class ReservationsActivity extends AppCompatActivity {
             }
         });
 
+        // On item Click, show reservation details
+        // On Item Long Click, delete reservation
         reservations = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
             @Override
@@ -89,13 +91,12 @@ public class ReservationsActivity extends AppCompatActivity {
             public void onItemLongClick(View v, int position) {
                 Log.d(TAG, "longClicked position:" + position);
                 Log.d(TAG, "longClicked on: " + reservations.get(position).getIdReservation());
-
                 createDeleteDialog(position);
             }
         });
 
+        // will get and show the reservations
         ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), user);
-
         viewModel = ViewModelProviders.of(this, factory).get(ReservationListViewModel.class);
         viewModel.getPlayerReservation().observe(this, reservationEntities -> {
             if (reservationEntities != null){
@@ -103,16 +104,16 @@ public class ReservationsActivity extends AppCompatActivity {
                 adapter.setData(reservations);
             }
         });
-
         recyclerView.setAdapter(adapter);
 
+        // Creation of the Account button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAccountActivity();
             }
         });
-
     }
 
     /**
@@ -135,6 +136,11 @@ public class ReservationsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method that will call a pupup message to prevent missclicks.
+     *
+     * @param position the int position on the reservation list
+     */
     private void createDeleteDialog(final int position) {
         final ReservationEntity reservationEntity = reservations.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -166,8 +172,4 @@ public class ReservationsActivity extends AppCompatActivity {
         alertDialog.setView(view);
         alertDialog.show();
     }
-
-
-
-
 }

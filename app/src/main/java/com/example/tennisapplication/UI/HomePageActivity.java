@@ -14,16 +14,15 @@ import com.google.android.material.button.MaterialButton;
 
 public class HomePageActivity extends AppCompatActivity {
 
+    /**
+     * Initialisation method of the Home Page Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
-        MaterialButton bookButton = (MaterialButton) findViewById(R.id.bookacourtbutton);
-
-        MaterialButton reservationsButton = findViewById(R.id.myReservationsButton);
-
 
         // Create menu Button
         ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
@@ -34,6 +33,8 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        // Create book Button
+        MaterialButton bookButton = (MaterialButton) findViewById(R.id.bookacourtbutton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +42,8 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        // Create toolbar Button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +51,8 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        // Create Reservation Button
+        MaterialButton reservationsButton = findViewById(R.id.myReservationsButton);
         reservationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

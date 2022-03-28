@@ -20,15 +20,18 @@ public class BookCourtActivity extends AppCompatActivity {
 
     private String curDate;
 
+    /**
+     * Initialisation method of the Book Court Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_court);
 
-        MaterialButton nextActivity = (MaterialButton) findViewById(R.id.nextbutton);
-        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
+        // Create Calendar View Button
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendar);
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
@@ -37,6 +40,8 @@ public class BookCourtActivity extends AppCompatActivity {
             }
         });
 
+        // Create Next Activity Button
+        MaterialButton nextActivity = (MaterialButton) findViewById(R.id.nextbutton);
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +65,8 @@ public class BookCourtActivity extends AppCompatActivity {
             }
         });
 
+        // Create ToolBar Button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +92,6 @@ public class BookCourtActivity extends AppCompatActivity {
      */
     private void openCourtTypeActivity(){
         Intent intent = new Intent(this, CourtTypeActivity.class);
-        // envoyer la date
         intent.putExtra("curDate", curDate);
         startActivity(intent);
     }

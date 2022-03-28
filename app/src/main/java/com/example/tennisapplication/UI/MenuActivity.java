@@ -20,15 +20,21 @@ public class MenuActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
 
+    /**
+     * Initialisation method of the Menu Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        // Initialize the session Manager
         sessionManager = new SessionManager(getApplicationContext());
 
+        // Initialize the menu list
         ListView listView = findViewById(R.id.listview);
-
         List<String> list = new ArrayList<>();
         list.add(getString(R.string.menu_list_account)); // p0
         list.add(getString(R.string.menu_list_menu)); // p1
@@ -36,13 +42,11 @@ public class MenuActivity extends AppCompatActivity {
         list.add(getString(R.string.menu_list_settings)); // p3
         list.add(getString(R.string.menu_list_logout)); // p4
 
-
-
-
-
+        // initialize the list that will be show on the UI
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
 
+        // set onClickListener on the list. It will do something depending on which item you clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

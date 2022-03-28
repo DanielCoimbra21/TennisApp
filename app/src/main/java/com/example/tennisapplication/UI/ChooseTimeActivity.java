@@ -20,11 +20,17 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
     private boolean isIndoor;
     private String curDate;
 
+    /**
+     * Initialisation method of the Choose Time Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_time);
 
+        // Get the previous data
         Intent intent = getIntent();
         isIndoor = intent.getBooleanExtra("isIndoor", true);
         curDate = intent.getStringExtra("curDate");
@@ -107,7 +113,11 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
         startActivity(intent);
     }
 
-
+    /**
+     * Method that react to the clicks of the user
+     *
+     * @param view the current view in order to detect the onClick elements
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.toolbaraccountbutton){
@@ -119,9 +129,5 @@ public class ChooseTimeActivity extends AppCompatActivity implements View.OnClic
             System.out.println(selectedTime);
             openCourtSelectionActivity();
         }
-    }
-
-    public int getSelectedTime(){
-        return selectedTime;
     }
 }
