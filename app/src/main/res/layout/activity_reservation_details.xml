@@ -192,21 +192,7 @@
         android:textSize="25dp"
         android:textStyle="bold"></TextView>
 
-    <Button
-        android:id="@+id/editReservationBtn"
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/reservationSurname"
-        android:layout_alignRight="@id/reservationHistory"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_dark_label"
-        android:drawablePadding="10dp"
-        android:padding="7dp"
-        android:text="@string/editButton_txt"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:backgroundTint="@null"></Button>
+
 
 
 </RelativeLayout>

@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TennisApplication">
         <activity
-            android:name=".UI.EditReservationActivity"
-            android:exported="false" />
-        <activity
             android:name=".UI.AboutActivity"
             android:exported="false" />
         <activity

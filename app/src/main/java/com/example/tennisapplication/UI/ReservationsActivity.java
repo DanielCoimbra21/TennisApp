@@ -58,13 +58,13 @@ public class ReservationsActivity extends AppCompatActivity {
         String user = settings.getString(SessionManager.PREFS_USER, null);
 
         // Create menu Button
-        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
+/*        ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openMenuActivity();
             }
-        });
+        });*/
 
         // On item Click, show reservation details
         // On Item Long Click, delete reservation
