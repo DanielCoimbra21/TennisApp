@@ -119,4 +119,9 @@
     <string name="action_accept" >Delete</string>
     <string name="reservation_deleted">Reservation Deleted</string>
     <string name="action_cancel" >Cancel</string>
+
+
+    //EditReservation
+    <string name="dateEdit">Edit Date</string>
+    <string name="hourEdit">Edit Hour</string>
 </resources>

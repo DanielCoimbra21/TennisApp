@@ -112,6 +112,7 @@ public class AccountActivity extends AppCompatActivity {
      */
     private void openEditActivity(){
         Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("playerId", playerEntity.getEmail());
         startActivity(intent);
     }
 

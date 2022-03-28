@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.database.async.player.CreatePlayer;
 import com.example.tennisapplication.database.async.player.DeletePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 import com.google.android.material.button.MaterialButton;
@@ -26,12 +28,12 @@ public class EditActivity extends AppCompatActivity {
 
     private EditText etFirstName;
     private EditText etLastName;
-    private EditText etEmail;
     private EditText etAge;
     private EditText etPhone;
     private EditText etPwd1;
-    private EditText etPwd2;
+    private String owner;
     private PlayerViewModel playerViewModel;
+    private PlayerRepository repository;
 
     private PlayerEntity player;
 
@@ -40,8 +42,14 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+
+        repository = ((BaseApp) getApplication()).getPlayerRepository();
+
+        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
+        owner = settings.getString(BaseActivity.PREFS_USER, null);
+
         // Call initialisation method that will initialize all the fields
-        initializeForm();
+        initializeEdit();
 
         // Create menu Button
         ImageView menuBtn = (ImageView) findViewById(R.id.menubutton);
@@ -60,91 +68,115 @@ public class EditActivity extends AppCompatActivity {
                 openAccountActivity();
             }
         });
+
+        String playerId = getIntent().getStringExtra("playerId");
+        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
+                getApplication(), playerId);
+        playerViewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
+        playerViewModel.getPlayer().observe(this, accountEntity -> {
+            if (accountEntity != null) {
+                player = accountEntity;
+                etFirstName.setText(player.getFirstName());
+                etLastName.setText(player.getLastName());
+                etAge.setText(player.getAge());
+                etPhone.setText(player.getPhoneNumber());
+            }
+        });
+
+
     }
 
-    private void initializeForm() {
+    private void initializeEdit() {
         etFirstName = findViewById(R.id.tv_firstname);
         etLastName = findViewById(R.id.tv_lastname);
-        etEmail = findViewById(R.id.tv_email);
         etAge = findViewById(R.id.tv_age);
         etPhone = findViewById(R.id.tv_phone);
         etPwd1 = findViewById(R.id.tv_password1);
-        etPwd2 = findViewById(R.id.tv_password2);
-
 
         Button saveBtn = findViewById(R.id.button_save);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveChanges(
+                saveChanges(player.getEmail(),
                         etFirstName.getText().toString(),
                         etLastName.getText().toString(),
-                        etEmail.getText().toString(),
                         etAge.getText().toString(),
                         etPhone.getText().toString(),
-                        etPwd1.getText().toString(),
-                        etPwd2.getText().toString()
+                        etPwd1.getText().toString()
                 );
             }
         });
-
-        saveBtn.setOnClickListener(view -> saveChanges(
-                etFirstName.getText().toString(),
-                etLastName.getText().toString(),
-                etEmail.getText().toString(),
-                etAge.getText().toString(),
-                etPhone.getText().toString(),
-                etPwd1.getText().toString(),
-                etPwd2.getText().toString()
-        ));
     }
 
 
+    private void saveChanges(String playerId, String firstName, String lastName,  String age, String phone ,String pwd) {
 
-    private void saveChanges(String firstName, String lastName, String email, String age, String phone ,String pwd, String pwd2) {
-        if (!pwd.equals(pwd2)) {
-            etPwd1.setError(getString(R.string.error_invalid_password));
-            etPwd1.requestFocus();
-            etPwd1.setText("");
-            etPwd2.setText("");
-            return;
-        }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError(getString(R.string.error_invalid_email));
-            etEmail.requestFocus();
+        if (firstName.isEmpty()){
+            etFirstName.setError(getString(R.string.error_invalid_champ));
+            etFirstName.requestFocus();
+            etFirstName.setText("");
             return;
         }
 
-        PlayerEntity newClient = new PlayerEntity(email,pwd,firstName,lastName,age,phone,"player",0,0);
-
-        new CreatePlayer(getApplication(), new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-                //Log.d(TAG, "createUserWithEmail: success");
-                setResponse(true);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                //Log.d(TAG, "createUserWithEmail: failure", e);
-                setResponse(false);
-            }
-        }).execute(newClient);
-    }
-
-    private void setResponse(Boolean response) {
-        if (response) {
-            final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-            editor.putString(BaseActivity.PREFS_USER, etEmail.getText().toString());
-            editor.apply();
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            //etEmail.setError(getString(R.string.error_used_email));
-            etEmail.requestFocus();
+        if (lastName.isEmpty()){
+            etLastName.setError(getString(R.string.error_invalid_champ));
+            etLastName.requestFocus();
+            etLastName.setText("");
+            return;
         }
+
+        if (lastName.isEmpty()){
+            etLastName.setError(getString(R.string.error_invalid_champ));
+            etLastName.requestFocus();
+            etLastName.setText("");
+            return;
+        }
+
+
+        if (age.isEmpty()){
+            etAge.setError(getString(R.string.error_invalid_champ));
+            etAge.requestFocus();
+            etAge.setText("");
+            return;
+        }
+
+        if (phone.isEmpty()){
+            etPhone.setError(getString(R.string.error_invalid_champ));
+            etPhone.requestFocus();
+            etPhone.setText("");
+            return;
+        }
+
+
+        repository.getPlayer(playerId, getApplication()).observe(EditActivity.this, playerEntity -> {
+            if (playerEntity != null){
+                if(playerEntity.getPassword().equals(pwd)){
+                    player.setAge(age);
+                    player.setFirstName(firstName);
+                    player.setLastName(lastName);
+                    player.setPhoneNumber(phone);
+                    playerViewModel.updatePlayer(player, new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            Log.d(TAG, "Update: success");
+
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            Log.d(TAG, "Update: failure", e);
+
+                        }
+                    });
+                }
+            }
+        });
+
+        openAccountActivity();
+
+
     }
+
 
     /**
      * Method that redirect the user to the Menu Activity.

@@ -87,7 +87,6 @@
     <string name="settings_page_button">Change Settings</string>
 
 
-
     //reservation details
     <string name="reservation_details_title">Reservation Details:</string>
 
@@ -114,10 +113,15 @@
 
 
     //deleteReservation
-    <string name="title_activity_delete_reservation" >Delete Reservation</string>
-    <string name="reservation_delete_msg" >Do you want to delete the reservation %1$s?</string>
-    <string name="action_accept" >Delete</string>
+    <string name="title_activity_delete_reservation">Delete Reservation</string>
+    <string name="reservation_delete_msg">Do you want to delete the reservation %1$s?</string>
+    <string name="action_accept">Delete</string>
     <string name="reservation_deleted">Reservation Deleted</string>
-    <string name="action_cancel" >Cancel</string>
+    <string name="action_cancel">Cancel</string>
+
+    //EditReservation
+    <string name="dateEdit">Edit Date</string>
+    <string name="hourEdit">Edit Hour</string>
+    <string name="error_invalid_champ">No information in this text box</string>
 
 </resources>

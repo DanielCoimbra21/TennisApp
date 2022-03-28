@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/blue_to_dark_color"
     android:layout_height="match_parent"
-    tools:context=".UI.EditActivity">
+    tools:context=".UI.EditReservationActivity">
 
-    <include layout="@layout/toolbar"></include>
+    <include layout="@layout/toolbar"/>
 
     <ImageView
         android:id="@+id/menubutton"
@@ -17,10 +16,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="76dp"
         android:clickable="true"
-        android:src="@drawable/menu_button_image"></ImageView>
+        android:src="@drawable/menu_button_image"/>
 
     <TextView
-        android:id="@+id/choosetimetitle"
+        android:id="@+id/editReservationView"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -31,10 +30,10 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="26dp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/tv_firstname"
+        android:id="@+id/tv_dateEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -42,89 +41,36 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
+        android:layout_below="@id/editReservationView"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/firstname"
+        android:hint="@string/dateEdit"
         android:padding="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textColorHint="@color/black"/>
 
     <EditText
-        android:id="@+id/tv_lastname"
+        android:id="@+id/tv_hourEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/lastname"
+        android:hint="@string/hourEdit"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="-10dp"
         android:layout_marginBottom="30dp"
-        android:layout_below="@id/tv_firstname"
+        android:layout_below="@id/tv_dateEdit"
         android:background="@drawable/rounded_edittext"
         android:padding="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textColorHint="@color/black"/>
-
-
-
-    <EditText
-        android:id="@+id/tv_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginBottom="30dp"
-        android:layout_below="@id/tv_lastname"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/age"
-        android:textStyle="bold"
-        android:padding="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:inputType="number"/>
-
-    <EditText
-        android:id="@+id/tv_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginBottom="30dp"
-        android:layout_below="@id/tv_age"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/phone"
-        android:textStyle="bold"
-        android:padding="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:inputType="phone"/>
-
-
-    <EditText
-        android:id="@+id/tv_password1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_phone"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="@string/password"
-        android:padding="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textStyle="bold"
-        android:inputType="textPassword"/>
 
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_password1"
+        android:layout_below="@id/tv_hourEdit"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_transparent_button"
         android:drawablePadding="20dp"
@@ -133,7 +79,7 @@
         android:textColor="@color/black"
         android:textSize="19dp"
         android:textStyle="bold"
-        app:backgroundTint="@null"></Button>
+        app:backgroundTint="@null"/>
 
 
 </RelativeLayout>
