@@ -39,10 +39,7 @@ public class SummaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        //Book button
-        Button bookButton = (Button) findViewById(R.id.bookButton);
-
-
+        // get the reservation repository
         reservationRepository = ((BaseApp) getApplication()).getReservationRepository();
 
         // get les informations précédemment entrées
@@ -83,7 +80,7 @@ public class SummaryActivity extends AppCompatActivity {
             }
         });
 
-        // afficher le court choisi
+        // Afficher le court choisi
         ImageView court1 = (ImageView) findViewById(R.id.t1);
         ImageView court2 = (ImageView) findViewById(R.id.t2);
         ImageView court3 = (ImageView) findViewById(R.id.t3);
@@ -91,6 +88,8 @@ public class SummaryActivity extends AppCompatActivity {
         ImageView court5 = (ImageView) findViewById(R.id.t5);
         ImageView court6 = (ImageView) findViewById(R.id.t6);
         ImageView court7 = (ImageView) findViewById(R.id.t7);
+
+        // By default, every court is invisible on the UI
         court1.setVisibility(View.INVISIBLE);
         court2.setVisibility(View.INVISIBLE);
         court3.setVisibility(View.INVISIBLE);
@@ -99,6 +98,7 @@ public class SummaryActivity extends AppCompatActivity {
         court6.setVisibility(View.INVISIBLE);
         court7.setVisibility(View.INVISIBLE);
 
+        // If a certain court is selected, it will be activated on the UI
         switch (court){
             case 1 :
                 court1.setVisibility(View.VISIBLE);
@@ -123,6 +123,7 @@ public class SummaryActivity extends AppCompatActivity {
                 break;
         }
 
+        // Create account button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
         toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,18 +140,16 @@ public class SummaryActivity extends AppCompatActivity {
                 openMenuActivity();
             }
         });
-
         String h = String.valueOf(hour);
 
-
+        // OnClickListener on the book button
+        Button bookButton = (Button) findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                testReservation(h, curDate, playerEntity.getEmail(), court);
-
-                }
-
-            });
+                addReservation(h, curDate, playerEntity.getEmail(), court);
+            }
+        });
     }
 
     /**
@@ -173,15 +172,17 @@ public class SummaryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    private void testReservation(String schedule, String date, String playerId, int courtNumber) {
-        addReservation(schedule, date, playerId, courtNumber);
-    }
-
+    /**
+     * Method that add the selected reservation to the database.
+     *
+     * trigger : book button.
+     * @param schedule, this is the hour of the court reservation
+     * @param date, this is the date in string
+     * @param playerId, this is the id of the user that is registrated
+     * @param courtNumber, this is the number of the selected court.
+     */
     private void addReservation(String schedule, String date, String playerId, int courtNumber){
         ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
-
-
         new CreateReservation(getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
@@ -195,9 +196,14 @@ public class SummaryActivity extends AppCompatActivity {
         }).execute(newReservation);
     }
 
+    /**
+     * Method that will handle the creation status and will change page if it is successfully created.
+     *
+     * trigger : addReservation Method.
+     * @param response, this is the status of the success/failure of the reservation in the database.
+     */
     private void setResponse(Boolean response) {
         if (response) {
-
             final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
             editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
             editor.apply();
@@ -207,8 +213,6 @@ public class SummaryActivity extends AppCompatActivity {
             Toast.makeText(SummaryActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-            //etEmail.setError(getString(R.string.error_used_email));
-            //getE.requestFocus();
         }
     }
 }

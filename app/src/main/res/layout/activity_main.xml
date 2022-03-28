@@ -124,18 +124,4 @@
         android:textColor="@color/black"
         android:textSize="50dp"></com.google.android.material.button.MaterialButton>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/resetButton"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gobutton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        app:backgroundTint="@null"
-        android:background="@drawable/rounded_transparent_button"
-        android:padding="10dp"
-        android:text="G    "
-        android:textColor="@color/black"
-        android:textSize="20dp"/>
-
 </RelativeLayout>

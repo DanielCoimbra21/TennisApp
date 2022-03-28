@@ -20,7 +20,11 @@ public class SettingsActivity extends AppCompatActivity {
     private RadioButton french;
     private RadioButton english;
 
-
+    /**
+     * Initialisation method of the Settings Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // switch language onclicklistener that will call the languageChange method
         switchLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +79,12 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method that will change the language of the mobile application. It will then refresh the activity
+     * in order to directly see the language update.
+     *
+     * trigger : switch language toggle button then apply changes button.
+     */
     private void languageChange(){
         if (french.isChecked()){
             String language  = "fr"; // français
@@ -82,6 +93,8 @@ public class SettingsActivity extends AppCompatActivity {
             Configuration config = new Configuration();
             config.locale = locale;
             getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+            // restart the activity
             finish();
             startActivity(getIntent());
         }else{
@@ -91,6 +104,8 @@ public class SettingsActivity extends AppCompatActivity {
             Configuration config = new Configuration();
             config.locale = locale;
             getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+            // restart the activity
             finish();
             startActivity(getIntent());
         }
