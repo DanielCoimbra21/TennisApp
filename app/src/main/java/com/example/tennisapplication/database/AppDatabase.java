@@ -28,7 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "TennisDataB";
+    private static final String DATABASE_NAME = "TennisDB";
 
     public abstract CourtDAO courtDao();
 

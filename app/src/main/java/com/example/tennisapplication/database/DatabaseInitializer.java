@@ -69,8 +69,8 @@ public class DatabaseInitializer {
         }
 
 
-        addReservation(db, "10", "30.03.2022", "admin@admin.com", 1);
-        addReservation(db, "9", "31.03.2022", "admin@admin.com", 1);
+        addReservation(db, "10", "30.3.2022", "admin@admin.com", 1);
+        addReservation(db, "9", "31.3.2022", "admin@admin.com", 1);
 
 
     }
