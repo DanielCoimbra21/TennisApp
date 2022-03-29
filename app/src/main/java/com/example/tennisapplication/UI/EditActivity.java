@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
@@ -34,9 +35,15 @@ public class EditActivity extends AppCompatActivity {
     private String owner;
     private PlayerViewModel playerViewModel;
     private PlayerRepository repository;
-
     private PlayerEntity player;
 
+
+
+    /**
+     * Initialisation method of the EditAccount Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +76,10 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+
+        /**
+         * Call the Player view model
+         */
         String playerId = getIntent().getStringExtra("playerId");
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
                 getApplication(), playerId);
@@ -86,6 +97,10 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Method called to set the new infos about the player
+     */
     private void initializeEdit() {
         etFirstName = findViewById(R.id.tv_firstname);
         etLastName = findViewById(R.id.tv_lastname);
@@ -108,7 +123,10 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Method used when player clicks on save data
+     * If the information is not entered the rigth way it will display errors
+     */
     private void saveChanges(String playerId, String firstName, String lastName,  String age, String phone ,String pwd) {
 
         if (firstName.isEmpty()){
@@ -149,8 +167,10 @@ public class EditActivity extends AppCompatActivity {
 
 
         repository.getPlayer(playerId, getApplication()).observe(EditActivity.this, playerEntity -> {
-            if (playerEntity != null){
-                if(playerEntity.getPassword().equals(pwd)){
+            if (playerEntity != null)
+            {
+                if(playerEntity.getPassword().equals(pwd))
+                {
                     player.setAge(age);
                     player.setFirstName(firstName);
                     player.setLastName(lastName);
@@ -159,18 +179,24 @@ public class EditActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess() {
                             Log.d(TAG, "Update: success");
-
                         }
 
                         @Override
                         public void onFailure(Exception e) {
                             Log.d(TAG, "Update: failure", e);
-
                         }
                     });
+
+                }
+                else {
+                    Toast.makeText(this, "not updated wrong Password", Toast.LENGTH_SHORT).show();
                 }
             }
+            else {
+                Toast.makeText(this, "unable to update", Toast.LENGTH_SHORT).show();
+            }
         });
+
 
         openAccountActivity();
 
@@ -185,7 +211,9 @@ public class EditActivity extends AppCompatActivity {
      */
     private void openMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
+        finish();
         startActivity(intent);
+
     }
 
     /**
@@ -195,6 +223,8 @@ public class EditActivity extends AppCompatActivity {
      */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);
+        finish();
         startActivity(intent);
+
     }
 }

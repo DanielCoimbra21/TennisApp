@@ -50,7 +50,11 @@ public class ReservationDetailsActivity extends BaseActivity {
     private List<ReservationEntity> reservations;
 
 
-
+    /**
+     * Initialisation method of the Reservation details Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +131,9 @@ public class ReservationDetailsActivity extends BaseActivity {
 
 
     /**
+     * Method that redirect the user to the Account Activity.
      *
+     * trigger : Account button situated on the top rigth of the activity.
      */
     private void openAccountActivity(){
         Intent intent = new Intent(this, AccountActivity.class);

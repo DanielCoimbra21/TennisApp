@@ -29,6 +29,10 @@ public class AccountActivity extends AppCompatActivity {
     private PlayerEntity playerEntity;
     private PlayerViewModel viewModel;
 
+    /**
+     * On create method for the AccountActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +89,9 @@ public class AccountActivity extends AppCompatActivity {
         });
 
 
+        /**
+         * set an action listener on editButton
+         */
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +100,9 @@ public class AccountActivity extends AppCompatActivity {
         });
 
 
+        /**
+         * set an action listner on delete button
+         */
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

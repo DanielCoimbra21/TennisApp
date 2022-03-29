@@ -28,7 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "TennisDB";
+    private static final String DATABASE_NAME = "TennisDataB";
 
     public abstract CourtDAO courtDao();
 
@@ -75,8 +75,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static void initializeDemoData(final AppDatabase database) {
         Executors.newSingleThreadExecutor().execute(() -> {
             database.runInTransaction(() -> {
-                Log.i(TAG, "Wipe database.");
-                database.playerDao().deleteAll();
+//                Log.i(TAG, "Wipe database.");
+//                database.playerDao().deleteAll();
                 //database.courtDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
