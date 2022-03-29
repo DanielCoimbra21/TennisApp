@@ -1,5 +1,6 @@
 package com.example.tennisapplication.UI;
 
+import static com.example.tennisapplication.database.AppDatabase.getInstance;
 import static com.example.tennisapplication.database.AppDatabase.initializeDemoData;
 
 import androidx.appcompat.app.AlertDialog;
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
      * trigger : account button situated on the top right of the toolbar.
      */
     private void openAccountActivity(){
+        //initializeDemoData(AppDatabase.getInstance(this));
+        repository.getPlayer("",getApplication()).observe(MainActivity.this, playerEntity -> {});
         Intent intent = new Intent(this, NewAccountActivity.class);
         startActivity(intent);
     }

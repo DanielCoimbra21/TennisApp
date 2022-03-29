@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
+import com.example.tennisapplication.database.AppDatabase;
 import com.example.tennisapplication.database.async.player.CreatePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.util.OnAsyncEventListener;
@@ -130,6 +131,7 @@ public class NewAccountActivity extends AppCompatActivity {
             editor.apply();
 
             Intent intent = new Intent(this, MainActivity.class);
+            finish();
             startActivity(intent);
         } else {
             etEmail.requestFocus();

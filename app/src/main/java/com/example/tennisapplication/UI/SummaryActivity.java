@@ -34,6 +34,11 @@ public class SummaryActivity extends AppCompatActivity {
     private ReservationRepository reservationRepository;
     private PlayerViewModel viewModel;
 
+    /**
+     * Initialisation method of the Summary Activity
+     *
+     * @param savedInstanceState with the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,6 +214,7 @@ public class SummaryActivity extends AppCompatActivity {
             editor.apply();
 
             Intent intent = new Intent(this, HomePageActivity.class);
+            finish();
             startActivity(intent);
             Toast.makeText(SummaryActivity.this, "Reservation Successful", Toast.LENGTH_SHORT).show();
         } else {
