@@ -151,19 +151,19 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         int i = Integer.valueOf((String) courtToCheck.getTag());
         ReservationRepository repository = ((BaseApp) getApplication()).getReservationRepository();
         String h1 = String.valueOf(hour);
-        repository.getNotAvailableCourts(h1, curDate, getApplication()).observe(CourtSelectionActivity.this, reservationEntities -> {
-            if (reservationEntities != null)
-            {
-                reservations = reservationEntities;
-                for (ReservationEntity r: reservations) {
-                    if(i == r.getCourtNumber())
-                    {
-                        courtReservedTab[i] = true;
-                        courtToCheck.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
-        });
+//        repository.getNotAvailableCourts(h1, curDate, getApplication()).observe(CourtSelectionActivity.this, reservationEntities -> {
+//            if (reservationEntities != null)
+//            {
+//                reservations = reservationEntities;
+//                for (ReservationEntity r: reservations) {
+//                    if(i == r.getCourtNumber())
+//                    {
+//                        courtReservedTab[i] = true;
+//                        courtToCheck.setVisibility(View.INVISIBLE);
+//                    }
+//                }
+//            }
+//        });
     }
 
     /**

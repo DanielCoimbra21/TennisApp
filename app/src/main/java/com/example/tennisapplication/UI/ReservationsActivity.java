@@ -2,7 +2,6 @@ package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,15 +87,15 @@ public class ReservationsActivity extends AppCompatActivity {
         });
 
         // will get and show the reservations
-        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), user);
-        viewModel = ViewModelProviders.of(this, factory).get(ReservationListViewModel.class);
-        viewModel.getPlayerReservation().observe(this, reservationEntities -> {
-            if (reservationEntities != null){
-                reservations = reservationEntities;
-                adapter.setData(reservations);
-            }
-        });
-        recyclerView.setAdapter(adapter);
+//        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), user);
+//        viewModel = ViewModelProviders.of(this, factory).get(ReservationListViewModel.class);
+//        viewModel.getPlayerReservation().observe(this, reservationEntities -> {
+//            if (reservationEntities != null){
+//                reservations = reservationEntities;
+//                adapter.setData(reservations);
+//            }
+//        });
+//        recyclerView.setAdapter(adapter);
 
         // Creation of the Account button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);

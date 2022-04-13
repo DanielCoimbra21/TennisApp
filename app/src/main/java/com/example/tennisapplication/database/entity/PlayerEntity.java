@@ -1,46 +1,26 @@
 package com.example.tennisapplication.database.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "player")
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class PlayerEntity implements Comparable{
 
-    /*@PrimaryKey(autoGenerate = true)
-    private int idPlayer;*/
-
-    @PrimaryKey
-    @NonNull
+    private String idPlayer;
     private String email;
-
-    @ColumnInfo(name = "password")
     private String password;
-
-    @ColumnInfo(name = "firstName")
     private String firstName;
-
-    @ColumnInfo(name = "lastName")
     private String lastName;
-
-    @ColumnInfo(name = "age")
     private String age;
-
-    @ColumnInfo(name = "phoneNumber")
     private String phoneNumber;
-
-    @ColumnInfo(name = "status")
     private String status;
-
-    @ColumnInfo(name = "nbReservations")
     private int nbReservations;
-
-    @ColumnInfo(name = "image")
     private int image;
 
-    @Ignore
     public PlayerEntity() {
 
     }
@@ -58,13 +38,13 @@ public class PlayerEntity implements Comparable{
         this.image = image;
     }
 
-    /*public int getIdPlayer() {
+    public String getIdPlayer() {
         return idPlayer;
     }
 
-    public void setIdPlayer(int idPlayer) {
+    public void setIdPlayer(String idPlayer) {
         this.idPlayer = idPlayer;
-    }*/
+    }
 
     @NonNull
     public String getEmail() {
@@ -146,6 +126,17 @@ public class PlayerEntity implements Comparable{
     @Override
     public int compareTo(@NonNull Object o) {
         return toString().compareTo(o.toString());
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
+        result.put("age", age);
+        result.put("phoneNumber", phoneNumber);
+
+        return result;
     }
 
 }

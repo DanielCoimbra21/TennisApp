@@ -34,7 +34,7 @@ public class PlayerViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observerPlayer.setValue(null);
 
-        LiveData<PlayerEntity> player = repository.getPlayer(email, application);
+        LiveData<PlayerEntity> player = repository.getPlayer(email);
 
         // observe the changes of the client entity from the database and forward them
         observerPlayer.addSource(player, observerPlayer::setValue);
@@ -67,14 +67,14 @@ public class PlayerViewModel extends AndroidViewModel {
     public LiveData<PlayerEntity> getPlayer() {return observerPlayer;}
 
     public void createPlayer(PlayerEntity playerEntity, OnAsyncEventListener callback){
-        repository.insert(playerEntity, callback, application);
+        repository.insert(playerEntity, callback);
     }
 
     public void updatePlayer(PlayerEntity playerEntity, OnAsyncEventListener callback){
-        repository.update(playerEntity, callback, application);
+        repository.update(playerEntity, callback);
     }
 
     public void deletePlayer(PlayerEntity playerEntity, OnAsyncEventListener callback){
-        repository.delete(playerEntity, callback, application);
+        repository.delete(playerEntity, callback);
     }
 }

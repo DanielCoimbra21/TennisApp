@@ -35,7 +35,7 @@ public class ReservationViewModel extends AndroidViewModel {
         observerReservation = new MediatorLiveData<>();
         observerReservation.setValue(null);
 
-        LiveData<ReservationEntity> reservation = repository.getReservation(id, application);
+        LiveData<ReservationEntity> reservation = repository.getReservation(String.valueOf(id));
 
         observerReservation.addSource(reservation, observerReservation::setValue);
     }
@@ -64,15 +64,15 @@ public class ReservationViewModel extends AndroidViewModel {
     public LiveData<ReservationEntity> getReservation(){return observerReservation;}
 
     public void createReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){
-        repository.insert(reservationEntity, callback, application);
+        repository.insert(reservationEntity, callback);
     }
 
     public void updateReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){
-        repository.update(reservationEntity, callback, application);
+        repository.update(reservationEntity, callback);
     }
 
     public void deleteReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){
-        repository.delete(reservationEntity, callback, application);
+        repository.delete(reservationEntity, callback);
     }
 
 

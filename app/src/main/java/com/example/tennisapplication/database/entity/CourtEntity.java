@@ -1,40 +1,24 @@
 package com.example.tennisapplication.database.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import com.google.firebase.database.Exclude;
 
-@Entity(tableName = "courts")
+import java.util.HashMap;
+import java.util.Map;
+
 public class CourtEntity implements Comparable{
 
-    @PrimaryKey
-    private int idCourt;
-
-    @ColumnInfo(name = "openAir")
+    private String idCourt;
     private boolean openAir;
-
-    @ColumnInfo(name = "reserved")
-    private boolean reserved;
-
 
     public CourtEntity(){}
 
-    public CourtEntity(int idCourt,boolean openAir, boolean reserved){
-        this.openAir = openAir;
-        this.reserved = reserved;
-        this.idCourt = idCourt;
-    }
-
-
-    public int getIdCourt() {
+    @Exclude
+    public String getIdCourt() {
         return idCourt;
     }
 
-    public void setIdCourt(int idCourt) {
+    public void setIdCourt(String idCourt) {
         this.idCourt = idCourt;
     }
 
@@ -46,13 +30,6 @@ public class CourtEntity implements Comparable{
         this.openAir = openAir;
     }
 
-    public boolean isReserved() {
-        return reserved;
-    }
-
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -70,5 +47,13 @@ public class CourtEntity implements Comparable{
     @Override
     public int compareTo(Object o) {
         return toString().compareTo(o.toString());
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("idCourt", idCourt);
+        result.put("openAir", openAir);
+        return result;
     }
 }

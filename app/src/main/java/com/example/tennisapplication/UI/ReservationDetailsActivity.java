@@ -2,7 +2,6 @@ package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.async.reservation.CreateReservation;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.database.repository.ReservationRepository;
@@ -85,19 +83,19 @@ public class ReservationDetailsActivity extends BaseActivity {
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-        viewModel.getPlayer().observe(this, playerEntity -> {
-            if (playerEntity != null) {
-                this.playerEntity = playerEntity;
-                if (playerEntity != null){
-                    //Set Username on TextView
-                    name.setText(playerEntity.getLastName().toUpperCase());
-                    name.getText().toString();
-                    surname.setText(playerEntity.getFirstName());
-                    surname.getText().toString();
-                }
-            }
-        });
+//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
+//        viewModel.getPlayer().observe(this, playerEntity -> {
+//            if (playerEntity != null) {
+//                this.playerEntity = playerEntity;
+//                if (playerEntity != null){
+//                    //Set Username on TextView
+//                    name.setText(playerEntity.getLastName().toUpperCase());
+//                    name.getText().toString();
+//                    surname.setText(playerEntity.getFirstName());
+//                    surname.getText().toString();
+//                }
+//            }
+//        });
 
         // toolbar Button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
