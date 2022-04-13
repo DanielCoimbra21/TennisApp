@@ -1,7 +1,6 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.async.reservation.CreateReservation;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.database.repository.ReservationRepository;
@@ -71,19 +69,19 @@ public class SummaryActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-        viewModel.getPlayer().observe(this, playerEntity -> {
-            if (playerEntity != null) {
-                this.playerEntity = playerEntity;
-                if (playerEntity != null){
-                    //Set Username on TextView
-                    name.setText(playerEntity.getLastName().toUpperCase());
-                    name.getText().toString();
-                    surname.setText(playerEntity.getFirstName());
-                    surname.getText().toString();
-                }
-            }
-        });
+//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
+//        viewModel.getPlayer().observe(this, playerEntity -> {
+//            if (playerEntity != null) {
+//                this.playerEntity = playerEntity;
+//                if (playerEntity != null){
+//                    //Set Username on TextView
+//                    name.setText(playerEntity.getLastName().toUpperCase());
+//                    name.getText().toString();
+//                    surname.setText(playerEntity.getFirstName());
+//                    surname.getText().toString();
+//                }
+//            }
+//        });
 
         // Afficher le court choisi
         ImageView court1 = (ImageView) findViewById(R.id.t1);
@@ -187,18 +185,18 @@ public class SummaryActivity extends AppCompatActivity {
      * @param courtNumber, this is the number of the selected court.
      */
     private void addReservation(String schedule, String date, String playerId, int courtNumber){
-        ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
-        new CreateReservation(getApplication(), new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-                setResponse(true);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                setResponse(false);
-            }
-        }).execute(newReservation);
+//        ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
+//        new CreateReservation(getApplication(), new OnAsyncEventListener() {
+//            @Override
+//            public void onSuccess() {
+//                setResponse(true);
+//            }
+//
+//            @Override
+//            public void onFailure(Exception e) {
+//                setResponse(false);
+//            }
+//        }).execute(newReservation);
     }
 
     /**

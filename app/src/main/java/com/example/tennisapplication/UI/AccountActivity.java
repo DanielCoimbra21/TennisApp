@@ -1,8 +1,6 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -68,25 +66,25 @@ public class AccountActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
         String user = settings.getString(BaseActivity.PREFS_USER, null);
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-        viewModel.getPlayer().observe(this, playerEntity -> {
-            if (playerEntity != null) {
-                this.playerEntity = playerEntity;
-                if (playerEntity != null){
-                    //Set Username on TextView
-                    firstName.setText(playerEntity.getFirstName());
-                    firstName.getText().toString();
-                    lastName.setText(playerEntity.getLastName());
-                    lastName.getText().toString();
-                    age.setText(playerEntity.getAge());
-                    age.getText().toString();
-                    mail.setText(playerEntity.getEmail());
-                    mail.getText().toString();
-                    phone.setText(playerEntity.getPhoneNumber());
-                    phone.getText().toString();
-                }
-            }
-        });
+//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
+//        viewModel.getPlayer().observe(this, playerEntity -> {
+//            if (playerEntity != null) {
+//                this.playerEntity = playerEntity;
+//                if (playerEntity != null){
+//                    //Set Username on TextView
+//                    firstName.setText(playerEntity.getFirstName());
+//                    firstName.getText().toString();
+//                    lastName.setText(playerEntity.getLastName());
+//                    lastName.getText().toString();
+//                    age.setText(playerEntity.getAge());
+//                    age.getText().toString();
+//                    mail.setText(playerEntity.getEmail());
+//                    mail.getText().toString();
+//                    phone.setText(playerEntity.getPhoneNumber());
+//                    phone.getText().toString();
+//                }
+//            }
+//        });
 
 
         /**

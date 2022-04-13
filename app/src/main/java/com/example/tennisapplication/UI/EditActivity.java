@@ -1,7 +1,6 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.async.player.CreatePlayer;
-import com.example.tennisapplication.database.async.player.DeletePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
 import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.util.OnAsyncEventListener;
@@ -83,16 +80,16 @@ public class EditActivity extends AppCompatActivity {
         String playerId = getIntent().getStringExtra("playerId");
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
                 getApplication(), playerId);
-        playerViewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-        playerViewModel.getPlayer().observe(this, accountEntity -> {
-            if (accountEntity != null) {
-                player = accountEntity;
-                etFirstName.setText(player.getFirstName());
-                etLastName.setText(player.getLastName());
-                etAge.setText(player.getAge());
-                etPhone.setText(player.getPhoneNumber());
-            }
-        });
+//        playerViewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
+//        playerViewModel.getPlayer().observe(this, accountEntity -> {
+//            if (accountEntity != null) {
+//                player = accountEntity;
+//                etFirstName.setText(player.getFirstName());
+//                etLastName.setText(player.getLastName());
+//                etAge.setText(player.getAge());
+//                etPhone.setText(player.getPhoneNumber());
+//            }
+//        });
 
 
     }
@@ -166,36 +163,36 @@ public class EditActivity extends AppCompatActivity {
         }
 
 
-        repository.getPlayer(playerId, getApplication()).observe(EditActivity.this, playerEntity -> {
-            if (playerEntity != null)
-            {
-                if(playerEntity.getPassword().equals(pwd))
-                {
-                    player.setAge(age);
-                    player.setFirstName(firstName);
-                    player.setLastName(lastName);
-                    player.setPhoneNumber(phone);
-                    playerViewModel.updatePlayer(player, new OnAsyncEventListener() {
-                        @Override
-                        public void onSuccess() {
-                            Log.d(TAG, "Update: success");
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            Log.d(TAG, "Update: failure", e);
-                        }
-                    });
-
-                }
-                else {
-                    Toast.makeText(this, "not updated wrong Password", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-                Toast.makeText(this, "unable to update", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        repository.getPlayer(playerId, getApplication()).observe(EditActivity.this, playerEntity -> {
+//            if (playerEntity != null)
+//            {
+//                if(playerEntity.getPassword().equals(pwd))
+//                {
+//                    player.setAge(age);
+//                    player.setFirstName(firstName);
+//                    player.setLastName(lastName);
+//                    player.setPhoneNumber(phone);
+//                    playerViewModel.updatePlayer(player, new OnAsyncEventListener() {
+//                        @Override
+//                        public void onSuccess() {
+//                            Log.d(TAG, "Update: success");
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Exception e) {
+//                            Log.d(TAG, "Update: failure", e);
+//                        }
+//                    });
+//
+//                }
+//                else {
+//                    Toast.makeText(this, "not updated wrong Password", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            else {
+//                Toast.makeText(this, "unable to update", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         openAccountActivity();

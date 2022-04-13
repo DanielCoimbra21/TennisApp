@@ -1,22 +1,15 @@
 package com.example.tennisapplication.UI;
-
-import static com.example.tennisapplication.database.AppDatabase.getInstance;
-import static com.example.tennisapplication.database.AppDatabase.initializeDemoData;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.AppDatabase;
 import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.sessions.SessionManager;
 import com.google.android.material.button.MaterialButton;
@@ -72,28 +65,40 @@ public class MainActivity extends AppCompatActivity {
      * @param passwordV the password of the user
      */
     private void attemptLogin(String email, String passwordV) {
-        repository.getPlayer(email,getApplication()).observe(MainActivity.this, playerEntity -> {
-            if (playerEntity != null) {
-                if (playerEntity.getPassword().equals(passwordV)) {
-                    //Session
-                    SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-                    editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
-                    editor.apply();
 
-                    // login correct
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    openHomePageActivity();
-                }
-                else {
-                    // login incorrect
-                    Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-                // login incorrect
+        repository.signIn(email, passwordV, task -> {
+            if (task.isSuccessful()) {
+                openHomePageActivity();
+                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            } else {
                 Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+//        repository.getPlayer(email,getApplication()).observe(MainActivity.this, playerEntity -> {
+//            if (playerEntity != null) {
+//                if (playerEntity.getPassword().equals(passwordV)) {
+//                    //Session
+//                    SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+//                    editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
+//                    editor.apply();
+//
+//                    // login correct
+//                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                    openHomePageActivity();
+//                }
+//                else {
+//                    // login incorrect
+//                    Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            else {
+//                // login incorrect
+//                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     /**
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void openAccountActivity(){
         //initializeDemoData(AppDatabase.getInstance(this));
-        repository.getPlayer("",getApplication()).observe(MainActivity.this, playerEntity -> {});
+//        repository.getPlayer("").observe(MainActivity.this, playerEntity -> {});
         Intent intent = new Intent(this, NewAccountActivity.class);
         startActivity(intent);
     }

@@ -1,20 +1,27 @@
 package com.example.tennisapplication.database.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.tennisapplication.BaseApp;
-import com.example.tennisapplication.database.async.player.CreatePlayer;
-import com.example.tennisapplication.database.async.player.DeletePlayer;
-import com.example.tennisapplication.database.async.player.UpdatePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.firebase.PlayerLiveData;
+import com.example.tennisapplication.database.firebase.PlayerWithReservationListLiveData;
 import com.example.tennisapplication.database.pojo.PlayerWithReservation;
 import com.example.tennisapplication.util.OnAsyncEventListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class PlayerRepository {
+
+    private static final String TAG = "PlayerRepository";
 
     private static PlayerRepository instance;
 
@@ -31,25 +38,110 @@ public class PlayerRepository {
         return instance;
     }
 
-    public LiveData<PlayerEntity> getPlayer(final String email, Application application){
-        return ((BaseApp)application).getDatabase().playerDao().getByEmail(email);
+    public void signIn(final String email, final String password,
+                       final OnCompleteListener<AuthResult> listener) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(listener);
     }
 
-    public LiveData<List<PlayerWithReservation>> getOtherPlayerWithReservations(final String email,
-                                                                             Application application) {
-        return ((BaseApp) application).getDatabase().playerDao().getOtherPlayersWithReservations(email);
+
+
+    public LiveData<PlayerEntity> getPlayer(final String playerId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("players")
+                .child(playerId);
+        return new PlayerLiveData(reference);
     }
 
-    public void insert(final PlayerEntity playerEntity, OnAsyncEventListener callback, Application application){
-        new CreatePlayer(application, callback).execute(playerEntity);
+    public LiveData<List<PlayerWithReservation>> getOtherPlayerWithReservations(final String email) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("players");
+        return new PlayerWithReservationListLiveData(reference, email);
     }
 
-    public void update(final PlayerEntity playerEntity, OnAsyncEventListener callback, Application application){
-        new UpdatePlayer(application, callback).execute(playerEntity);
+    public void register(final PlayerEntity client, final OnAsyncEventListener callback) {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                client.getEmail(),
+                client.getPassword()
+        ).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                client.setIdPlayer(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                insert(client, callback);
+            } else {
+                callback.onFailure(task.getException());
+            }
+        });
     }
 
-    public void delete(final PlayerEntity playerEntity, OnAsyncEventListener callback, Application application){
-        new DeletePlayer(application, callback).execute(playerEntity);
+//    public void register(final PlayerEntity client, final OnAsyncEventListener callback) {
+//        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+//                client.getEmail(),
+//                client.getPassword()
+//        ).addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                System.out.println("SUCCESS AT REGISTER METHOD PLAYERREPOSITORY");
+//                client.setIdPlayer(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                insert(client, callback);
+//            } else {
+//                System.out.println("FAILURE AT REGISTER METHOD PLAYERREPOSITORY");
+//                System.out.println("Exception : " + task.getException());
+//                callback.onFailure(task.getException());
+//            }
+//        });
+//    }
+
+    public void insert(final PlayerEntity playerEntity, OnAsyncEventListener callback){
+        FirebaseDatabase.getInstance()
+                .getReference("players")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(playerEntity, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                        FirebaseAuth.getInstance().getCurrentUser().delete()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        callback.onFailure(null);
+                                        Log.d(TAG, "Rollback successful: User account deleted");
+                                    } else {
+                                        callback.onFailure(task.getException());
+                                        Log.d(TAG, "Rollback failed: signInWithEmail:failure",
+                                                task.getException());
+                                    }
+                                });
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
+
+    public void update(final PlayerEntity playerEntity, OnAsyncEventListener callback){
+        FirebaseDatabase.getInstance()
+                .getReference("clients")
+                .child(playerEntity.getIdPlayer())
+                .updateChildren(playerEntity.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+        FirebaseAuth.getInstance().getCurrentUser().updatePassword(playerEntity.getPassword())
+                .addOnFailureListener(
+                        e -> Log.d(TAG, "updatePassword failure!", e)
+                );
+    }
+
+    public void delete(final PlayerEntity playerEntity, OnAsyncEventListener callback){
+        FirebaseDatabase.getInstance()
+                .getReference("clients")
+                .child(playerEntity.getEmail())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
 

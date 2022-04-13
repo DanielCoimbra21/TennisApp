@@ -1,23 +1,21 @@
 package com.example.tennisapplication.UI;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
-import com.example.tennisapplication.database.AppDatabase;
-import com.example.tennisapplication.database.async.player.CreatePlayer;
 import com.example.tennisapplication.database.entity.PlayerEntity;
+import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.util.OnAsyncEventListener;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.gms.common.util.JsonUtils;
 
 public class NewAccountActivity extends AppCompatActivity {
 
@@ -28,6 +26,7 @@ public class NewAccountActivity extends AppCompatActivity {
     private EditText etPhone;
     private EditText etPwd1;
     private EditText etPwd2;
+    private PlayerRepository repository;
 
     /**
      * Initialisation method of the New Account Activity
@@ -38,7 +37,7 @@ public class NewAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-
+        repository = ((BaseApp) getApplication()).getPlayerRepository();
         // Call the initialisation method of the activity
         initializeForm();
     }
@@ -103,8 +102,9 @@ public class NewAccountActivity extends AppCompatActivity {
         }
 
         // if it is correct, then create a new client in the database
-        PlayerEntity newClient = new PlayerEntity(email,pwd,firstName,lastName,age,phone,"player",0,0);
-        new CreatePlayer(getApplication(), new OnAsyncEventListener() {
+        PlayerEntity newClient = new PlayerEntity(email, pwd, firstName, lastName, age, phone, "player", 0, 0);
+
+        repository.register(newClient, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 //Log.d(TAG, "createUserWithEmail: success");
@@ -116,7 +116,7 @@ public class NewAccountActivity extends AppCompatActivity {
                 //Log.d(TAG, "createUserWithEmail: failure", e);
                 setResponse(false);
             }
-        }).execute(newClient);
+        });
     }
 
     /**

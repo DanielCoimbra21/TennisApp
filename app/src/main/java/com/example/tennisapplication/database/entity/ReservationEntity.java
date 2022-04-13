@@ -1,69 +1,18 @@
 package com.example.tennisapplication.database.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
 
-/*@Entity(tableName = "reservation"
-        ,foreignKeys =
-        @ForeignKey(
-                entity=PlayerEntity.class,
-                parentColumns = "email",
-                childColumns = "playerEmail",
-                onDelete = ForeignKey.CASCADE
+import com.google.firebase.database.Exclude;
 
-        ),
-        indices = {
-        @Index(
-                value = {"player"}
-        )
-        }
-)
-@Entity(tableName = "courts"
-        ,foreignKeys =
-@ForeignKey(
-        entity=CourtEntity.class,
-        parentColumns = "idCourt",
-        childColumns = "courtNumber",
-        onDelete = ForeignKey.CASCADE
-
-),
-        indices = {
-                @Index(
-                        value = {"court"}
-                )
-        }
-)*/
-
-@Entity(tableName = "reservation" ,foreignKeys = {
-        @ForeignKey(
-                entity=PlayerEntity.class,
-                parentColumns = "email",
-                childColumns = "playerEmail",
-                onDelete = ForeignKey.CASCADE
-        ),
-        @ForeignKey(
-                entity=CourtEntity.class,
-                parentColumns = "idCourt",
-                childColumns = "courtNumber",
-                onDelete = ForeignKey.CASCADE
-        )
-
-}
-)
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReservationEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    private Long idReservation;
+    private String idReservation;
 
-    @ColumnInfo(name = "schedule")
     private String schedule;
 
-    @ColumnInfo(name = "date")
     private String date;
-
 
     private String playerEmail;
 
@@ -79,11 +28,11 @@ public class ReservationEntity {
         this.courtNumber = courtNumber;
     }
 
-    public Long getIdReservation() {
+    public String getIdReservation() {
         return idReservation;
     }
 
-    public void setIdReservation(Long idReservation) {
+    public void setIdReservation(String idReservation) {
         this.idReservation = idReservation;
     }
 
@@ -127,4 +76,20 @@ public class ReservationEntity {
         ReservationEntity o = (ReservationEntity) obj;
         return o.getIdReservation().equals(this.getIdReservation());
     }
+
+    @Exclude
+    public Map<String, Object> toMapByUser() {
+        HashMap<String, Object> result = new HashMap<>();
+        String dateTime = date + "/" + schedule;
+        result.put(dateTime, courtNumber);
+        return result;
+    }
+
+    @Exclude
+    public Map<String, Object> toMapByDate() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put(playerEmail, courtNumber);
+        return result;
+    }
+
 }
