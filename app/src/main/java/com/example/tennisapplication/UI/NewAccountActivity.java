@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
@@ -103,17 +104,16 @@ public class NewAccountActivity extends AppCompatActivity {
 
         // if it is correct, then create a new client in the database
         PlayerEntity newClient = new PlayerEntity(email, pwd, firstName, lastName, age, phone, "player", 0, 0);
-
         repository.register(newClient, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-                //Log.d(TAG, "createUserWithEmail: success");
+                Toast.makeText(NewAccountActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                 setResponse(true);
             }
 
             @Override
             public void onFailure(Exception e) {
-                //Log.d(TAG, "createUserWithEmail: failure", e);
+                Toast.makeText(NewAccountActivity.this, "Account Creation Failure", Toast.LENGTH_SHORT).show();
                 setResponse(false);
             }
         });
@@ -129,7 +129,6 @@ public class NewAccountActivity extends AppCompatActivity {
             final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
             editor.putString(BaseActivity.PREFS_USER, etEmail.getText().toString());
             editor.apply();
-
             Intent intent = new Intent(this, MainActivity.class);
             finish();
             startActivity(intent);

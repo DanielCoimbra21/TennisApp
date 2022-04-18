@@ -54,7 +54,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         T item = mData.get(position);
         if (item.getClass().equals(ReservationEntity.class))
-            holder.mTextView.setText(((ReservationEntity) item).getSchedule() +"H " + ((ReservationEntity) item).getDate()+" court: " + ((ReservationEntity) item).getCourtNumber());
+            holder.mTextView.setText(((ReservationEntity) item).getSchedule() +"H " + ((ReservationEntity) item).getDate()+" court: " + ((ReservationEntity) item).getCourtNum());
         if (item.getClass().equals(PlayerEntity.class))
             holder.mTextView.setText(((PlayerEntity) item).getFirstName() + " " + ((PlayerEntity) item).getLastName());
     }
@@ -103,9 +103,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                         ReservationEntity oldReservation = (ReservationEntity) mData.get(newItemPosition);
                         return newReservation.getIdReservation().equals(oldReservation.getIdReservation())
                                 && Objects.equals(newReservation.getDate(), oldReservation.getDate())
-                                && Objects.equals(newReservation.getCourtNumber(), oldReservation.getCourtNumber())
-                                && Objects.equals(newReservation.getSchedule(), oldReservation.getSchedule())
-                                && Objects.equals(newReservation.getPlayerEmail(), oldReservation.getPlayerEmail());
+                                && Objects.equals(newReservation.getCourtNum(), oldReservation.getCourtNum())
+                                && Objects.equals(newReservation.getSchedule(), oldReservation.getSchedule());
                     }
                     if (mData instanceof PlayerEntity) {
                         PlayerEntity newClient = (PlayerEntity) data.get(newItemPosition);

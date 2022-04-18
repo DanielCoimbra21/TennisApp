@@ -14,18 +14,14 @@ public class ReservationEntity {
 
     private String date;
 
-    private String playerEmail;
-
-
-    private int courtNumber;
+    private int courtNum;
 
     public ReservationEntity() {}
 
-    public ReservationEntity(String schedule, String date, String playerId, int courtNumber) {
+    public ReservationEntity(String schedule, String date, int courtNum) {
         this.schedule = schedule;
         this.date = date;
-        this.playerEmail = playerId;
-        this.courtNumber = courtNumber;
+        this.courtNum = courtNum;
     }
 
     public String getIdReservation() {
@@ -52,20 +48,12 @@ public class ReservationEntity {
         this.date = date;
     }
 
-    public String getPlayerEmail() {
-        return playerEmail;
+    public int getCourtNum() {
+        return courtNum;
     }
 
-    public void setPlayerEmail(String playerEmail) {
-        this.playerEmail = playerEmail;
-    }
-
-    public int getCourtNumber() {
-        return courtNumber;
-    }
-
-    public void setCourtNumber(int courtNumber) {
-        this.courtNumber = courtNumber;
+    public void setCourtNum(int courtNum) {
+        this.courtNum = courtNum;
     }
 
     @Override
@@ -77,19 +65,15 @@ public class ReservationEntity {
         return o.getIdReservation().equals(this.getIdReservation());
     }
 
+    // va regarder si le user a déjà réservé à cette date la
     @Exclude
-    public Map<String, Object> toMapByUser() {
+    public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        String dateTime = date + "/" + schedule;
-        result.put(dateTime, courtNumber);
+        result.put("date", date);
+        result.put("schedule", schedule);
+        result.put("courtNum", courtNum);
         return result;
     }
 
-    @Exclude
-    public Map<String, Object> toMapByDate() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put(playerEmail, courtNumber);
-        return result;
-    }
 
 }

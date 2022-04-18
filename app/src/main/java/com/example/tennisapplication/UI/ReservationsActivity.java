@@ -2,6 +2,7 @@ package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,7 @@ import com.example.tennisapplication.util.RecyclerViewItemClickListener;
 import com.example.tennisapplication.viewModel.reservation.ReservationListViewModel;
 import com.example.tennisapplication.viewModel.reservation.ReservationViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,12 +52,8 @@ public class ReservationsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.reservationsRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                LinearLayoutManager.VERTICAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        SharedPreferences settings = getSharedPreferences(SessionManager.PREFS_NAME, 0);
-        String user = settings.getString(SessionManager.PREFS_USER, null);
-
 
         // On item Click, show reservation details
         // On Item Long Click, delete reservation
@@ -71,11 +69,9 @@ public class ReservationsActivity extends AppCompatActivity {
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
                 );
-                intent.putExtra("reservationId", reservations.get(position).getIdReservation());
                 intent.putExtra("date", reservations.get(position).getDate());
                 intent.putExtra("schedule", reservations.get(position).getSchedule());
-                intent.putExtra("playerId", reservations.get(position).getPlayerEmail());
-                intent.putExtra("courtNumber", reservations.get(position).getCourtNumber());
+                intent.putExtra("courtNumber", reservations.get(position).getCourtNum());
                 startActivity(intent);
             }
             @Override
@@ -87,15 +83,15 @@ public class ReservationsActivity extends AppCompatActivity {
         });
 
         // will get and show the reservations
-//        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), user);
-//        viewModel = ViewModelProviders.of(this, factory).get(ReservationListViewModel.class);
-//        viewModel.getPlayerReservation().observe(this, reservationEntities -> {
-//            if (reservationEntities != null){
-//                reservations = reservationEntities;
-//                adapter.setData(reservations);
-//            }
-//        });
-//        recyclerView.setAdapter(adapter);
+        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        viewModel = new ViewModelProvider(this, factory).get(ReservationListViewModel.class);
+        viewModel.getPlayerReservation().observe(this, reservationEntities -> {
+            if (reservationEntities != null){
+                reservations = reservationEntities;
+                adapter.setData(reservations);
+            }
+        });
+        recyclerView.setAdapter(adapter);
 
         // Creation of the Account button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
@@ -141,7 +137,7 @@ public class ReservationsActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
 
         final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
-        deleteMessage.setText(String.format(getString(R.string.reservation_delete_msg), reservationEntity.getPlayerEmail()));
+        deleteMessage.setText(getString(R.string.reservation_delete_msg));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_accept), (dialog, which) -> {
             Toast toast = Toast.makeText(this, getString(R.string.reservation_deleted), Toast.LENGTH_LONG);

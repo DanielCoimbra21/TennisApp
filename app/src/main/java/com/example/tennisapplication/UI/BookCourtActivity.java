@@ -48,7 +48,7 @@ public class BookCourtActivity extends AppCompatActivity {
                 // mettre la date d'aujourd'hui si rien n'est sélectionné
                 if(curDate == null){
                     Date date = new Date();
-                    curDate = new SimpleDateFormat("dd.MM.yyyy").format(date);
+                    curDate = new SimpleDateFormat("d.M.yyyy").format(date);
                 }
                 // afficher la date sélectionnée grâce à un toast et passer à la suite
                 Toast.makeText(BookCourtActivity.this, "sip: "+ curDate, Toast.LENGTH_SHORT).show();

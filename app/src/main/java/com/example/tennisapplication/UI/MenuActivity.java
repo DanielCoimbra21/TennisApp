@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.sessions.SessionManager;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,15 @@ public class MenuActivity extends AppCompatActivity {
                     finish();
                     startActivity(intent);
                 }
+            }
+        });
+
+        // toolbar Button
+        MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);
+        toolbarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAccountActivity();
             }
         });
     }

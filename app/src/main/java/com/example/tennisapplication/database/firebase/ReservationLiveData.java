@@ -40,7 +40,6 @@ public class ReservationLiveData extends LiveData<ReservationEntity> {
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             ReservationEntity entity = dataSnapshot.getValue(ReservationEntity.class);
             entity.setIdReservation(dataSnapshot.getKey());
-            entity.setPlayerEmail(owner);
             setValue(entity);
         }
 

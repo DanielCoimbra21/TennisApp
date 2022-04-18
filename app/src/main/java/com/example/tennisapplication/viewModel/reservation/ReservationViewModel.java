@@ -25,7 +25,7 @@ public class ReservationViewModel extends AndroidViewModel {
 
     private final MediatorLiveData<ReservationEntity> observerReservation;
 
-    public ReservationViewModel(@NonNull Application application, final int id, ReservationRepository reservationRepository) {
+    public ReservationViewModel(@NonNull Application application, final String id, ReservationRepository reservationRepository) {
         super(application);
 
         this.application = application;
@@ -35,7 +35,7 @@ public class ReservationViewModel extends AndroidViewModel {
         observerReservation = new MediatorLiveData<>();
         observerReservation.setValue(null);
 
-        LiveData<ReservationEntity> reservation = repository.getReservation(String.valueOf(id));
+        LiveData<ReservationEntity> reservation = repository.getReservation(id);
 
         observerReservation.addSource(reservation, observerReservation::setValue);
     }
@@ -44,11 +44,11 @@ public class ReservationViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int id;
+        private final String id;
 
         private final ReservationRepository repository;
 
-        public Factory(@NonNull Application application, int id) {
+        public Factory(@NonNull Application application, String id) {
             this.id = id;
             this.application = application;
             repository = ((BaseApp) application).getReservationRepository();
@@ -57,7 +57,7 @@ public class ReservationViewModel extends AndroidViewModel {
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //no inspection unchecked
-            return (T) new ReservationViewModel(application, id, repository);
+            return (T) new ReservationViewModel(application,id, repository);
         }
     }
 
@@ -65,10 +65,6 @@ public class ReservationViewModel extends AndroidViewModel {
 
     public void createReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){
         repository.insert(reservationEntity, callback);
-    }
-
-    public void updateReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){
-        repository.update(reservationEntity, callback);
     }
 
     public void deleteReservation(ReservationEntity reservationEntity, OnAsyncEventListener callback){

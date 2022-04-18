@@ -73,7 +73,6 @@ public class PlayerWithReservationListLiveData extends LiveData<List<PlayerWithR
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             ReservationEntity entity = childSnapshot.getValue(ReservationEntity.class);
             entity.setIdReservation(childSnapshot.getKey());
-            entity.setPlayerEmail(ownerId);
             accounts.add(entity);
         }
         return accounts;

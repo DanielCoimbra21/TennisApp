@@ -1,6 +1,7 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,9 @@ import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.database.repository.ReservationRepository;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
+import com.example.tennisapplication.viewModel.reservation.ReservationViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -26,11 +29,14 @@ public class SummaryActivity extends AppCompatActivity {
 
     private boolean isIndoor;
     private String curDate;
+    private String courtId;
     private int hour;
     private int court;
     private PlayerEntity playerEntity;
     private ReservationRepository reservationRepository;
+    private ReservationViewModel rViewModel;
     private PlayerViewModel viewModel;
+    private PlayerEntity player;
 
     /**
      * Initialisation method of the Summary Activity
@@ -66,22 +72,22 @@ public class SummaryActivity extends AppCompatActivity {
         // set le textView du nom Prénom de l'utilisateur actuel
         TextView name = (TextView) findViewById(R.id.resultName);
         TextView surname = (TextView) findViewById(R.id.resultSurname);
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
-        String user = settings.getString(BaseActivity.PREFS_USER, null);
-        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-//        viewModel.getPlayer().observe(this, playerEntity -> {
-//            if (playerEntity != null) {
-//                this.playerEntity = playerEntity;
-//                if (playerEntity != null){
-//                    //Set Username on TextView
-//                    name.setText(playerEntity.getLastName().toUpperCase());
-//                    name.getText().toString();
-//                    surname.setText(playerEntity.getFirstName());
-//                    surname.getText().toString();
-//                }
-//            }
-//        });
+
+
+        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
+                getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        viewModel = new ViewModelProvider(this, factory).get(PlayerViewModel.class);
+        viewModel.getPlayer().observe(this, playerEntity -> {
+            if (playerEntity != null){
+                player  = playerEntity;
+                if (player != null){
+                    name.setText(player.getFirstName());
+                    name.getText().toString();
+                    surname.setText(player.getLastName());
+                    surname.getText().toString();
+                }
+            }
+        });
 
         // Afficher le court choisi
         ImageView court1 = (ImageView) findViewById(R.id.t1);
@@ -145,12 +151,13 @@ public class SummaryActivity extends AppCompatActivity {
         });
         String h = String.valueOf(hour);
 
+
         // OnClickListener on the book button
         Button bookButton = (Button) findViewById(R.id.bookButton);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addReservation(h, curDate, playerEntity.getEmail(), court);
+                addReservation(h, curDate, court);
             }
         });
     }
@@ -181,22 +188,27 @@ public class SummaryActivity extends AppCompatActivity {
      * trigger : book button.
      * @param schedule, this is the hour of the court reservation
      * @param date, this is the date in string
-     * @param playerId, this is the id of the user that is registrated
-     * @param courtNumber, this is the number of the selected court.
+     * @param courtNum, this is the number of the selected court.
      */
-    private void addReservation(String schedule, String date, String playerId, int courtNumber){
-//        ReservationEntity newReservation = new ReservationEntity(schedule, date, playerId, courtNumber);
-//        new CreateReservation(getApplication(), new OnAsyncEventListener() {
-//            @Override
-//            public void onSuccess() {
-//                setResponse(true);
-//            }
-//
-//            @Override
-//            public void onFailure(Exception e) {
-//                setResponse(false);
-//            }
-//        }).execute(newReservation);
+    private void addReservation(String schedule, String date, int courtNum){
+        ReservationEntity newReservation = new ReservationEntity(schedule, date, courtNum);
+        newReservation.setCourtNum(courtNum);
+        newReservation.setDate(date);
+        newReservation.setSchedule(schedule);
+
+        reservationRepository.insert(newReservation, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                System.out.println("the reservation is a success");
+                setResponse(true);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("the reservation failed. " + e.getMessage());
+                setResponse(false);
+            }
+        });
     }
 
     /**
@@ -208,7 +220,7 @@ public class SummaryActivity extends AppCompatActivity {
     private void setResponse(Boolean response) {
         if (response) {
             final SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
-            editor.putString(BaseActivity.PREFS_USER, playerEntity.getEmail());
+            editor.putString(BaseActivity.PREFS_USER, FirebaseAuth.getInstance().getCurrentUser().getEmail());
             editor.apply();
 
             Intent intent = new Intent(this, HomePageActivity.class);

@@ -1,6 +1,7 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -77,19 +79,18 @@ public class EditActivity extends AppCompatActivity {
         /**
          * Call the Player view model
          */
-        String playerId = getIntent().getStringExtra("playerId");
         PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
-                getApplication(), playerId);
-//        playerViewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-//        playerViewModel.getPlayer().observe(this, accountEntity -> {
-//            if (accountEntity != null) {
-//                player = accountEntity;
-//                etFirstName.setText(player.getFirstName());
-//                etLastName.setText(player.getLastName());
-//                etAge.setText(player.getAge());
-//                etPhone.setText(player.getPhoneNumber());
-//            }
-//        });
+                getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        playerViewModel = new ViewModelProvider(this,factory).get(PlayerViewModel.class);
+        playerViewModel.getPlayer().observe(this, accountEntity -> {
+            if (accountEntity != null) {
+                player = accountEntity;
+                etFirstName.setText(player.getFirstName());
+                etLastName.setText(player.getLastName());
+                etAge.setText(player.getAge());
+                etPhone.setText(player.getPhoneNumber());
+            }
+        });
 
 
     }
@@ -109,7 +110,7 @@ public class EditActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveChanges(player.getEmail(),
+                saveChanges(FirebaseAuth.getInstance().getCurrentUser().getUid(),
                         etFirstName.getText().toString(),
                         etLastName.getText().toString(),
                         etAge.getText().toString(),
@@ -162,42 +163,30 @@ public class EditActivity extends AppCompatActivity {
             return;
         }
 
+        repository.signIn(FirebaseAuth.getInstance().getCurrentUser().getEmail(), pwd, task -> {
+            if (task.isSuccessful()) {
+                player.setAge(age);
+                player.setFirstName(firstName);
+                player.setLastName(lastName);
+                player.setPhoneNumber(phone);
+                playerViewModel.updatePlayer(player, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "Update: success");
+                    }
 
-//        repository.getPlayer(playerId, getApplication()).observe(EditActivity.this, playerEntity -> {
-//            if (playerEntity != null)
-//            {
-//                if(playerEntity.getPassword().equals(pwd))
-//                {
-//                    player.setAge(age);
-//                    player.setFirstName(firstName);
-//                    player.setLastName(lastName);
-//                    player.setPhoneNumber(phone);
-//                    playerViewModel.updatePlayer(player, new OnAsyncEventListener() {
-//                        @Override
-//                        public void onSuccess() {
-//                            Log.d(TAG, "Update: success");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Exception e) {
-//                            Log.d(TAG, "Update: failure", e);
-//                        }
-//                    });
-//
-//                }
-//                else {
-//                    Toast.makeText(this, "not updated wrong Password", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            else {
-//                Toast.makeText(this, "unable to update", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG, "Update: failure", e);
+                    }
+                });
+            } else {
+                Toast.makeText(EditActivity.this, "Bad Password", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         openAccountActivity();
-
-
+        finish();
     }
 
 
