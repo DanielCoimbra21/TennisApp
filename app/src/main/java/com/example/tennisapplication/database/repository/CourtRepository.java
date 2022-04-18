@@ -4,7 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import com.example.tennisapplication.database.entity.CourtEntity;
+import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.database.firebase.CourtLiveData;
+import com.example.tennisapplication.database.firebase.ReservationLiveData;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,41 +27,30 @@ public class CourtRepository {
         return instance;
     }
 
-    public LiveData<CourtEntity> getCourt(final String courtId){
+    public LiveData<CourtEntity> getCourtByCourtNum(int courtNum){
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("courts")
+                .child(String.valueOf(courtNum));
+        return new CourtLiveData(reference);
+    }
+
+    public LiveData<ReservationEntity> getReservation(final String reservationId){
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("players")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("courts");
-        return new CourtLiveData(reference);
+                .child("reservations")
+                .child(reservationId);
+        return new ReservationLiveData(reference);
     }
 
     public void insert(final CourtEntity court, final OnAsyncEventListener callback) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("courts")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("Openair");
-        String key = reference.push().getKey();
+                .child(String.valueOf(court.getCourtNum()));
         FirebaseDatabase.getInstance()
-                .getReference("players")
-                .child(court.getIdCourt())
-                .child("courts")
-                .child(key)
-                .setValue(court, (databaseError, databaseReference) -> {
-                    if (databaseError != null) {
-                        callback.onFailure(databaseError.toException());
-                    } else {
-                        callback.onSuccess();
-                    }
-                });
-    }
-
-    public void update(final CourtEntity court, OnAsyncEventListener callback) {
-        FirebaseDatabase.getInstance()
-                .getReference("players")
-                .child(court.getIdCourt())
-                .child("courts")
-                .child(court.getIdCourt())
-                .updateChildren(court.toMap(), (databaseError, databaseReference) -> {
+                .getReference("courts")
+                .child(String.valueOf(court.getCourtNum()))
+                .setValue(court.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {

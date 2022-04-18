@@ -56,7 +56,6 @@ public class ReservationListLiveData extends LiveData<List<ReservationEntity>> {
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             ReservationEntity entity = childSnapshot.getValue(ReservationEntity.class);
             entity.setIdReservation(childSnapshot.getKey());
-            entity.setPlayerEmail(owner);
             reservations.add(entity);
         }
         return reservations;

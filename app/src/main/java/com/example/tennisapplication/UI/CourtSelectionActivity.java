@@ -82,6 +82,8 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
             disableIfFull(courts[i]);
             disableIfType(courts[i]);
         }
+
+        System.out.println("AFLAIEFGLAIEFGLIEFBLIBF");
     }
 
     /**
@@ -147,23 +149,18 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
      *
      * @param courtToCheck the court to check. Every court will pass here at the start of the activity
      */
-    private void disableIfFull(ImageView courtToCheck){
+    private void disableIfFull(ImageView courtToCheck) {
         int i = Integer.valueOf((String) courtToCheck.getTag());
         ReservationRepository repository = ((BaseApp) getApplication()).getReservationRepository();
         String h1 = String.valueOf(hour);
-//        repository.getNotAvailableCourts(h1, curDate, getApplication()).observe(CourtSelectionActivity.this, reservationEntities -> {
-//            if (reservationEntities != null)
-//            {
-//                reservations = reservationEntities;
-//                for (ReservationEntity r: reservations) {
-//                    if(i == r.getCourtNumber())
-//                    {
-//                        courtReservedTab[i] = true;
-//                        courtToCheck.setVisibility(View.INVISIBLE);
-//                    }
-//                }
+
+
+        System.out.println("Court n° " + i + " = " + repository.getNotAvailableCourts(h1, curDate, i));
+
+//        if (!repository.getNotAvailableCourts(h1, curDate, i)) {
+//                courtReservedTab[i] = true;
+//                courtToCheck.setVisibility(View.INVISIBLE);
 //            }
-//        });
     }
 
     /**

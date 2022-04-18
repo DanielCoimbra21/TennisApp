@@ -73,22 +73,6 @@ public class PlayerRepository {
         });
     }
 
-//    public void register(final PlayerEntity client, final OnAsyncEventListener callback) {
-//        FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-//                client.getEmail(),
-//                client.getPassword()
-//        ).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                System.out.println("SUCCESS AT REGISTER METHOD PLAYERREPOSITORY");
-//                client.setIdPlayer(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//                insert(client, callback);
-//            } else {
-//                System.out.println("FAILURE AT REGISTER METHOD PLAYERREPOSITORY");
-//                System.out.println("Exception : " + task.getException());
-//                callback.onFailure(task.getException());
-//            }
-//        });
-//    }
 
     public void insert(final PlayerEntity playerEntity, OnAsyncEventListener callback){
         FirebaseDatabase.getInstance()
@@ -116,8 +100,8 @@ public class PlayerRepository {
 
     public void update(final PlayerEntity playerEntity, OnAsyncEventListener callback){
         FirebaseDatabase.getInstance()
-                .getReference("clients")
-                .child(playerEntity.getIdPlayer())
+                .getReference("players")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .updateChildren(playerEntity.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -133,8 +117,19 @@ public class PlayerRepository {
 
     public void delete(final PlayerEntity playerEntity, OnAsyncEventListener callback){
         FirebaseDatabase.getInstance()
-                .getReference("clients")
-                .child(playerEntity.getEmail())
+                .getReference("players")
+                .child(playerEntity.getIdPlayer())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+
+        FirebaseDatabase.getInstance()
+                .getReference("reservations")
+                .child(playerEntity.getIdPlayer())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());

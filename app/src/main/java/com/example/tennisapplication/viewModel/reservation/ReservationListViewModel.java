@@ -48,7 +48,7 @@ public class ReservationListViewModel extends AndroidViewModel {
         observableReservations.setValue(null);
 
         LiveData<List<PlayerWithReservation>> playerReservations = repositoryP.getOtherPlayerWithReservations(ownerId);
-        LiveData<List<ReservationEntity>> reservations = repository.getByPlayerEmail(ownerId);
+        LiveData<List<ReservationEntity>> reservations = repository.getByPlayerId(ownerId);
 
         // observe the changes of the entities from the database and forward them
         observablePlayerReservations.addSource(playerReservations, observablePlayerReservations::setValue);

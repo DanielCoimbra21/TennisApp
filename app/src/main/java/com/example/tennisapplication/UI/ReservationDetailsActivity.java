@@ -2,6 +2,7 @@ package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,24 +29,19 @@ import com.example.tennisapplication.viewModel.player.PlayerViewModel;
 import com.example.tennisapplication.viewModel.reservation.ReservationListViewModel;
 import com.example.tennisapplication.viewModel.reservation.ReservationViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.NumberFormat;
 import java.util.List;
 
 public class ReservationDetailsActivity extends BaseActivity {
 
-    private static final String TAG = "ReservationDetailsActivity";
-    private static final int EDIT_RESERVATION= 1;
-    private ReservationEntity reservation;
     private ReservationRepository reservationRepository;
-    private NumberFormat defaultFormat;
-    private ReservationViewModel reservationViewModel;
+    private PlayerEntity playerEntity;
     private String curDate;
     private int hour;
     private int court;
-    private PlayerEntity playerEntity;
     private PlayerViewModel viewModel;
-    private List<ReservationEntity> reservations;
 
 
     /**
@@ -60,14 +56,13 @@ public class ReservationDetailsActivity extends BaseActivity {
 
         reservationRepository = ((BaseApp) getApplication()).getReservationRepository();
 
-        // get les informations précédemment entrées
+        // get previous informations
         Intent intent = getIntent();
         curDate = intent.getStringExtra("date");
         hour = Integer.valueOf(intent.getStringExtra("schedule"));
         court = intent.getIntExtra("courtNumber", -1);
 
-        // Initialisation de la page
-        // infos des pages précédentes
+        // Initialization of the page
         TextView date = (TextView) findViewById(R.id.reservationDate);
         date.setText(curDate);
         TextView courtnb = (TextView) findViewById(R.id.reservationCourt);
@@ -76,26 +71,21 @@ public class ReservationDetailsActivity extends BaseActivity {
         heureDebut.setText(String.format("%02d",hour)+"h00");
         TextView heureFin = (TextView) findViewById(R.id.reservationTo);
         heureFin.setText(String.format("%02d",(hour+1))+"h00");
-
-        // set le textView du nom Prénom de l'utilisateur actuel
         TextView name = (TextView) findViewById(R.id.reservationName);
         TextView surname = (TextView) findViewById(R.id.reservationSurname);
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
-        String user = settings.getString(BaseActivity.PREFS_USER, null);
-        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-//        viewModel.getPlayer().observe(this, playerEntity -> {
-//            if (playerEntity != null) {
-//                this.playerEntity = playerEntity;
-//                if (playerEntity != null){
-//                    //Set Username on TextView
-//                    name.setText(playerEntity.getLastName().toUpperCase());
-//                    name.getText().toString();
-//                    surname.setText(playerEntity.getFirstName());
-//                    surname.getText().toString();
-//                }
-//            }
-//        });
+        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        viewModel = new ViewModelProvider(this,factory).get(PlayerViewModel.class);
+        viewModel.getPlayer().observe(this, playerEntity -> {
+            if (playerEntity != null) {
+                this.playerEntity = playerEntity;
+                if (playerEntity != null){
+                    name.setText(playerEntity.getLastName().toUpperCase());
+                    name.getText().toString();
+                    surname.setText(playerEntity.getFirstName());
+                    surname.getText().toString();
+                }
+            }
+        });
 
         // toolbar Button
         MaterialButton toolbarButton = (MaterialButton) findViewById(R.id.toolbaraccountbutton);

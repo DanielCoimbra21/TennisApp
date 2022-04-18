@@ -1,6 +1,7 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,14 +19,15 @@ import com.example.tennisapplication.database.repository.PlayerRepository;
 import com.example.tennisapplication.sessions.SessionManager;
 import com.example.tennisapplication.util.OnAsyncEventListener;
 import com.example.tennisapplication.viewModel.player.PlayerViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountActivity extends AppCompatActivity {
 
     private static final String TAG = "AccountActivity";
     SessionManager sessionManager;
     private PlayerRepository repository;
-    private PlayerEntity playerEntity;
-    private PlayerViewModel viewModel;
+    private PlayerViewModel viewModel ;
+    private PlayerEntity player;
 
     /**
      * On create method for the AccountActivity
@@ -63,29 +65,27 @@ public class AccountActivity extends AppCompatActivity {
         TextView age = (TextView) findViewById(R.id.accountAge);
         TextView mail = (TextView) findViewById(R.id.accountMailAddress);
         TextView phone = (TextView) findViewById(R.id.accountPhoneNumber);
-        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME,0);
-        String user = settings.getString(BaseActivity.PREFS_USER, null);
-        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(getApplication(), user);
-//        viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel.class);
-//        viewModel.getPlayer().observe(this, playerEntity -> {
-//            if (playerEntity != null) {
-//                this.playerEntity = playerEntity;
-//                if (playerEntity != null){
-//                    //Set Username on TextView
-//                    firstName.setText(playerEntity.getFirstName());
-//                    firstName.getText().toString();
-//                    lastName.setText(playerEntity.getLastName());
-//                    lastName.getText().toString();
-//                    age.setText(playerEntity.getAge());
-//                    age.getText().toString();
-//                    mail.setText(playerEntity.getEmail());
-//                    mail.getText().toString();
-//                    phone.setText(playerEntity.getPhoneNumber());
-//                    phone.getText().toString();
-//                }
-//            }
-//        });
 
+        PlayerViewModel.Factory factory = new PlayerViewModel.Factory(
+                getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+        viewModel = new ViewModelProvider(this, factory).get(PlayerViewModel.class);
+        viewModel.getPlayer().observe(this, playerEntity -> {
+            if (playerEntity != null){
+                player  = playerEntity;
+                if (player != null){
+                    firstName.setText(player.getFirstName());
+                    firstName.getText().toString();
+                    lastName.setText(player.getLastName());
+                    lastName.getText().toString();
+                    age.setText(player.getAge());
+                    age.getText().toString();
+                    mail.setText(player.getEmail());
+                    mail.getText().toString();
+                    phone.setText(player.getPhoneNumber());
+                    phone.getText().toString();
+                }
+            }
+        });
 
         /**
          * set an action listener on editButton
@@ -112,6 +112,7 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
+
     /**
      * Method that redirect the user to the Menu Activity.
      *
@@ -129,7 +130,7 @@ public class AccountActivity extends AppCompatActivity {
      */
     private void openEditActivity(){
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra("playerId", playerEntity.getEmail());
+        intent.putExtra("playerId", player.getEmail());
         startActivity(intent);
     }
 
@@ -149,10 +150,11 @@ public class AccountActivity extends AppCompatActivity {
      * trigger : delecte button.
      */
     private void deleteAccount(){
-        viewModel.deletePlayer(playerEntity, new OnAsyncEventListener() {
+        viewModel.deletePlayer(player, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "deleteAccount:success");
+                finish();
             }
 
             @Override

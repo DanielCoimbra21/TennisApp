@@ -8,18 +8,14 @@ import java.util.Map;
 
 public class CourtEntity implements Comparable{
 
-    private String idCourt;
     private boolean openAir;
+    private int courtNum;
 
     public CourtEntity(){}
 
-    @Exclude
-    public String getIdCourt() {
-        return idCourt;
-    }
-
-    public void setIdCourt(String idCourt) {
-        this.idCourt = idCourt;
+    public CourtEntity(boolean openAir, int courtNum){
+        this.courtNum=courtNum;
+        this.openAir=openAir;
     }
 
     public boolean isOpenAir() {
@@ -30,6 +26,13 @@ public class CourtEntity implements Comparable{
         this.openAir = openAir;
     }
 
+    public int getCourtNum() {
+        return courtNum;
+    }
+
+    public void setCourtNum(int courtNum) {
+        this.courtNum = courtNum;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -37,7 +40,7 @@ public class CourtEntity implements Comparable{
         if (obj == this) return true;
         if (!(obj instanceof CourtEntity)) return false;
         CourtEntity o = (CourtEntity) obj;
-        if(o.getIdCourt() == this.getIdCourt()){
+        if(o.getCourtNum() == this.getCourtNum()){
             return true;
         }else {
             return false;
@@ -52,7 +55,6 @@ public class CourtEntity implements Comparable{
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("idCourt", idCourt);
         result.put("openAir", openAir);
         return result;
     }
