@@ -1,6 +1,7 @@
 package com.example.tennisapplication.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.media.Image;
@@ -14,7 +15,9 @@ import com.example.tennisapplication.BaseApp;
 import com.example.tennisapplication.R;
 import com.example.tennisapplication.database.entity.ReservationEntity;
 import com.example.tennisapplication.database.repository.ReservationRepository;
+import com.example.tennisapplication.viewModel.reservation.ReservationListViewModel;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,9 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
     private String curDate;
     private int hour;
     private List<ReservationEntity> reservations;
+    private ReservationListViewModel viewModel;
+    private ReservationEntity reservation;
+    private boolean isUpdated = false;
 
     /**
      * Initialisation method of the Court Selection Activity
@@ -76,10 +82,32 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         menuButton.setOnClickListener(this);
         toolbarButton.setOnClickListener(this);
 
+        // will get and show the unavailable reservations
+        ReservationListViewModel.Factory factory = new ReservationListViewModel.Factory(getApplication(), String.valueOf(hour),curDate, courtSelected);
+        viewModel = new ViewModelProvider(this, factory).get(ReservationListViewModel.class);
+        viewModel.getUnavailableReservations().observe(this, reservationEntities -> {
+            if (reservationEntities != null){
+                reservations = reservationEntities;
+                for (ReservationEntity reservation : reservations){
+                    if (courtReservedTab[reservation.getCourtNum()] == false){
+                        if (String.valueOf(hour).equals(reservation.getSchedule())){
+                            if (curDate.equals(reservation.getDate())){
+                                courtReservedTab[reservation.getCourtNum()] = true;
+                                courts[reservation.getCourtNum() - 1].setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
+                }
+                if(!isUpdated){
+                    isUpdated = true;
+                    this.onResume();
+                }
+            }
+        });
+
         // ajouter les différents paramètres aux courts grâce au tableau
         for (int i = 0 ; i < courts.length ; i++){
             courts[i].setOnClickListener(this);
-            disableIfFull(courts[i]);
             disableIfType(courts[i]);
         }
 
@@ -155,7 +183,7 @@ public class CourtSelectionActivity extends AppCompatActivity implements View.On
         String h1 = String.valueOf(hour);
 
 
-        System.out.println("Court n° " + i + " = " + repository.getNotAvailableCourts(h1, curDate, i));
+//        System.out.println("Court n° " + i + " = " + repository.getNotAvailableCourts(h1, curDate, i));
 
 //        if (!repository.getNotAvailableCourts(h1, curDate, i)) {
 //                courtReservedTab[i] = true;
