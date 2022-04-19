@@ -24,8 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AccountActivity extends AppCompatActivity {
 
     private static final String TAG = "AccountActivity";
-    SessionManager sessionManager;
-    private PlayerRepository repository;
     private PlayerViewModel viewModel ;
     private PlayerEntity player;
 
@@ -104,6 +102,7 @@ public class AccountActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 deleteAccount();
                 Toast.makeText(AccountActivity.this,"Account deleted", Toast.LENGTH_SHORT).show();
                 openMainActivity();
@@ -154,7 +153,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "deleteAccount:success");
-                finish();
+
             }
 
             @Override

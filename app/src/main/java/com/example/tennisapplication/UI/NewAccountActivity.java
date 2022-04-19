@@ -89,9 +89,10 @@ public class NewAccountActivity extends AppCompatActivity {
      */
     private void saveChanges(String firstName, String lastName, String email, String age, String phone ,String pwd, String pwd2) {
         // check that the pwd and the email address are incorrect
-        if (!pwd.equals(pwd2)) {
+        if (!pwd.equals(pwd2) || pwd.length() < 6) {
             etPwd1.setError(getString(R.string.error_invalid_password));
             etPwd1.requestFocus();
+            etPwd2.requestFocus();
             etPwd1.setText("");
             etPwd2.setText("");
             return;
@@ -103,7 +104,7 @@ public class NewAccountActivity extends AppCompatActivity {
         }
 
         // if it is correct, then create a new client in the database
-        PlayerEntity newClient = new PlayerEntity(email, pwd, firstName, lastName, age, phone, "player", 0, 0);
+        PlayerEntity newClient = new PlayerEntity(email, pwd, firstName, lastName, age, phone);
         repository.register(newClient, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
