@@ -39,3 +39,20 @@ In order to access to the application, you need to register. You can create your
 3. Modify fields you want to modify then click "Validate"
 4. In order to delete it, click "Delete" Button
 
+### Firebase
+The Room library (classes, variables, etc) was removed and replaced by firebase.
+In the gitHub, we've created a tag for the project with the local Database : https://github.com/DanielCoimbra21/TennisApp/releases/tag/LocalDatabase
+
+## Extra Features
+
+To add an extra level of security, we have implemented the Firebase authentication.
+We also have implemented a unique court reservation system, because the DB is not in local anymore.
+
+For this, we test if the court is booked for a specific hour in a specific day.
+If so, the court will not be available for reservation.
+
+### Programmers
+Theo Choffat and Daniel Coimbra
+
+PS: Special thanks to Yvan for all the help that he provided to us
+
