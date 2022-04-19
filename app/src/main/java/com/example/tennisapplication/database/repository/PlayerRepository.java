@@ -78,7 +78,7 @@ public class PlayerRepository {
         FirebaseDatabase.getInstance()
                 .getReference("players")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .setValue(playerEntity, (databaseError, databaseReference) -> {
+                .setValue(playerEntity.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                         FirebaseAuth.getInstance().getCurrentUser().delete()
@@ -109,10 +109,6 @@ public class PlayerRepository {
                         callback.onSuccess();
                     }
                 });
-        FirebaseAuth.getInstance().getCurrentUser().updatePassword(playerEntity.getPassword())
-                .addOnFailureListener(
-                        e -> Log.d(TAG, "updatePassword failure!", e)
-                );
     }
 
     public void delete(final PlayerEntity playerEntity, OnAsyncEventListener callback){

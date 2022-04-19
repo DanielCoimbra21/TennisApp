@@ -17,15 +17,13 @@ public class PlayerEntity implements Comparable{
     private String lastName;
     private String age;
     private String phoneNumber;
-    private String status;
-    private int nbReservations;
-    private int image;
+
 
     public PlayerEntity() {
 
     }
 
-    public PlayerEntity(@NonNull String email, String password, String firstName, String lastName, String age, String phoneNumber, String status, int nbReservations, int image)
+    public PlayerEntity(@NonNull String email, String password, String firstName, String lastName, String age, String phoneNumber)
     {
         this.email = email;
         this.password = password;
@@ -33,9 +31,6 @@ public class PlayerEntity implements Comparable{
         this.lastName = lastName;
         this.age = age;
         this.phoneNumber = phoneNumber;
-        this.status = status;
-        this.nbReservations = nbReservations;
-        this.image = image;
     }
 
     public String getIdPlayer() {
@@ -55,9 +50,6 @@ public class PlayerEntity implements Comparable{
         return password;
     }
 
-    public int getImage() {
-        return image;
-    }
 
     public void setEmail(@NonNull String email) {
         this.email = email;
@@ -95,21 +87,6 @@ public class PlayerEntity implements Comparable{
         this.phoneNumber = phoneNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getNbReservations() {
-        return nbReservations;
-    }
-
-    public void setNbReservations(int nbReservations) {
-        this.nbReservations = nbReservations;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -133,6 +110,7 @@ public class PlayerEntity implements Comparable{
         HashMap<String, Object> result = new HashMap<>();
         result.put("firstName", firstName);
         result.put("lastName", lastName);
+        result.put("mail", email);
         result.put("age", age);
         result.put("phoneNumber", phoneNumber);
 
